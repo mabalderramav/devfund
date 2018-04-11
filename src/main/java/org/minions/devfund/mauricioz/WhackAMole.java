@@ -30,10 +30,7 @@ public class WhackAMole {
      * @return true if mole was whacked.
      */
     public boolean place(int x, int y) {
-        if (moleGrid[x][y] == 'M') {
-            return true;
-        }
-        return false;
+        return moleGrid[x][y] == 'M';
     }
 
     /**

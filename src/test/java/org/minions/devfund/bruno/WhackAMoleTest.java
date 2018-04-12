@@ -60,10 +60,33 @@ public class WhackAMoleTest {
      * Verifies if the whack is the same place to the mole.
      */
     @Test
+    public void checkTheMoleInTheGrid() {
+        final int xMole = 5;
+        final int yMole = 5;
+        final int xWhack = 4;
+        final int yWhack = 4;
+        game.place(xMole, yMole);
+        assertFalse(game.checkTheMoleInTheGrid(xWhack, yWhack));
+    }
+
+    /**
+     * Verifies if the whack is the same place to the mole.
+     */
+    @Test
     public void whackInvalid() {
         final int xWhackMole = 11;
         final int yWhackMole = 8;
         assertFalse(game.whack(xWhackMole, yWhackMole));
+    }
+
+    /**
+     * Verifies if the mole is hided.
+     */
+    @Test
+    public void hideMoleTest() {
+        String expectedResult = " o ";
+        String actualResult = game.hideMole("M");
+        assertEquals(expectedResult, actualResult);
     }
 
     /**
@@ -90,7 +113,7 @@ public class WhackAMoleTest {
      * Verifies if the coordinates are are inside the size grid.
      */
     @Test
-    public void validTheTwoCordinates() {
+    public void validTheTwoCoordinates() {
         final int xWhackMole = 4;
         final int yWhackMole = 5;
         assertTrue(game.validCordinates(xWhackMole, yWhackMole));
@@ -100,7 +123,7 @@ public class WhackAMoleTest {
      * Verifies if the coordinates are are inside the size grid.
      */
     @Test
-    public void inValidTheTwoCordinates() {
+    public void inValidTheTwoCoordinates() {
         final int xWhackMole = -1;
         final int yWhackMole = 11;
         assertFalse(game.validCordinates(xWhackMole, yWhackMole));
@@ -110,7 +133,7 @@ public class WhackAMoleTest {
      * Verifies if the coordinates are are inside the size grid.
      */
     @Test
-    public void inValidTheXCordinates() {
+    public void inValidTheXCoordinates() {
         final int xWhackMole = -1;
         final int yWhackMole = 8;
         assertFalse(game.validCordinates(xWhackMole, yWhackMole));
@@ -120,9 +143,29 @@ public class WhackAMoleTest {
      * Verifies if the coordinates are are inside the size grid.
      */
     @Test
-    public void inValidTheYCordinates() {
+    public void inValidTheYCoordinates() {
         final int xWhackMole = 4;
         final int yWhackMole = 11;
+        assertFalse(game.validCordinates(xWhackMole, yWhackMole));
+    }
+
+    /**
+     * Verifies if the coordinates are are inside the size grid.
+     */
+    @Test
+    public void inValidTheXExceedCoordinates() {
+        final int xWhackMole = 15;
+        final int yWhackMole = -1;
+        assertFalse(game.validCordinates(xWhackMole, yWhackMole));
+    }
+
+    /**
+     * Verifies if the coordinates are are inside the size grid.
+     */
+    @Test
+    public void inValidTheXYCoordinates() {
+        final int xWhackMole = -15;
+        final int yWhackMole = -1;
         assertFalse(game.validCordinates(xWhackMole, yWhackMole));
     }
 
@@ -175,5 +218,15 @@ public class WhackAMoleTest {
     @Test
     public void printGridToUser() {
         game.printGridToUser();
+    }
+
+    /**
+     * Verifies if the exit game should be false.
+     */
+    @Test
+    public void exitGameFalse() {
+        final int xWhackMole = 7;
+        final int yWhackMole = 8;
+        assertFalse(game.exitGame(xWhackMole, yWhackMole));
     }
 }

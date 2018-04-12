@@ -127,7 +127,7 @@ public class WhackAMole {
      * @param yWhack Integer Y coordinate of the whack place.
      * @return true id the mole and whack has the same location.
      */
-    private boolean checkTheMoleInTheGrid(final int xWhack, final int yWhack) {
+    public boolean checkTheMoleInTheGrid(final int xWhack, final int yWhack) {
         boolean isWhackAMole = false;
         if (moleGrid[xWhack][yWhack].equals("M")) {
             moleGrid[xWhack][yWhack] = "W";

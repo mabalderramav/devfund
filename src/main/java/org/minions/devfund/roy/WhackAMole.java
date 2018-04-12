@@ -54,7 +54,7 @@ public class WhackAMole {
     /**
      * Starts the grid with the moles.
      */
-    private void initializeGrid() {
+    public void initializeGrid() {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid.length; j++) {
                 grid[i][j] = EMPTY_PLACE;
@@ -131,7 +131,7 @@ public class WhackAMole {
     /**
      * Prints grind and the score on the console.
      */
-    private void printGridAndScore() {
+    public void printGridAndScore() {
         printGrid();
         System.out.println("Score: " + score);
     }

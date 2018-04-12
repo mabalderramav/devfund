@@ -9,9 +9,10 @@ import java.util.stream.IntStream;
 public class WhackAMole {
 
     private static final String BLANK_SPACE = " ";
+    private static final int ZERO = 0;
     private Random random;
-    private String moleGrid[][];
-    private boolean quitGame = false;
+    private String[][] moleGrid;
+    private boolean quitGame;
     private int score;
     private int molesLeft;
     private int attemptsLeft;
@@ -26,8 +27,8 @@ public class WhackAMole {
         attemptsLeft = numAttempts;
         moleGrid = new String[gridDimension][gridDimension];
         random = new Random();
+        quitGame = false;
         generateGrid();
-
     }
 
     /**
@@ -56,11 +57,14 @@ public class WhackAMole {
     }
 
     /**
-     * @param moleGrid
-     * @return
+     * Hides the mole for the user cannot see them if is necessary.
+     *
+     * @param moleGrid to hide.
+     * @return the place with the mole hide if is necessary.
      */
-    private String hideMole(String moleGrid) {
-        return  BLANK_SPACE.concat(moleGrid).concat(BLANK_SPACE);
+    public String hideMole(final String moleGrid) {
+        return moleGrid.equals("M") ? BLANK_SPACE.concat("o").concat(BLANK_SPACE)
+                : BLANK_SPACE.concat(moleGrid).concat(BLANK_SPACE);
     }
 
     /**
@@ -78,17 +82,21 @@ public class WhackAMole {
     }
 
     /**
-     * @param numMoles
+     * Places the moles randomly.
+     *
+     * @param numMoles moles number to placing.
+     * @return number moles placed.
      */
-    public void placeAllMoles(int numMoles) {
+    public int placeAllMoles(int numMoles) {
         molesLeft = numMoles;
         int gridLength = moleGrid.length;
         int moles = numMoles;
-        while (moles > 0) {
+        while (moles > ZERO) {
             if (place(random.nextInt(gridLength), random.nextInt(gridLength))) {
                 moles--;
             }
         }
+        return moles;
     }
 
     /**
@@ -96,18 +104,20 @@ public class WhackAMole {
      *
      * @param xWhack Integer X coordinate of the whack place.
      * @param yWhack Integer Y coordinate of the whack place.
+     * @return true id the mole and whack has the same location.
      */
-    public void whack(final int xWhack, final int yWhack) {
-        moleGrid[xWhack][yWhack] = moleGrid[xWhack][yWhack].equals("M") ? "W" : "*";
+    public boolean whack(final int xWhack, final int yWhack) {
+        boolean isWhackMole = false;
         if (exitGame(xWhack, yWhack)) {
             quitGame = true;
             System.out.println("Exiting Game!\n");
         } else if (validCordinates(xWhack, yWhack)) {
-            checkTheMoleInTheGrid(xWhack, yWhack);
+            isWhackMole = checkTheMoleInTheGrid(xWhack, yWhack);
         } else {
             System.out.println("Hmmmm. It seems you put in an invalid entry.");
             System.out.println("Please enter values from 1 to " + moleGrid.length + ".\n");
         }
+        return isWhackMole;
     }
 
     /**
@@ -115,30 +125,45 @@ public class WhackAMole {
      *
      * @param xWhack Integer X coordinate of the whack place.
      * @param yWhack Integer Y coordinate of the whack place.
+     * @return true id the mole and whack has the same location.
      */
-    private void checkTheMoleInTheGrid(int xWhack, int yWhack) {
-        boolean asd = moleGrid[xWhack][yWhack].equals("M");
-        String asda = moleGrid[xWhack][yWhack];
+    private boolean checkTheMoleInTheGrid(final int xWhack, final int yWhack) {
+        boolean isWhackAMole = false;
         if (moleGrid[xWhack][yWhack].equals("M")) {
             moleGrid[xWhack][yWhack] = "W";
             molesLeft--;
             attemptsLeft--;
             score++;
+            isWhackAMole = true;
             System.out.println("You hit a mole!\n");
         } else {
             moleGrid[xWhack][yWhack] = "*";
             attemptsLeft--;
             System.out.println("Oops! No mole there!\n");
         }
+        return isWhackAMole;
     }
 
-
-    public boolean exitGame(int x, int y) {
+    /**
+     * Verifies the coordinates to exiting of the game.
+     *
+     * @param x coordinates.
+     * @param y coordinates.
+     * @return true to end the game false to continue.
+     */
+    public boolean exitGame(final int x, final int y) {
         return x == -1 && y == -1;
     }
 
-    public boolean validCordinates(int x, int y) {
-        return (x >= 0 && x < moleGrid.length) && (y >= 0 && y < moleGrid.length);
+    /**
+     * Validates the coordinates.
+     *
+     * @param x coordinates.
+     * @param y coordinates.
+     * @return true if the coordinates are inside the size grid.
+     */
+    public boolean validCordinates(final int x, final int y) {
+        return x >= 0 && x < moleGrid.length && y >= 0 && y < moleGrid.length;
     }
 
     /**
@@ -165,5 +190,23 @@ public class WhackAMole {
             System.out.println("You actual score ".concat(String.valueOf(score)));
             return false;
         }
+    }
+
+    /**
+     * Sets the number moles.
+     *
+     * @param numberMoles number moles.
+     */
+    public void setMolesLeft(int numberMoles) {
+        molesLeft = numberMoles;
+    }
+
+    /**
+     * Sets the attempts.
+     *
+     * @param attempts number attempts.
+     */
+    public void setAttemptsLeft(int attempts) {
+        attemptsLeft = attempts;
     }
 }

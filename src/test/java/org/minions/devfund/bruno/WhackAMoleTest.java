@@ -40,8 +40,8 @@ public class WhackAMoleTest {
      */
     @Test
     public void placeAllMoles() {
-        int expectedNumMoles = 0;
-        int actualNumMoles = game.placeAllMoles(NUM_MOLES);
+        final int expectedNumMoles = 0;
+        final int actualNumMoles = game.placeAllMoles(NUM_MOLES);
         assertEquals(actualNumMoles, expectedNumMoles);
     }
 
@@ -224,8 +224,8 @@ public class WhackAMoleTest {
      * Verifies if the exit game should be false.
      */
     @Test
-    public void exitGameFalse() {
-        final int xWhackMole = 7;
+    public void exitGameXCoordenateToExitIncorrect() {
+        final int xWhackMole = -1;
         final int yWhackMole = 8;
         assertFalse(game.exitGame(xWhackMole, yWhackMole));
     }

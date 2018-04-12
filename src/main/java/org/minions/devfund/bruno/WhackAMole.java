@@ -152,7 +152,17 @@ public class WhackAMole {
      * @return true to end the game false to continue.
      */
     public boolean exitGame(final int x, final int y) {
-        return x == -1 && y == -1;
+        return validCoordinateToExit(x) && validCoordinateToExit(y);
+    }
+
+    /**
+     * Verifies the coordinates if is the correct.
+     *
+     * @param coordinate Integer coordinate number
+     * @return true if is the coorrect.
+     */
+    public boolean validCoordinateToExit(final int coordinate) {
+        return coordinate == -1;
     }
 
     /**
@@ -163,7 +173,17 @@ public class WhackAMole {
      * @return true if the coordinates are inside the size grid.
      */
     public boolean validCordinates(final int x, final int y) {
-        return x >= 0 && x < moleGrid.length && y >= 0 && y < moleGrid.length;
+        return validateRange(x) && validateRange(y);
+    }
+
+    /**
+     * Validates the range.
+     *
+     * @param coordinate Integer number.
+     * @return true if the coordinate is in range.
+     */
+    public boolean validateRange(final int coordinate) {
+        return coordinate >= 0 && coordinate <= moleGrid.length;
     }
 
     /**

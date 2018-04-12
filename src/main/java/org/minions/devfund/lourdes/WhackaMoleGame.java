@@ -6,13 +6,20 @@ import java.util.Scanner;
 /**
  * Main Class of the application game.
  */
-public class WhackaMoleGame {
+final public class WhackaMoleGame {
+
+    /**
+     * Private constructor
+     */
+    private WhackaMoleGame(){
+        //Burro el que lea esto
+    }
 
     /**
      * Main method that start the game.
      * @param args  arguments.
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         final int maxAttepmts = 50;
         final int gridSize = 10;
         final int maxNumMoles = 10;

@@ -24,8 +24,8 @@ public class WhackAMoleApplication {
         Scanner scanner = new Scanner(System.in, "UTF-8");
         WhackAMole game = new WhackAMole(attemptsNumber, boardDimension);
         System.out.println("Game is Started.........");
-        game.printGridToUSer();
-        game.printBoard();
+        printGridToUSer(game);
+        printBoard(game);
         while (game.getAttemptsLeft() > 0) {
             System.out.println("Enter a value for X coordinate (0-9): ");
             positionX = scanner.nextInt();
@@ -33,14 +33,50 @@ public class WhackAMoleApplication {
             positionY = scanner.nextInt();
             if (positionX != -1 && positionY != -1) {
                 game.whack(positionX, positionY);
-                game.printBoard();
+                printBoard(game);
             } else {
                 break;
             }
 
         }
-        game.printGrid();
+        printGrid(game);
         System.out.println("Final Score: " + game.getScore());
 
+    }
+
+    /**
+     * print the initial grid.
+     * @param game current game.
+     */
+    public static void printGridToUSer(final WhackAMole game) {
+        for (int i = 0; i < game.getMoleGridLength(); i++) {
+            for (int j = 0; j < game.getMoleGridLength(); j++) {
+                System.out.print("\t * ");
+            }
+            System.out.println();
+        }
+    }
+
+    /**
+     * print final grid.
+     * @param game current game
+     */
+    public static void printGrid(final WhackAMole game) {
+        for (int i = 0; i < game.getMoleGridLength(); i++) {
+            for (int j = 0; j < game.getMoleGridLength(); j++) {
+                System.out.print(game.getMoleGrid(i, j) + "\t");
+            }
+            System.out.println();
+        }
+    }
+
+    /**
+     * print board of the game results.
+     * @param game current game.
+     */
+    public static void printBoard(final WhackAMole game) {
+        System.out.println("Attempts Left: " + game.getAttemptsLeft());
+        System.out.println("Moles Left: " + game.getMolesLeft());
+        System.out.println("Score: " + game.getScore());
     }
 }

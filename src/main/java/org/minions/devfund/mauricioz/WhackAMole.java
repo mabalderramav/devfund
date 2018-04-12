@@ -34,18 +34,6 @@ public class WhackAMole {
     }
 
     /**
-     * print the initial grid.
-     */
-    public void printGridToUSer() {
-        for (int i = 0; i < moleGrid.length; i++) {
-            for (int j = 0; j < moleGrid[i].length; j++) {
-                System.out.print("\t * ");
-            }
-            System.out.println();
-        }
-    }
-
-    /**
      * Whack over a mole.
      * @param x coordinate in x.
      * @param y coordinate in y.
@@ -57,18 +45,6 @@ public class WhackAMole {
             score += 1;
         }
         attemptsLeft--;
-    }
-
-    /**
-     * print final grid.
-     */
-    public void printGrid() {
-        for (int i = 0; i < getMoleGridLength(); i++) {
-            for (int j = 0; j < moleGrid[i].length; j++) {
-                System.out.print(moleGrid[i][j] + "\t");
-            }
-            System.out.println();
-        }
     }
 
     /**
@@ -111,15 +87,6 @@ public class WhackAMole {
      */
     public char getMoleGrid(int x, int y) {
         return moleGrid[x][y];
-    }
-
-    /**
-     * print board of the game results.
-     */
-    public void printBoard() {
-        System.out.println("Attempts Left: " + getAttemptsLeft());
-        System.out.println("Moles Left: " + getMolesLeft());
-        System.out.println("Score: " + getScore());
     }
 
     /**

@@ -9,6 +9,9 @@ public abstract class  MainWhackAMole {
      */
 
     public static void main(final String[] args) {
+        /**
+         * This method will run the game.
+         */
 
         final int attempts = 50;
         final int dimensions = 10;

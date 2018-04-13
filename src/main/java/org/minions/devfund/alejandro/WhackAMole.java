@@ -1,9 +1,10 @@
 package org.minions.devfund.alejandro;
 
+/**
+ * Class for whack a mole.
+ */
 public class WhackAMole {
-    /**
-     * Whack a mole class.
-     */
+
     private int score;
     private int molesLeft;
     private int attemptsLeft;
@@ -13,21 +14,27 @@ public class WhackAMole {
     private final char mole = 'M';
     private final char nothing = '*';
 
+    /**
+     * This is the constructor for the whack a mole class.
+     * @param numAttempts is the number of attempts the user will have to find the moles.
+     * @param gridDimension is the dimension of the grid where the player will play.
+     */
     public WhackAMole(int numAttempts, int gridDimension) {
-        /**
-         * This is the constructor for the whack a mole class
-         */
+
         this.moleGrid = new char[gridDimension][gridDimension];
         this.attemptsLeft = numAttempts;
         this.score = 0;
         this.size = gridDimension;
     }
 
+    /**
+     * Given a location, place a mole at that location.
+     * @param x The position in x where the mole will be tried to be placed.
+     * @param y The position in y where the mole will be tried to be placed.
+     * @return true or false if the mole can be placed there.
+     */
     private boolean place(int x, int y) {
-        /**
-         *  Given a location, place a mole at that location.
-         *  Return true if you can. (Also update number of moles left.)
-         */
+
         if (this.moleGrid[x][y] == mole) {
             return false;
         } else {
@@ -37,14 +44,17 @@ public class WhackAMole {
         }
     }
 
+    /**
+     * Given a location, take a whack at that location.
+     * If that location contains a mole, the score,
+     * number of attemptsLeft, and molesLeft is updated.
+     * If that location does not contain a mole,
+     * only attemptsLeft is updated.
+     * @param x The position in x where the player will make a whack.
+     * @param y The position in y where the player will make a whack.
+     */
     public void whack(int x, int y) {
-        /**
-         *  Given a location, take a whack at that location.
-         *  If that location contains a mole, the score,
-         *  number of attemptsLeft, and molesLeft is updated.
-         *  If that location does not contain a mole,
-         *  only attemptsLeft is updated.
-         */
+
         char whack = 'W';
         if (this.moleGrid[x][y] == mole) {
             this.moleGrid[x][y] = whack;
@@ -56,26 +66,31 @@ public class WhackAMole {
         }
     }
 
+    /**
+     * This method will set the amount of moles.
+     * @param moles The amount of moles that will be in game.
+     */
     public void setMoles(int moles) {
-        /**
-         * This method will set the amount of moles
-         */
+
         this.moles = moles;
         this.molesLeft = moles;
     }
 
+    /**
+     * This method fill the matrix with wildcard "*", "M".
+     */
     public void fillMatrix() {
-        /**
-         * This method fill the matrix with wildcard "*", "M"
-         */
+
         fillGrid();
         fillMoles(size);
     }
 
+    /**
+     * This method will fill the matrix with moles.
+     * @param size the size of the matrix.
+     */
     private void fillMoles(int size) {
-        /**
-         * This method will fill the matrix with moles.
-         */
+
         for (int i = 0; i < size; i++) {
             boolean p = false;
             while (!p) {
@@ -88,10 +103,11 @@ public class WhackAMole {
         }
     }
 
+    /**
+     *  This method will fill the matrix with "*".
+     */
     private void fillGrid() {
-        /**
-         * This method will fill the matrix with "*".
-         */
+
         for (int i = 0; i < moleGrid.length; i++) {
             for (int y = 0; y < moleGrid.length; y++) {
                 moleGrid[i][y] = nothing;
@@ -99,10 +115,12 @@ public class WhackAMole {
         }
     }
 
+    /**
+     * This method display the matrix.
+     * @param mode this will determine if the print will be for the user,
+     *             or if will display the moles without hidden.
+     */
     private void grid(char mode) {
-        /**
-         * This method display the matrix.
-         */
 
         for (char[] aMoleGrid : moleGrid) {
             for (int y = 0; y < moleGrid.length; y++) {
@@ -116,43 +134,48 @@ public class WhackAMole {
         }
     }
 
+    /**
+     * This method display the matrix for the user.
+     */
     public void printGridToUser() {
-        /**
-         * This method display the matrix for the user.
-         */
+
         char mode = 'u';
         grid(mode);
     }
 
+    /**
+     * This method will display the matrix without hide the moles.
+     */
     public void printGrid() {
-        /**
-         * This method will display the matrix without hide the moles.
-         */
+
         char mode = 'i';
         grid(mode);
     }
 
+    /**
+     * This method return the score.
+     * @return score: the score the player has.
+     */
     public int getScore() {
-        /**
-         * This method return the score
-         * @return score: the score the player has.
-         */
+
         return this.score;
     }
 
+    /**
+     * This method return the moles that are left.
+     * @return moleLeft: the moleLeft on the matrix.
+     */
     public int getMoleLeft() {
-        /**
-         * This method return the moles that are left
-         * @return moleLeft: the moleLeft on the matrix.
-         */
+
         return this.molesLeft;
     }
 
+    /**
+     * This method return the attemps left for the player.
+     * @return attempsLeft: the attempsLeft the player has.
+     */
     public int getAttemptsLeft() {
-        /**
-         * This method return the attemps left for the player
-         * @return attempsLeft: the attempsLeft the player has.
-         */
+
         return this.attemptsLeft;
     }
 }

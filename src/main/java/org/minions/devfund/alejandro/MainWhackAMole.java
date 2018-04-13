@@ -1,17 +1,16 @@
 package org.minions.devfund.alejandro;
 import java.util.Scanner;
 
-
+/**
+ * class for main wack a mole game.
+ */
 public abstract class  MainWhackAMole {
+
     /**
-     * Public class for the main.
+     * This is the main method to start running the game.
      * @param args arguments.
      */
-
     public static void main(final String[] args) {
-        /**
-         * This method will run the game.
-         */
 
         final int attempts = 50;
         final int dimensions = 10;

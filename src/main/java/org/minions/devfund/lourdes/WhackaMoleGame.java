@@ -6,18 +6,19 @@ import java.util.Scanner;
 /**
  * Main Class of the application game.
  */
-final public class WhackaMoleGame {
+public final class WhackaMoleGame {
 
     /**
-     * Private constructor
+     * Private constructor.
      */
-    private WhackaMoleGame(){
-        //Burro el que lea esto
+    private WhackaMoleGame() {
+        //test
     }
 
     /**
      * Main method that start the game.
-     * @param args  arguments.
+     *
+     * @param args arguments.
      */
     public static void main(final String[] args) {
         final int maxAttepmts = 50;
@@ -32,7 +33,7 @@ final public class WhackaMoleGame {
             whackaMole.place(positionX, positionY);
         }
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, "UTF-8");
         System.out.println("You have a maximum of 50 attempts to get all the moles.");
         while (whackaMole.getAttemptsLeft() > 0) {
             System.out.println("Enter Coordinate X (range between 0 to 9)");

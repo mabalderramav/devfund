@@ -3,10 +3,14 @@ package org.minions.devfund.lourdes;
 /**
  * Class that simulate the Whackamole game.
  */
-class WhackAMole {
+public class WhackAMole {
+    private static final char MOLE = 'M';
+    private static final char WHACK = 'W';
+    private static final char ASTERISK = '*';
     private int score;
     private int molesLeft;
     private int attemptsLeft;
+
     private char[][] moleGrid;
 
     /**
@@ -15,7 +19,7 @@ class WhackAMole {
      * @param numAttempts   Specify the max number of attempt to be used in the game.
      * @param gridDimension Define the grid dimension.
      */
-    WhackAMole(int numAttempts, int gridDimension) {
+    public WhackAMole(int numAttempts, int gridDimension) {
         this.attemptsLeft = numAttempts;
         this.moleGrid = new char[gridDimension][gridDimension];
         for (int i = 0; i < moleGrid.length; i++) {
@@ -30,12 +34,15 @@ class WhackAMole {
      *
      * @param x Represents the X axes position in the grid.
      * @param y Represents the Y axes position in the grid.
+     * @return True if the mole was placed succesfully
      */
-    void place(int x, int y) {
-        if (this.moleGrid[x][y] == '*') {
-            this.moleGrid[x][y] = 'M';
+    public boolean place(int x, int y) {
+        if (this.moleGrid[x][y] == ASTERISK) {
+            this.moleGrid[x][y] = MOLE;
             this.molesLeft++;
+            return true;
         }
+        return false;
     }
 
     /**
@@ -44,11 +51,11 @@ class WhackAMole {
      * @param x Represents the X axes position in the grid.
      * @param y Represents the Y axes position in the grid.
      */
-    void whack(int x, int y) {
-        if (moleGrid[x][y] == 'M') {
+    public void whack(int x, int y) {
+        if (moleGrid[x][y] == MOLE) {
             molesLeft--;
             score++;
-            moleGrid[x][y] = 'W';
+            moleGrid[x][y] = WHACK;
         }
         attemptsLeft--;
     }
@@ -56,13 +63,13 @@ class WhackAMole {
     /**
      * Method that print the grid without showing the moles.
      */
-    void printGridToUser() {
+    public void printGridToUser() {
         for (char[] row : moleGrid) {
             for (char cellValue : row) {
-                if (cellValue == 'M' || cellValue == '*') {
-                    System.out.print("*");
+                if (cellValue == MOLE || cellValue == ASTERISK) {
+                    System.out.print(ASTERISK);
                 } else {
-                    System.out.print("W");
+                    System.out.print(WHACK);
                 }
             }
             System.out.println();
@@ -73,7 +80,7 @@ class WhackAMole {
     /**
      * Method that print the whole grid in its current state.
      */
-    void printGrid() {
+    public void printGrid() {
         for (char[] row : moleGrid) {
             for (char cellValue : row) {
                 System.out.print(cellValue);
@@ -107,5 +114,14 @@ class WhackAMole {
      */
     public int getAttemptsLeft() {
         return attemptsLeft;
+    }
+
+    /**
+     * Method that return the grid.
+     *
+     * @return the mole grid.
+     */
+    public char[][] getMoleGrid() {
+        return moleGrid.clone();
     }
 }

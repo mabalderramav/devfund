@@ -10,7 +10,7 @@ public interface MainWhackAMole {
      * This is the main method to start running the game.
      * @param args arguments.
      */
-    static void main(final String[] args) {
+    static void main(final String args[]) {
 
         final int attempts = 50;
         final int dimensions = 10;

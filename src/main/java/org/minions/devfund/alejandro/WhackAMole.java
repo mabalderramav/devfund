@@ -7,10 +7,10 @@ public class WhackAMole {
 
     private int score;
     private int molesLeft;
-    private int attemptsLeft;
     private int moles;
-    private char[][] moleGrid;
-    private int size;
+    private int attemptsLeft;
+    private final char[][] moleGrid;
+    private final int size;
     private final char mole = 'M';
     private final char nothing = '*';
 
@@ -91,11 +91,12 @@ public class WhackAMole {
      */
     private void fillMoles(int size) {
 
+        java.util.Random ran = new java.util.Random();
         for (int i = 0; i < size; i++) {
             boolean p = false;
             while (!p) {
-                int randomX = (int) (Math.random() * size + 0);
-                int randomY = (int) (Math.random() * size + 0);
+                int randomX = ran.nextInt(10);
+                int randomY = ran.nextInt(10);
                 if (place(randomX, randomY)) {
                     p = true;
                 }

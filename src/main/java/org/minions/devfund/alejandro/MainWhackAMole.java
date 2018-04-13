@@ -4,13 +4,13 @@ import java.util.Scanner;
 /**
  * class for main wack a mole game.
  */
-public abstract class  MainWhackAMole {
+public interface MainWhackAMole {
 
     /**
      * This is the main method to start running the game.
      * @param args arguments.
      */
-    public static void main(final String[] args) {
+    static void main(final String[] args) {
 
         final int attempts = 50;
         final int dimensions = 10;

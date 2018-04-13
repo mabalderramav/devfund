@@ -10,13 +10,13 @@ public interface MainWhackAMole {
      * This is the main method to start running the game.
      * @param args arguments.
      */
-    static void main(final String args[]) {
+    static void main(final String[] args) {
 
         final int attempts = 50;
         final int dimensions = 10;
         final int amountOfMoles = 10;
         final int exitNumber = -1;
-        Scanner in = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, "UTF-8");
         WhackAMole whackAMole = new WhackAMole(attempts, dimensions);
         whackAMole.setMoles(amountOfMoles);
         whackAMole.fillMatrix();
@@ -25,9 +25,9 @@ public interface MainWhackAMole {
         whackAMole.printGridToUser();
         while (keepPlaying) {
             System.out.print("Enter x Value:  ");
-            int x = in.nextInt();
+            int x = scanner.nextInt();
             System.out.print("Enter y Value:  ");
-            int y = in.nextInt();
+            int y = scanner.nextInt();
             if (x == -1 && y == -1) {
                 System.out.println("The game has end with you surrendering,...");
                 whackAMole.printGrid();

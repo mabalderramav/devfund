@@ -95,8 +95,8 @@ public class WhackAMole {
         for (int i = 0; i < size; i++) {
             boolean p = false;
             while (!p) {
-                int randomX = ran.nextInt(10);
-                int randomY = ran.nextInt(10);
+                int randomX = ran.nextInt(size);
+                int randomY = ran.nextInt(size);
                 if (place(randomX, randomY)) {
                     p = true;
                 }

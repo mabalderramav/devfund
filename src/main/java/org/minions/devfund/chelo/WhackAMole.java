@@ -1,3 +1,6 @@
+package org.minions.devfund.chelo;
+
+
 import java.util.Random;
 import java.util.Scanner;
 

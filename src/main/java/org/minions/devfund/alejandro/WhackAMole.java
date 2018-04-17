@@ -11,7 +11,7 @@ public class WhackAMole {
     private int molesLeft;
     private int attemptsLeft;
     private char[][] moleGrid;
-    private StringBuilder auxialiryBuilder = new StringBuilder();
+    private StringBuilder auxiliaryBuilder = new StringBuilder();
 
 
     /**
@@ -22,7 +22,7 @@ public class WhackAMole {
      * @param numAttempts   number of attempts.
      * @param gridDimension grid dimensions.
      */
-    WhackAMole(int numAttempts, int gridDimension) {
+    public WhackAMole(int numAttempts, int gridDimension) {
 
         this.attemptsLeft = numAttempts;
         this.moleGrid = new char[gridDimension][gridDimension];
@@ -40,7 +40,7 @@ public class WhackAMole {
      * @param y location.
      * @return true if you can. (Also update number of moles left.)
      */
-    boolean place(int x, int y) {
+    public boolean place(int x, int y) {
 
         if (this.moleGrid[x][y] != 'M') {
             this.moleGrid[x][y] = 'M';
@@ -58,31 +58,31 @@ public class WhackAMole {
      * @param x location.
      * @param y location.
      */
-    void whack(int x, int y) {
+    public void whack(int x, int y) {
 
         if (this.moleGrid[x][y] == 'M') {
+            this.moleGrid[x][y] = 'W';
             this.score++;
-            this.attemptsLeft--;
             molesLeft--;
-        } else {
-            this.attemptsLeft--;
         }
+        this.attemptsLeft--;
     }
 
     /**
      * Print the grid without showing where the moles are.
      * For every spot that has recorded a “whacked mole,” print out a W, or * otherwise.
+     * @return an string.
      */
-    void printGridToUser() {
+    public String printGridToUser() {
 
-        this.auxialiryBuilder.setLength(0);
+        this.auxiliaryBuilder.setLength(0);
         for (char[] aMoleGrid : this.moleGrid) {
             for (char[] aMoleGrid1 : this.moleGrid) {
-                this.auxialiryBuilder.append('*');
+                this.auxiliaryBuilder.append('*');
             }
-            this.auxialiryBuilder.append("\n");
+            this.auxiliaryBuilder.append("\n");
         }
-        System.out.println(this.auxialiryBuilder);
+        return auxiliaryBuilder.toString();
     }
 
     /**
@@ -90,24 +90,25 @@ public class WhackAMole {
      * The places where the moles are should be printed as an ‘M’.
      * The places where the moles have been whacked should be printed as a ‘W’.
      * The places that don’t have a mole should be printed as *.
+     * @return an string.
      */
-    void printGrid() {
+    public String  printGrid() {
 
-        this.auxialiryBuilder.setLength(0);
+        this.auxiliaryBuilder.setLength(0);
         for (char[] aMoleGrid : this.moleGrid) {
             for (int y = 0; y < this.moleGrid.length; y++) {
-                auxialiryBuilder.append(aMoleGrid[y]);
+                auxiliaryBuilder.append(aMoleGrid[y]);
             }
-            this.auxialiryBuilder.append("\n");
+            this.auxiliaryBuilder.append("\n");
         }
-        System.out.println(this.auxialiryBuilder);
+        return auxiliaryBuilder.toString();
     }
 
     /**
      * This method return the score.
      * @return an int.
      */
-    int getScore() {
+    public int getScore() {
         return this.score;
     }
 
@@ -115,7 +116,7 @@ public class WhackAMole {
      * This method return the moles left.
      * @return an int.
      */
-    int getMolesLeft() {
+    public int getMolesLeft() {
         return this.molesLeft;
     }
 
@@ -123,8 +124,9 @@ public class WhackAMole {
      * This method return the attempts that are left.
      * @return an int.
      */
-    int getAttemptsLeft() {
+    public int getAttemptsLeft() {
         return this.attemptsLeft;
     }
+
 }
 

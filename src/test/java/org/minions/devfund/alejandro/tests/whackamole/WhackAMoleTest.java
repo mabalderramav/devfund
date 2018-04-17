@@ -10,14 +10,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class WhackAMoleTest {
 
-    private final int numAttempts = 10;
-    private final int gridDimension = 4;
-    private int xPosition = 2;
-    private int yPosition = 2;
-    private final String expectedChar = "****\n****\n****\n****\n";
-    private final String expectedCharMoles = "****\n****\n**M*\n****\n";
-    private final String expectedCharWhacks = "****\n****\n**W*\n****\n";
-    private WhackAMole whackAMole = new WhackAMole(numAttempts, gridDimension);
+    private static final int NUM_ATTEMPTS = 10;
+    private static final int GRID_DIMENSION = 4;
+    private static int xPosition = 2;
+    private static int yPosition = 2;
+    private static final String EXPECTED_CHAR = "****\n****\n****\n****\n";
+    private static final String EXPECTED_CHAR_MOLES = "****\n****\n**M*\n****\n";
+    private static final String EXPECTED_CHAR_WHACKS = "****\n****\n**W*\n****\n";
+    private WhackAMole whackAMole = new WhackAMole(NUM_ATTEMPTS, GRID_DIMENSION);
 
 
     /**
@@ -57,7 +57,7 @@ public class WhackAMoleTest {
 
         whackAMole.place(xPosition, yPosition);
         String actual = whackAMole.printGrid();
-        assert actual.equals(expectedCharMoles);
+        assert actual.equals(EXPECTED_CHAR_MOLES);
     }
 
     /**
@@ -80,7 +80,7 @@ public class WhackAMoleTest {
         whackAMole.place(xPosition, yPosition);
         whackAMole.whack(xPosition, yPosition);
         String actual = whackAMole.printGrid();
-        assert expectedCharWhacks.equals(actual);
+        assert EXPECTED_CHAR_WHACKS.equals(actual);
     }
 
     /**
@@ -91,7 +91,7 @@ public class WhackAMoleTest {
 
         whackAMole.whack(xPosition, yPosition);
         String actual = whackAMole.printGrid();
-        assert expectedChar.equals(actual);
+        assert EXPECTED_CHAR.equals(actual);
     }
 
     /**
@@ -115,7 +115,7 @@ public class WhackAMoleTest {
         whackAMole.place(xPosition, yPosition);
         whackAMole.whack(xPosition, yPosition);
         int actual = whackAMole.getAttemptsLeft();
-        assert actual == numAttempts - 1;
+        assert actual == NUM_ATTEMPTS - 1;
     }
 
     /**
@@ -125,7 +125,7 @@ public class WhackAMoleTest {
     @Test
     public void testPrintGridForUsers() {
 
-        assert expectedChar.equals(whackAMole.printGridToUser());
+        assert EXPECTED_CHAR.equals(whackAMole.printGridToUser());
     }
 
     /**
@@ -136,7 +136,7 @@ public class WhackAMoleTest {
     public void testPrintGridWithMoles() {
 
         whackAMole.place(xPosition, yPosition);
-        assert expectedCharMoles.equals(whackAMole.printGrid());
+        assert EXPECTED_CHAR_MOLES.equals(whackAMole.printGrid());
     }
 
     /**
@@ -148,6 +148,6 @@ public class WhackAMoleTest {
 
         whackAMole.place(xPosition, yPosition);
         whackAMole.whack(xPosition, yPosition);
-        assert expectedCharWhacks.equals(whackAMole.printGrid());
+        assert EXPECTED_CHAR_WHACKS.equals(whackAMole.printGrid());
     }
 }

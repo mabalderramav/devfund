@@ -76,8 +76,8 @@ public class WhackAMole {
     public String printGridToUser() {
 
         this.auxiliaryBuilder.setLength(0);
-        for (char[] aMoleGrid : this.moleGrid) {
-            for (char[] aMoleGrid1 : this.moleGrid) {
+        for (int i = 0; i < this.moleGrid.length; i++) {
+            for (int y = 0; y < this.moleGrid.length; y++) {
                 this.auxiliaryBuilder.append('*');
             }
             this.auxiliaryBuilder.append("\n");

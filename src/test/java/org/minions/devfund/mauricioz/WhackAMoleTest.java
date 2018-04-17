@@ -3,9 +3,10 @@ package org.minions.devfund.mauricioz;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 
 /**
@@ -75,9 +76,10 @@ public class WhackAMoleTest {
      */
     @Test
     public void testIsPossibleMissTheWhack() {
+        whackamole.place(1, 1);
         whackamole.whack(1, 1);
 
-        assertEquals('*', whackamole.getMolePosition(0, 1));
+        assertNotEquals('W', whackamole.getMolePosition(1, 1));
     }
 
     /**

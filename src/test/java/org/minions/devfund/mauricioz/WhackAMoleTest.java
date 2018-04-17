@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 
@@ -41,6 +42,17 @@ public class WhackAMoleTest {
     public void testSetAMoleInBoard() {
 
         assertTrue(whackamole.place(1, 1));
+
+    }
+
+    /**
+     * Test is not possible set a mole in the board when a mole exists.
+     */
+    @Test
+    public void testIsNotPossibleSetAMoleInBoardOverAnother() {
+        whackamole.place(1, 1);
+
+        assertFalse(whackamole.place(1, 1));
 
     }
 

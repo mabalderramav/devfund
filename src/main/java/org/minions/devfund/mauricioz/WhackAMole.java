@@ -45,7 +45,7 @@ public class WhackAMole {
         if (place(x, y)) {
             moleGrid[x][y] = 'W';
             molesLeft--;
-            score += 1;
+            score++;
         }
         attemptsLeft--;
     }

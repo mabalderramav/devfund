@@ -11,7 +11,6 @@ public class WhackAMole {
     private int molesLeft;
     private int attemptsLeft;
     private char[][] moleGrid;
-    private StringBuilder auxiliaryBuilder = new StringBuilder();
 
 
     /**
@@ -75,12 +74,12 @@ public class WhackAMole {
      */
     public String printGridToUser() {
 
-        this.auxiliaryBuilder.setLength(0);
+        StringBuilder auxiliaryBuilder = new StringBuilder();
         for (int i = 0; i < this.moleGrid.length; i++) {
             for (int y = 0; y < this.moleGrid.length; y++) {
-                this.auxiliaryBuilder.append('*');
+                auxiliaryBuilder.append('*');
             }
-            this.auxiliaryBuilder.append("\n");
+            auxiliaryBuilder.append("\n");
         }
         return auxiliaryBuilder.toString();
     }
@@ -94,12 +93,12 @@ public class WhackAMole {
      */
     public String  printGrid() {
 
-        this.auxiliaryBuilder.setLength(0);
+        StringBuilder auxiliaryBuilder = new StringBuilder();
         for (char[] aMoleGrid : this.moleGrid) {
             for (int y = 0; y < this.moleGrid.length; y++) {
                 auxiliaryBuilder.append(aMoleGrid[y]);
             }
-            this.auxiliaryBuilder.append("\n");
+            auxiliaryBuilder.append("\n");
         }
         return auxiliaryBuilder.toString();
     }

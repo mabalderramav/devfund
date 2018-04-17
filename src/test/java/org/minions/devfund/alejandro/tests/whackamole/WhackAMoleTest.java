@@ -1,4 +1,5 @@
 package org.minions.devfund.alejandro.tests.whackamole;
+import org.junit.Before;
 import org.minions.devfund.alejandro.WhackAMole;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -17,15 +18,23 @@ public class WhackAMoleTest {
     private static final String EXPECTED_CHAR = "****\n****\n****\n****\n";
     private static final String EXPECTED_CHAR_MOLES = "****\n****\n**M*\n****\n";
     private static final String EXPECTED_CHAR_WHACKS = "****\n****\n**W*\n****\n";
-    private WhackAMole whackAMole = new WhackAMole(NUM_ATTEMPTS, GRID_DIMENSION);
+    private WhackAMole whackAMole;
 
+
+    /**
+     * This method initialize the whackamole class.
+     */
+    @Before
+    public void setUp() {
+        whackAMole = new WhackAMole(NUM_ATTEMPTS, GRID_DIMENSION);
+    }
 
     /**
      * This test will verify that the instance of WhackAMole is created.
      */
     @Test
     public void testWhackAMoleConstructor() {
-        assertThat(this.whackAMole, instanceOf(WhackAMole.class));
+        assertThat(whackAMole, instanceOf(WhackAMole.class));
     }
 
     /**

@@ -1,10 +1,8 @@
 package org.minions.devfund.mauricioz;
-
 /**
  * class in charge to provide game functionality.
  */
 public class WhackAMole {
-    private static final int MOLES_LEFT = 10;
     private int score = 0;
     private int molesLeft;
     private int attemptsLeft;
@@ -18,9 +16,8 @@ public class WhackAMole {
     public WhackAMole(int numAttempts, int gridDimension) {
         attemptsLeft = numAttempts;
         moleGrid = new char[gridDimension][gridDimension];
-        this.molesLeft = MOLES_LEFT;
+        molesLeft = 0;
         initializeMoleGrid();
-        placeMolesInTheGrid();
     }
 
     /**
@@ -30,7 +27,12 @@ public class WhackAMole {
      * @return true if mole was whacked.
      */
     public boolean place(int x, int y) {
-        return moleGrid[x][y] == 'M';
+
+        if (moleGrid[x][y] == '*') {
+            moleGrid[x][y] = 'M';
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -48,48 +50,6 @@ public class WhackAMole {
     }
 
     /**
-     *
-     * @return attempts left.
-     */
-    public int getAttemptsLeft() {
-        return attemptsLeft;
-    }
-
-    /**
-     *
-     * @return score.
-     */
-    public int getScore() {
-        return score;
-    }
-
-    /**
-     *
-     * @return moles left.
-     */
-    public int getMolesLeft() {
-        return molesLeft;
-    }
-
-    /**
-     *
-     * @return size of the grid
-     */
-    public int getMoleGridLength() {
-        return moleGrid.length;
-    }
-
-    /**
-     *
-     * @param x coordinate in x
-     * @param y coordinate in y
-     * @return value in given position
-     */
-    public char getMoleGrid(int x, int y) {
-        return moleGrid[x][y];
-    }
-
-    /**
      * fill the initial grid.
      */
     private void initializeMoleGrid() {
@@ -101,25 +61,67 @@ public class WhackAMole {
     }
 
     /**
-     * adding moles to the initial grid.
+     * print final grid.
+     * @return sbuilder string
      */
-    private void placeMolesInTheGrid() {
-        int xCoordinate;
-        int yCoordinate;
-        for (int i = 0; i < molesLeft; i++) {
-            xCoordinate = generateRandomPosition();
-            yCoordinate = generateRandomPosition();
-            moleGrid[xCoordinate][yCoordinate] = 'M';
+    public String printGrid() {
+        StringBuilder sbuilder = new StringBuilder();
+        for (int i = 0; i < moleGrid.length; i++) {
+            for (int j = 0; j < moleGrid.length; j++) {
+                sbuilder.append(moleGrid[i][j]);
+            }
+            sbuilder.append('\n');
         }
+        return sbuilder.toString();
     }
 
     /**
-     *
-     * @return provide a integer position between 0-9.
+     * print the initial grid.
+     * @return sbuilder to string.
      */
-    private int generateRandomPosition() {
-        final int rndRange = 10;
-        double value = Math.random() * rndRange;
-        return (int) value;
+    public String printGridToUSer() {
+        StringBuilder sbuilder = new StringBuilder();
+        for (int i = 0; i < moleGrid.length; i++) {
+            for (int j = 0; j < moleGrid.length; j++) {
+                sbuilder.append("*");
+            }
+            sbuilder.append('\n');
+        }
+        return sbuilder.toString();
+    }
+
+    /**
+     * get the value for a given position.
+     * @param x position
+     * @param y position
+     * @return return value into a position
+     */
+    public char getMolePosition(int x, int y) {
+        return moleGrid[x][y];
+    }
+
+    /**
+     * get moles left.
+     * @return moles left
+     */
+    public int getMolesLeft() {
+        return molesLeft;
+    }
+
+    /**
+     * get attempts left.
+     * @return attempts left
+     */
+    public int getAttemptsLeft() {
+        return attemptsLeft;
+    }
+
+    /**
+     * get score.
+     * @return score
+     */
+    public int getScore() {
+        return score;
     }
 }
+

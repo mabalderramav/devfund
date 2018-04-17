@@ -18,6 +18,11 @@ public class WhackAMoleTest {
     private WhackAMole whackamole;
     private static final int ATTEMPTS_NUMBER = 50;
     private static final int BOARD_DIMENSION = 10;
+    private static final int WHACK_POSITION = 9;
+    private String initialGrid = "**********\n**********\n**********\n**********\n**********\n**********\n**********"
+            + "\n**********\n**********\n**********\n";
+    private String endGrid = "**********\n*M********\n**********\n**********\n**********\n**********\n**********"
+            + "\n**********\n**********\n*********W\n";
 
     /**
      * Initialization of the whackamole board.
@@ -30,39 +35,69 @@ public class WhackAMoleTest {
     }
 
     /**
-     * Test initial value of moles in the board is 10.
+     * Test is possible set a mole in the board.
      */
     @Test
-    public void testWackamoleStartWith10Moles() {
+    public void testSetAMoleInBoard() {
 
-        assertTrue(whackamole.getMolesLeft() == BOARD_DIMENSION);
+        assertTrue(whackamole.place(1, 1));
 
     }
 
     /**
-     * Test initial value of attempts remaining is 50.
+     * Test is possible whack a mole.
      */
     @Test
-    public void testWhackAMoleStartWith50AttemptsRemaining() {
+    public void testIsPossibleWhackAMole() {
+        whackamole.whack(1, 1);
+
+        assertEquals('W', whackamole.getMolePosition(1, 1));
+    }
+
+    /**
+     * Test initial amount of moles is 0.
+     */
+    @Test
+    public void testInitialAmountOfMolesIs0() {
+
+        assertEquals(0, whackamole.getMolesLeft());
+    }
+
+    /**
+     * Test initial amount of attempts is 50.
+     */
+    @Test
+    public void testInitialAmountOfAttemptsIs50() {
 
         assertEquals(ATTEMPTS_NUMBER, whackamole.getAttemptsLeft());
-
     }
 
     /**
-     * Test initial grid displayed to the user shows only *.
+     * Test initial score is 0.
      */
     @Test
-    public void testInitialWhackAMoleBoardShowsOnlyStars() {
+    public void testInitialScoreIs0() {
 
-        boolean isStar = false;
-        for (int i = 0; i < whackamole.getMoleGridLength(); i++) {
-            for (int j = 0; j < whackamole.getMoleGridLength(); j++) {
-                if (whackamole.getMoleGrid(i, j) == '*' || whackamole.getMoleGrid(i, j) == 'M') {
-                    isStar = true;
-                }
-            }
-        }
-        assertTrue(isStar);
+        assertEquals(0, whackamole.getScore());
+    }
+
+    /**
+     * Test initial grid print.
+     */
+    @Test
+    public void testPrintGridToUser() {
+
+        assertEquals(initialGrid, whackamole.printGridToUSer());
+    }
+
+    /**
+     * Test grid with a mole and a whack print.
+     */
+    @Test
+    public void testPrintGridWithAMoleAndAWhackToUser() {
+        whackamole.place(1, 1);
+        whackamole.whack(WHACK_POSITION, WHACK_POSITION);
+
+        assertEquals(endGrid, whackamole.printGrid());
     }
 }

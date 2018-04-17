@@ -42,6 +42,7 @@ public class WhackAMoleTest {
     public void testSetAMoleInBoard() {
 
         assertTrue(whackamole.place(1, 1));
+        assertEquals(1, whackamole.getMolesLeft());
 
     }
 
@@ -64,6 +65,19 @@ public class WhackAMoleTest {
         whackamole.whack(1, 1);
 
         assertEquals('W', whackamole.getMolePosition(1, 1));
+        assertEquals(1, whackamole.getScore());
+        assertEquals(ATTEMPTS_NUMBER - 1, whackamole.getAttemptsLeft());
+        assertEquals(0, whackamole.getMolesLeft());
+    }
+
+    /**
+     * Test is possible miss the whack.
+     */
+    @Test
+    public void testIsPossibleMissTheWhack() {
+        whackamole.whack(1, 1);
+
+        assertEquals('*', whackamole.getMolePosition(0, 1));
     }
 
     /**

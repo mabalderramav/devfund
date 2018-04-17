@@ -30,6 +30,7 @@ public class WhackAMole {
 
         if (moleGrid[x][y] == '*') {
             moleGrid[x][y] = 'M';
+            molesLeft++;
             return true;
         }
         return false;

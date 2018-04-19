@@ -1,93 +1,251 @@
 package org.minions.devfund.roy;
 
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.Random;
 
 /**
  * Test for WhackAMole class.
  */
 public class WhackAMoleTest {
     private WhackAMole whackAMole;
-    private static final int POSITION_X = 4;
-    private static final int POSITION_Y = 7;
-    private static final int POSITION_X_1 = 3;
-    private static final int POSITION_Y_1 = 5;
-    private static final int POSITION_X_2 = 2;
-    private static final int POSITION_Y_2 = 1;
-    private static final int ATTEMPTS = 50;
-    private static final int GRID_DIMENSION = 10;
 
     /**
-     * Preconditions.
-     */
-    @Before
-    public void before() {
-        whackAMole = new WhackAMole(ATTEMPTS, GRID_DIMENSION);
-    }
-
-    /**
-     * Test for whackAMole.place method.
+     * Test negative positions for place method.
      */
     @Test
-    public void place() {
-        Assert.assertTrue(whackAMole.place(POSITION_X, POSITION_Y));
+    public void placeNegativePosition() {
+        final int attempts = 2;
+        final int dimension = 2;
+        final int xNegative = -1;
+        final int yNegative = -3;
+        whackAMole = new WhackAMole(attempts, dimension);
+        Assert.assertFalse(whackAMole.place(xNegative, yNegative));
     }
 
     /**
-     * Test for whack method.
+     * Test place a mole in a invalid position.
+     */
+    @Test
+    public void placeAMoleInAValidPosition() {
+        final int attempts = 20;
+        final int dimension = 10;
+
+        whackAMole = new WhackAMole(attempts, dimension);
+        boolean result;
+
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                result = whackAMole.place(i, j);
+                if (result) {
+                    Assert.assertTrue(result);
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * Test place method for an invalid position.
+     */
+    @Test
+    public void placeAMoleInAnInvalidPosition() {
+        final int attempts = 30;
+        final int dimension = 10;
+
+        whackAMole = new WhackAMole(attempts, dimension);
+        boolean result = true;
+
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                result = whackAMole.place(i, j);
+                if (!result) {
+                    Assert.assertFalse(result);
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * Tests whack method.
      */
     @Test
     public void whack() {
-        whackAMole.whack(POSITION_X, POSITION_Y);
+        final int attempts = 25;
+        final int dimension = 10;
+        final int x = 2;
+        final int y = 3;
+
+        whackAMole = new WhackAMole(attempts, dimension);
+        whackAMole.whack(x, y);
     }
 
     /**
-     * Test for printGridToUser Method.
+     * Second test for whack Method.
      */
     @Test
-    public void printGridToUser() {
-        whackAMole.whack(POSITION_X, POSITION_Y);
-        whackAMole.printGridToUser();
+    public void whackTwo() {
+        final int attempts = 4;
+        final int dimension = 2;
+
+        whackAMole = new WhackAMole(attempts, dimension);
+        whackAMole.placeMoles();
+        whackAMole.whack(0, 1);
+        whackAMole.printGrid();
     }
 
     /**
-     * Test for printGrid Method.
+     * Tests give Up the game.
+     */
+    @Test
+    public void giveUpTheGame() {
+        final int attempts = 25;
+        final int dimension = 10;
+        final int x = -1;
+        final int y = -1;
+
+        whackAMole = new WhackAMole(attempts, dimension);
+        whackAMole.whack(x, y);
+    }
+
+    /**
+     * Tests do not give up the game.
+     */
+    @Test
+    public void doNotGiveUp() {
+        final int attempts = 25;
+        final int dimension = 10;
+        final int x = 1;
+        final int y = 3;
+
+        whackAMole = new WhackAMole(attempts, dimension);
+        Assert.assertFalse(whackAMole.giveUp(x, y));
+    }
+
+    /**
+     * Tests the end of the game.
+     */
+    @Test
+    public void endGameWhenTheAttemptsAreEmpty() {
+        final int dimension = 10;
+        final int attempts = 25;
+        whackAMole = new WhackAMole(attempts, dimension);
+        int aux = attempts;
+        while (aux > 0) {
+            whackAMole.whack(new Random().nextInt(dimension - 1) + 1,
+                    new Random().nextInt(dimension - 1) + 1);
+            aux--;
+        }
+    }
+
+    /**
+     * Tests printGrid method.
      */
     @Test
     public void printGrid() {
-        whackAMole.whack(POSITION_X, POSITION_Y);
-        whackAMole.whack(POSITION_X_1, POSITION_Y_1);
-        whackAMole.whack(POSITION_X_2, POSITION_Y_2);
-        whackAMole.printGridToUser();
+        final int attempts = 25;
+        final int dimension = 10;
+        whackAMole = new WhackAMole(attempts, dimension);
+        whackAMole.placeMoles();
+        whackAMole.printGrid();
     }
 
     /**
-     * Test for playGame method.
+     * Tests printGridForUser method.
      */
-    @Ignore
     @Test
-    public void playGame() {
-        whackAMole.playGame();
+    public void printGridForUser() {
+        final int attempts = 25;
+        final int dimension = 10;
+        whackAMole = new WhackAMole(attempts, dimension);
+        whackAMole.placeMoles();
+        whackAMole.printGridForUser();
     }
 
     /**
-     * Test for initializeGrid method.
+     * Tests gridBuilder Method.
+     */
+    @Test
+    public void gridBuilder() {
+        final int attempts = 25;
+        final int dimension = 10;
+        whackAMole = new WhackAMole(attempts, dimension);
+        Assert.assertTrue(whackAMole.gridBuilder().getClass().equals(StringBuilder.class));
+    }
+
+    /**
+     * Tests gridBuilder for user method.
+     */
+    @Test
+    public void gridBuilderForUser() {
+        final int attempts = 25;
+        final int dimension = 10;
+        whackAMole = new WhackAMole(attempts, dimension);
+        Assert.assertTrue(whackAMole.gridBuilderForUser().getClass().equals(StringBuilder.class));
+    }
+
+    /**
+     * Tests whack method for negative positions.
+     */
+    @Test
+    public void whackInANegativePosition() {
+        final int attempts = 25;
+        final int dimension = 10;
+        final int x = -5;
+        final int y = -3;
+        whackAMole = new WhackAMole(attempts, dimension);
+        whackAMole.whack(x, y);
+    }
+
+    /**
+     * Tests initialize grid method.
      */
     @Test
     public void initializeGrid() {
+        final int attempts = 25;
+        final int dimension = 10;
+        whackAMole = new WhackAMole(attempts, dimension);
         whackAMole.initializeGrid();
     }
 
     /**
-     * Test for printGridAndScore method.
+     * Tests rules method.
      */
     @Test
-    public void printGridAndScore() {
-        whackAMole.whack(POSITION_X, POSITION_Y);
-        whackAMole.whack(POSITION_X_1, POSITION_Y_1);
-        whackAMole.whack(POSITION_X_2, POSITION_Y_2);
-        whackAMole.printGridAndScore();
+    public void rules() {
+        final int attempts = 25;
+        final int dimension = 10;
+        whackAMole = new WhackAMole(attempts, dimension);
+        Assert.assertTrue(whackAMole.rules());
+    }
+
+    /**
+     * Tests rules method, without attempts.
+     */
+    @Test
+    public void rulesWithOutAttempts() {
+        final int attempts = 0;
+        final int dimension = 10;
+        whackAMole = new WhackAMole(attempts, dimension);
+        Assert.assertFalse(whackAMole.rules());
+    }
+
+    /**
+     * Tests rules method without moles.
+     */
+    @Test
+    public void rulesWithOutMoles() {
+        final int attempts = 4;
+        final int dimension = 2;
+        whackAMole = new WhackAMole(attempts, dimension);
+
+        for (int i = 1; i <= dimension; i++) {
+            for (int j = 1; j <= dimension; j++) {
+                whackAMole.whack(i, j);
+            }
+        }
+        Assert.assertFalse(whackAMole.rules());
     }
 }

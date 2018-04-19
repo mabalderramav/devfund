@@ -187,19 +187,6 @@ public class WhackAMoleTest {
     }
 
     /**
-     * Tests whack method for negative positions.
-     */
-    @Test
-    public void whackInANegativePosition() {
-        final int attempts = 25;
-        final int dimension = 10;
-        final int x = -5;
-        final int y = -3;
-        whackAMole = new WhackAMole(attempts, dimension);
-        whackAMole.whack(x, y);
-    }
-
-    /**
      * Tests initialize grid method.
      */
     @Test
@@ -229,23 +216,6 @@ public class WhackAMoleTest {
         final int attempts = 0;
         final int dimension = 10;
         whackAMole = new WhackAMole(attempts, dimension);
-        Assert.assertFalse(whackAMole.rules());
-    }
-
-    /**
-     * Tests rules method without moles.
-     */
-    @Test
-    public void rulesWithOutMoles() {
-        final int attempts = 4;
-        final int dimension = 2;
-        whackAMole = new WhackAMole(attempts, dimension);
-
-        for (int i = 1; i <= dimension; i++) {
-            for (int j = 1; j <= dimension; j++) {
-                whackAMole.whack(i, j);
-            }
-        }
         Assert.assertFalse(whackAMole.rules());
     }
 

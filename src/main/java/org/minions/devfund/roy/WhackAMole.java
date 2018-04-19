@@ -53,18 +53,13 @@ public class WhackAMole {
      */
     public void whack(int x, int y) {
         if (rules() && !giveUp(x, y)) {
-            try {
-                if (moleGrid[x][y] == MOLE) {
-                    moleGrid[x][y] = WHACKED_MOLE;
-                    score++;
-                    attemptsLeft--;
-                    molesLeft--;
-                } else {
-                    attemptsLeft--;
-                }
-            } catch (IndexOutOfBoundsException e) {
+            if (moleGrid[x][y] == MOLE) {
+                moleGrid[x][y] = WHACKED_MOLE;
+                score++;
                 attemptsLeft--;
-                System.out.println("Wrong position");
+                molesLeft--;
+            } else {
+                attemptsLeft--;
             }
         } else {
             printGrid();

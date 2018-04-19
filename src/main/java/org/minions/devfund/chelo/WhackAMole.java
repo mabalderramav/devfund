@@ -1,5 +1,4 @@
-package org.minions.devfund.chelo;
-
+//package org.minions.devfund.chelo;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -8,7 +7,9 @@ import java.util.Scanner;
  * A class for WackAMole task.
  */
 public class WhackAMole {
-    private int score, molesLeft, attemptsLeft;
+    private int score;
+    private int molesLeft;
+    private int attemptsLeft;
     private char[][] moleGrid;
 
     /**
@@ -41,7 +42,8 @@ public class WhackAMole {
      * @param dimensionLimit dimension of the grid's limit
      */
     void placeTheMoles(int molesLeft, int dimensionLimit) {
-        int x, y;
+        int x;
+        int y;
         Random rand = new Random();
 
         while (molesLeft > 0) {
@@ -65,9 +67,8 @@ public class WhackAMole {
             this.moleGrid[x][y] = 'M';
             this.molesLeft++;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -82,40 +83,46 @@ public class WhackAMole {
             moleGrid[x][y] = 'W';
             score++;
             molesLeft--;
-            attemptsLeft--;
-        } else {
-            attemptsLeft--;
         }
+        attemptsLeft--;
     }
 
-    /**
+    /***
      * A method to print the grid without showing where the moles are.
      * For every spot that has recorded a whacked mole, print out a W, or * otherwise.
+     * @return string builder
      */
-    void printGridToUser() {
+    String printGridToUser() {
+        StringBuilder builder = new StringBuilder();
+
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
                 if (moleGrid[i][j] == 'M') {
-                    System.out.print("[*]");
+                    builder.append("[*]");
                 } else {
-                    System.out.print("[" + moleGrid[i][j] + "]");
+                    builder.append("[" + moleGrid[i][j] + "]");
                 }
             }
-            System.out.println(" ");
+            builder.append("\n");
         }
+        return builder.toString();
     }
 
     /**
      * A method to print the grid without showing where the moles are.
      * For every spot that has recorded a whacked mole print out a W, or * otherwise.
+     * @return string builder
      */
-    void printGrid() {
+    String printGrid() {
+        StringBuilder builder = new StringBuilder();
+
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
-                System.out.print("[" + moleGrid[i][j] + "]");
+                builder.append("[" + moleGrid[i][j] + "]");
             }
-            System.out.println(" ");
+            builder.append("\n");
         }
+        return builder.toString();
     }
 
     /**\
@@ -151,24 +158,28 @@ public class WhackAMole {
      * @param args main method
      */
     public static void main(final String[] args) {
+        Scanner scanner = new Scanner(System.in, "UTF-8");
         System.out.println("Enter number of attempts:");
-        int numAttempts = readUserInputOnlyIntegers();
+        int numAttempts = scanner.nextInt(); //readUserInputOnlyIntegers();
         System.out.println("Enter dimension for the grid:");
-        int dimensionBegin = readUserInputOnlyIntegers();
+        int dimensionBegin = scanner.nextInt(); //readUserInputOnlyIntegers();
 
         WhackAMole whackAmole = new WhackAMole(numAttempts, dimensionBegin);
 
         System.out.println("Enter the amount of moles");
-        int amountMoles = readUserInputOnlyIntegers();
+        int amountMoles = scanner.nextInt(); // readUserInputOnlyIntegers();
         whackAmole.placeTheMoles(amountMoles, dimensionBegin);
 
         // Printing the grid as first action to know where the moles were placed
-        whackAmole.printGrid();
+        System.out.println(whackAmole.printGrid());
 
-        int userInputX, userInputY;
+        int userInputX;
+        int userInputY;
+
+        boolean finished = false;
 
         // While the attempts left are greater than zero the user can submit coordinates
-        while (whackAmole.getAttemptsLeft() > 0) {
+        while (numAttempts > 0) {
             if (whackAmole.getMolesLeft() == 0) {
                 System.out.println("Whack-A-Mole CHAMP!!!");
                 break;
@@ -176,84 +187,32 @@ public class WhackAMole {
 
             // Reading user input
             System.out.println("Enter X: ");
-            userInputX = readUserInputForGame();
+            userInputX = scanner.nextInt(); // readUserInputForGame();
             System.out.println("Enter Y: ");
-            userInputY = readUserInputForGame();
+            userInputY = scanner.nextInt(); // readUserInputForGame();
 
             // Printing the coordinates submitted by the user
             System.out.println("User input: [X=" + userInputX + "][Y=" + userInputY + "]");
 
             // Conditional if the user wants to finish the game
             if (userInputX == -1 || userInputY == -1) {
-                whackAmole.printGrid();
+                System.out.println(whackAmole.printGrid());
                 whackAmole.printStatus();
                 System.out.println("GAME OVER: User gave up");
-                break;
-            }
-
-            // Positioning the user's hit
-            whackAmole.whack(userInputX, userInputY);
-            whackAmole.printGridToUser();
-            whackAmole.printStatus();
-
-            numAttempts--;
-
-            if (numAttempts == 0) {
-                whackAmole.printGrid();
-                System.out.println("GAME OVER! NO MORE ATTEMPTS");
-                break;
-            }
-        }
-    }
-
-    /**
-     * A method to read user input and validate is a value between the range of array dimension.
-     * Validates a valid integer too.
-     * @return the integer value entered by the user.
-     */
-    public static int readUserInputForGame() {
-        Scanner scanner = new Scanner(System.in, "UTF-8");
-
-        String value = " ";
-        boolean flag = true;
-        while (flag) {
-            value = scanner.next();
-            if (!value.matches("^((-1)?|^[0-9])$")) {
-                flag = false;
+                numAttempts = 0;
             } else {
-                System.out.print("Wrong input. Insert again: ");
+                // Positioning the user's hit
+                whackAmole.whack(userInputX, userInputY);
+                System.out.println(whackAmole.printGridToUser());
+                whackAmole.printStatus();
+                numAttempts--;
+
+                if (numAttempts == 0) {
+                    System.out.println(whackAmole.printGrid());
+                    System.out.println("GAME OVER! NO MORE ATTEMPTS");
+                    numAttempts = 0;
+                }
             }
         }
-        return Integer.parseInt(value);
-    }
-
-    /**
-     * A method to read user input only integers.
-     * @return value submitted by the user
-     */
-    public static int readUserInputOnlyIntegers() {
-        Scanner scanner = new Scanner(System.in, "UTF-8");
-
-        String value = " ";
-
-        // The code to avoid Inner assignments should be avoided
-        boolean flag = true;
-        while (flag) {
-            value = scanner.next();
-            if (!value.matches("^[0-9]+$")) {
-                flag = false;
-            } else {
-                System.out.print("Wrong input. Insert again: ");
-            }
-        }
-
-        // The following code fails with error:
-        // Inner assignments should be avoided.
-//        String value;
-//        while (!(value = scanner.next()).matches("^((-1)?|^[0-9])$")) {
-//            System.out.print("Wrong input. Insert again: ");
-//        }
-
-        return Integer.parseInt(value);
     }
 }

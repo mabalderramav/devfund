@@ -51,9 +51,9 @@ public class Squarelotron {
      * @param flip is the new squareltron.
      */
     private void moveTopRowToBottomRow(final int ring, final Squarelotron flip) {
-        for (int index = (ring - 1); index <= (size - ring); index++) {
-            flip.squarelotron[ring - 1][index] = squarelotron[(size - ring)][index];
-            flip.squarelotron[(size - ring)][index] = squarelotron[ring - 1][index];
+        for (int index = ring - 1; index <= size - ring; index++) {
+            flip.squarelotron[ring - 1][index] = squarelotron[size - ring][index];
+            flip.squarelotron[size - ring][index] = squarelotron[ring - 1][index];
         }
     }
 
@@ -64,13 +64,13 @@ public class Squarelotron {
      * @param flip is the new squareltron.
      */
     private void moveLeftSideRightSide(final int ring, final Squarelotron flip) {
-        for (int index = ring; index < (size / (ring + 1)); index++) {
+        for (int index = ring; index < size / (ring + 1); index++) {
             //left side
-            flip.squarelotron[index][ring - 1] = squarelotron[(size - index - 1)][ring - 1];
-            flip.squarelotron[(size - index - 1)][ring - 1] = squarelotron[index][ring - 1];
+            flip.squarelotron[index][ring - 1] = squarelotron[size - index - 1][ring - 1];
+            flip.squarelotron[size - index - 1][ring - 1] = squarelotron[index][ring - 1];
             //right side
-            flip.squarelotron[index][size - ring] = squarelotron[(size - index - 1)][size - ring];
-            flip.squarelotron[(size - index - 1)][size - ring] = squarelotron[index][size - ring];
+            flip.squarelotron[index][size - ring] = squarelotron[size - index - 1][size - ring];
+            flip.squarelotron[size - index - 1][size - ring] = squarelotron[index][size - ring];
         }
     }
 
@@ -94,7 +94,7 @@ public class Squarelotron {
      * @param flip is the new squareltron.
      */
     private void moveSideColumnToBottomRow(final int ring, final Squarelotron flip) {
-        for (int i = (ring); i <= (size - ring - 1); i++) {
+        for (int i = ring; i <= size - ring - 1; i++) {
             flip.squarelotron[size - ring][i] = squarelotron[i][size - ring];
             flip.squarelotron[i][size - ring] = squarelotron[size - ring][i];
         }
@@ -107,7 +107,7 @@ public class Squarelotron {
      * @param flip is the new squareltron.
      */
     private void moveTopRowToSideColumn(final int ring, final Squarelotron flip) {
-        for (int j = (ring - 1); j <= (size - ring); j++) {
+        for (int j = ring - 1; j <= size - ring; j++) {
             flip.squarelotron[ring - 1][j] = squarelotron[j][ring - 1];
             flip.squarelotron[j][ring - 1] = squarelotron[ring - 1][j];
         }

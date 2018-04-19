@@ -25,6 +25,16 @@ public class WhackAMoleTest {
     }
 
     /**
+     * Verifies if the method generate a grind to print.
+     */
+    @Test
+    public void place() {
+        final int positionX = 0;
+        final int positionY = 0;
+        assertTrue(game.place(positionX, positionY));
+    }
+
+    /**
      * Verifies if the all moles was placed.
      */
     @Test
@@ -206,7 +216,12 @@ public class WhackAMoleTest {
      */
     @Test
     public void printGridToUser() {
-        game.printGridToUser();
+        final String expectedGrid = " o  o  o \n o  o  o \n o  o  o \n";
+        final int gridDimension = 3;
+        final int numAttempts = 3;
+        WhackAMole game = new WhackAMole(numAttempts, gridDimension);
+        final String actualGrid = game.printGridToUser();
+        assertEquals(expectedGrid, actualGrid);
     }
 
     /**

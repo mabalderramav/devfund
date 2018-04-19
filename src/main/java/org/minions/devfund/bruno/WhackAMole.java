@@ -1,7 +1,6 @@
 package org.minions.devfund.bruno;
 
 import java.util.Random;
-import java.util.stream.IntStream;
 
 /**
  * This Class in charge to manage the whack a mole game.
@@ -45,15 +44,18 @@ public class WhackAMole {
 
     /**
      * Prints the grid without showing where the moles are.
+     *
+     * @return a string to print grid to user.
      */
-    public void printGridToUser() {
-        int gridLength = moleGrid.length;
+    public String printGridToUser() {
+        StringBuilder userGrid = new StringBuilder();
         for (String[] row : moleGrid) {
-            IntStream.range(0, gridLength).mapToObj(col -> hideMole(row[col]))
-                    .forEach(System.out::print);
-            System.out.print("\n");
+            for (String place : row) {
+                userGrid.append(hideMole(place));
+            }
+            userGrid.append('\n');
         }
-        System.out.print("\n");
+        return userGrid.toString();
     }
 
     /**

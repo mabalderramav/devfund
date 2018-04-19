@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 /**
- * This Class.
+ * This Class in charge to manage the whack a mole game.
  */
 public class WhackAMole {
 
@@ -132,15 +132,14 @@ public class WhackAMole {
         if (moleGrid[xWhack][yWhack].equals("M")) {
             moleGrid[xWhack][yWhack] = "W";
             molesLeft--;
-            attemptsLeft--;
             score++;
             isWhackAMole = true;
             System.out.println("You hit a mole!\n");
         } else {
             moleGrid[xWhack][yWhack] = "*";
-            attemptsLeft--;
             System.out.println("Oops! No mole there!\n");
         }
+        attemptsLeft--;
         return isWhackAMole;
     }
 

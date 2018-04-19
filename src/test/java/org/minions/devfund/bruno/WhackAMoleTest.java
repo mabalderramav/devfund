@@ -16,23 +16,12 @@ public class WhackAMoleTest {
     private static final int NUM_MOLES = 10;
     private WhackAMole game;
 
-
     /**
      * Before test.
      */
     @Before
     public void beforeTest() {
         game = new WhackAMole(NUM_ATTEMPTS, GRID_DIMENSION);
-    }
-
-    /**
-     * Verifies if the method generate a grind to print.
-     */
-    @Test
-    public void place() {
-        final int positionX = 0;
-        final int positionY = 0;
-        assertTrue(game.place(positionX, positionY));
     }
 
     /**

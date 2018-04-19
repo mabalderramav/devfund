@@ -219,8 +219,8 @@ public class WhackAMoleTest {
         final String expectedGrid = " o  o  o \n o  o  o \n o  o  o \n";
         final int gridDimension = 3;
         final int numAttempts = 3;
-        WhackAMole game = new WhackAMole(numAttempts, gridDimension);
-        final String actualGrid = game.printGridToUser();
+        WhackAMole whackAMoleGame = new WhackAMole(numAttempts, gridDimension);
+        final String actualGrid = whackAMoleGame.printGridToUser();
         assertEquals(expectedGrid, actualGrid);
     }
 

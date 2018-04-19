@@ -160,14 +160,14 @@ public class WhackAMole {
     public static void main(final String[] args) {
         Scanner scanner = new Scanner(System.in, "UTF-8");
         System.out.println("Enter number of attempts:");
-        int numAttempts = scanner.nextInt(); //readUserInputOnlyIntegers();
+        int numAttempts = scanner.nextInt();
         System.out.println("Enter dimension for the grid:");
-        int dimensionBegin = scanner.nextInt(); //readUserInputOnlyIntegers();
+        int dimensionBegin = scanner.nextInt();
 
         WhackAMole whackAmole = new WhackAMole(numAttempts, dimensionBegin);
 
         System.out.println("Enter the amount of moles");
-        int amountMoles = scanner.nextInt(); // readUserInputOnlyIntegers();
+        int amountMoles = scanner.nextInt();
         whackAmole.placeTheMoles(amountMoles, dimensionBegin);
 
         // Printing the grid as first action to know where the moles were placed
@@ -185,9 +185,9 @@ public class WhackAMole {
 
             // Reading user input
             System.out.println("Enter X: ");
-            userInputX = scanner.nextInt(); // readUserInputForGame();
+            userInputX = scanner.nextInt();
             System.out.println("Enter Y: ");
-            userInputY = scanner.nextInt(); // readUserInputForGame();
+            userInputY = scanner.nextInt();
 
             // Printing the coordinates submitted by the user
             System.out.println("User input: [X=" + userInputX + "][Y=" + userInputY + "]");

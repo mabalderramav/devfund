@@ -1,4 +1,4 @@
-//package org.minions.devfund.chelo;
+package org.minions.devfund.chelo;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -175,8 +175,6 @@ public class WhackAMole {
 
         int userInputX;
         int userInputY;
-
-        boolean finished = false;
 
         // While the attempts left are greater than zero the user can submit coordinates
         while (numAttempts > 0) {

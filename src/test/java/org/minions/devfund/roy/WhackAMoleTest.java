@@ -248,4 +248,31 @@ public class WhackAMoleTest {
         }
         Assert.assertFalse(whackAMole.rules());
     }
+
+    /**
+     * Whack a mole.
+     */
+    @Test
+    public void testWhack() {
+        final int attempts = 2;
+        final int dimension = 1;
+        whackAMole = new WhackAMole(attempts, dimension);
+        whackAMole.placeMoles();
+        whackAMole.printGrid();
+        whackAMole.whack(0, 0);
+        whackAMole.printGrid();
+    }
+
+    /**
+     * Test place.
+     */
+    @Test
+    public void testPlace() {
+        final int attempts = 2;
+        final int dimension = 1;
+        final int invalidPos = 5;
+        whackAMole = new WhackAMole(attempts, dimension);
+        whackAMole.place(invalidPos, 0);
+        whackAMole.place(0, invalidPos);
+    }
 }

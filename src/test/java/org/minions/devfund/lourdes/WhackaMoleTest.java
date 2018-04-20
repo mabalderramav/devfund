@@ -89,17 +89,18 @@ public class WhackaMoleTest {
      */
     @Test
     public void testPrintGridToUser() {
+        final String asteriskLine = "**********\n";
         StringBuilder gridToUser = new StringBuilder();
-        gridToUser.append("**********\n");
-        gridToUser.append("**********\n");
-        gridToUser.append("**********\n");
-        gridToUser.append("**********\n");
-        gridToUser.append("**********\n");
+        gridToUser.append(asteriskLine);
+        gridToUser.append(asteriskLine);
+        gridToUser.append(asteriskLine);
+        gridToUser.append(asteriskLine);
+        gridToUser.append(asteriskLine);
         gridToUser.append("********W*\n");
-        gridToUser.append("**********\n");
-        gridToUser.append("**********\n");
-        gridToUser.append("**********\n");
-        gridToUser.append("**********\n");
+        gridToUser.append(asteriskLine);
+        gridToUser.append(asteriskLine);
+        gridToUser.append(asteriskLine);
+        gridToUser.append(asteriskLine);
         final int positionX1 = 0;
         final int positionY1 = 5;
         final int positionX2 = 5;
@@ -115,17 +116,18 @@ public class WhackaMoleTest {
      */
     @Test
     public void printGrid() {
+        final String asteriskLine = "**********\n";
         StringBuilder grid = new StringBuilder();
         grid.append("*****M****\n");
-        grid.append("**********\n");
-        grid.append("**********\n");
-        grid.append("**********\n");
-        grid.append("**********\n");
+        grid.append(asteriskLine);
+        grid.append(asteriskLine);
+        grid.append(asteriskLine);
+        grid.append(asteriskLine);
         grid.append("********W*\n");
-        grid.append("**********\n");
-        grid.append("**********\n");
-        grid.append("**********\n");
-        grid.append("**********\n");
+        grid.append(asteriskLine);
+        grid.append(asteriskLine);
+        grid.append(asteriskLine);
+        grid.append(asteriskLine);
         final int positionX1 = 0;
         final int positionY1 = 5;
         final int positionX2 = 5;

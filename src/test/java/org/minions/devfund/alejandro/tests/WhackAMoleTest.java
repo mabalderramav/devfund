@@ -1,4 +1,4 @@
-package org.minions.devfund.alejandro.tests.whackamole;
+package org.minions.devfund.alejandro.tests;
 import org.junit.Before;
 import org.minions.devfund.alejandro.WhackAMole;
 import org.junit.Test;

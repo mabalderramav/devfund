@@ -83,4 +83,56 @@ public class WhackaMoleTest {
         whackAMole.whack(positionX, positionY);
         assertEquals(whackAMole.getAttemptsLeft(), attempts - 1);
     }
+
+    /**
+     * Method that validate how a Grid should be displayed to an User.
+     */
+    @Test
+    public void testPrintGridToUser() {
+        StringBuilder gridToUser = new StringBuilder();
+        gridToUser.append("**********\n");
+        gridToUser.append("**********\n");
+        gridToUser.append("**********\n");
+        gridToUser.append("**********\n");
+        gridToUser.append("**********\n");
+        gridToUser.append("********W*\n");
+        gridToUser.append("**********\n");
+        gridToUser.append("**********\n");
+        gridToUser.append("**********\n");
+        gridToUser.append("**********\n");
+        final int positionX1 = 0;
+        final int positionY1 = 5;
+        final int positionX2 = 5;
+        final int positionY2 = 8;
+        whackAMole.place(positionX1, positionY1);
+        whackAMole.place(positionX2, positionY2);
+        whackAMole.whack(positionX2, positionY2);
+        assertEquals(whackAMole.printGridToUser(), gridToUser.toString());
+    }
+
+    /**
+     * Method that validate how a Grid should be displayed when game ends.
+     */
+    @Test
+    public void printGrid() {
+        StringBuilder grid = new StringBuilder();
+        grid.append("*****M****\n");
+        grid.append("**********\n");
+        grid.append("**********\n");
+        grid.append("**********\n");
+        grid.append("**********\n");
+        grid.append("********W*\n");
+        grid.append("**********\n");
+        grid.append("**********\n");
+        grid.append("**********\n");
+        grid.append("**********\n");
+        final int positionX1 = 0;
+        final int positionY1 = 5;
+        final int positionX2 = 5;
+        final int positionY2 = 8;
+        whackAMole.place(positionX1, positionY1);
+        whackAMole.place(positionX2, positionY2);
+        whackAMole.whack(positionX2, positionY2);
+        assertEquals(whackAMole.printGrid(), grid.toString());
+    }
 }

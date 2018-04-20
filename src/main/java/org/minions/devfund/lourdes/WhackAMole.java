@@ -34,7 +34,7 @@ public class WhackAMole {
      *
      * @param x Represents the X axes position in the grid.
      * @param y Represents the Y axes position in the grid.
-     * @return True if the mole was placed succesfully
+     * @return True if the mole was placed successfully.
      */
     public boolean place(int x, int y) {
         if (this.moleGrid[x][y] == ASTERISK) {
@@ -62,31 +62,36 @@ public class WhackAMole {
 
     /**
      * Method that print the grid without showing the moles.
+     * @return a string that will be displayed to the user
      */
-    public void printGridToUser() {
+    public String printGridToUser() {
+        StringBuilder printGridUser = new StringBuilder();
         for (char[] row : moleGrid) {
             for (char cellValue : row) {
                 if (cellValue == MOLE || cellValue == ASTERISK) {
-                    System.out.print(ASTERISK);
+                    printGridUser.append(ASTERISK);
                 } else {
-                    System.out.print(WHACK);
+                    printGridUser.append(WHACK);
                 }
             }
-            System.out.println();
-
+            printGridUser.append("\n");
         }
+        return printGridUser.toString();
     }
 
     /**
      * Method that print the whole grid in its current state.
+     * @return a string that display the grid
      */
-    public void printGrid() {
+    public String printGrid() {
+        StringBuilder printGrid = new StringBuilder();
         for (char[] row : moleGrid) {
             for (char cellValue : row) {
-                System.out.print(cellValue);
+                printGrid.append(cellValue);
             }
-            System.out.println();
+            printGrid.append("\n");
         }
+        return printGrid.toString();
     }
 
     /**

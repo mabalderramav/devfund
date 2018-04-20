@@ -65,19 +65,12 @@ public class Squarelotron {
 
         for(int i = 0; i < this.size; i++){
             for(int j = 0; j < this.size; j++){
-                if(i == 0 || j == 0 || i == ring - 1 || j == ring - 1) {
-                    resSquare.squarelotron[i][j] = this.squarelotron[i][j];
-                }else {
+                if(i == this.size - ring || j == this.size - ring || i == ring - 1 || j == ring - 1) {
                     resSquare.squarelotron[i][j] = innerSquare.squarelotron[i][j];
+                }else {
+                    resSquare.squarelotron[i][j] = this.squarelotron[i][j];
                 }
             }
-        }
-
-        for(int i = 0; i < innerSquare.squarelotron.length; i++){
-            for(int j = 0 ; j < innerSquare.squarelotron.length; j++){
-                System.out.print(resSquare.squarelotron[i][j] + " ");
-            }
-            System.out.println();
         }
 
         return resSquare;

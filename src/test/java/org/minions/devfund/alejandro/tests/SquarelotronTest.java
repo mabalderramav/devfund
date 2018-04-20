@@ -49,6 +49,13 @@ public class SquarelotronTest {
         int[][] expected = {{21,22,23,24,25},{16,7,8,9,20},{11,12,13,14,15},{6,17,18,19,10},{1,2,3,4,5}};
         actualSquarelotron = squarelotron.upsideDownFlip(5);
         int[][] actual = actualSquarelotron.squarelotron;
+
+        for(int i = 0; i < actual.length; i++) {
+            for(int j = 0; j < actual.length; j++){
+                System.out.print(actual[i][j] + " ");
+            }
+            System.out.println();
+        }
         assert Arrays.deepEquals(actual, expected);
     }
 
@@ -61,12 +68,12 @@ public class SquarelotronTest {
         actualSquarelotron = squarelotron.upsideDownFlip(4);
         int[][] actual = actualSquarelotron.squarelotron;
 
-//        for(int i = 0; i < actual.length; i++) {
-//            for(int j = 0; j < actual.length; j++){
-//                System.out.print(actual[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
+        for(int i = 0; i < actual.length; i++) {
+            for(int j = 0; j < actual.length; j++){
+                System.out.print(actual[i][j] + " ");
+            }
+            System.out.println();
+        }
         assert Arrays.deepEquals(actual, expected);
     }
 

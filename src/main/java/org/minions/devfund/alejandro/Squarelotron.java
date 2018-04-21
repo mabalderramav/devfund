@@ -59,14 +59,24 @@ public class Squarelotron {
     }
 
     /**
-     * This method performs the Main Diagonal Flip of the squarelotron, as described above,
+     * This method performs the Main Diagonal Flip of the squarelotron,
      * and returns the new squarelotron. The original squarelotron should not be modified (we will check for this).
-     * @param ring
-     * @return
+     * @param ring the ring that will be flipped.
+     * @return A modified instance of a new Squarelotron.
      */
-//    Squarelotron mainDiagonalFlip(int ring) {
-//
-//    }
+    public Squarelotron mainDiagonalFlip(int ring) {
+        Squarelotron resultSquare = new Squarelotron(this.size);
+        Squarelotron temporarlSquare = new Squarelotron(this.size);
+
+        for(int i = this.size - ring; i < ring; i++) {
+            for(int j = this.size - ring; j < ring; j++) {
+                if(i == this.size - ring || j == this.size - ring || i == ring - 1 || j == ring -1) {
+                    resultSquare.squarelotron[i][j] = temporarlSquare.squarelotron[j][i];
+                }
+            }
+        }
+        return resultSquare;
+    }
 
 
     /**

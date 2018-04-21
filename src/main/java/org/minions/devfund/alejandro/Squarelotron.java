@@ -33,8 +33,7 @@ public class Squarelotron {
     public Squarelotron upsideDownFlip(int ring) {
 
         Squarelotron swapSquare = new Squarelotron(this.size);
-        Squarelotron innerSquare = new Squarelotron(this.size);
-        Squarelotron resSquare = new Squarelotron(this.size);
+        Squarelotron resultSquare = new Squarelotron(this.size);
 
         int controlSize = ring - 1;
         int[] row;
@@ -50,30 +49,13 @@ public class Squarelotron {
 
         for(int i = this.size - ring; i < ring; i++){
             for(int j = this.size - ring; j < ring; j++){
-                innerSquare.squarelotron[i][j] = swapSquare.squarelotron[i][j];
-            }
-        }
-
-        for(int i = this.size - ring; i < ring/2; i++){
-            for(int j = this.size - ring; j < ring; j++){
-                if(i == 0 || j == 0 || i == ring - 1 || j == ring - 1) {
-                    innerSquare.squarelotron[i][j] = resSquare.squarelotron[i][j];
-                }
-            }
-        }
-
-
-        for(int i = 0; i < this.size; i++){
-            for(int j = 0; j < this.size; j++){
                 if(i == this.size - ring || j == this.size - ring || i == ring - 1 || j == ring - 1) {
-                    resSquare.squarelotron[i][j] = innerSquare.squarelotron[i][j];
-                }else {
-                    resSquare.squarelotron[i][j] = this.squarelotron[i][j];
+                    resultSquare.squarelotron[i][j] = swapSquare.squarelotron[i][j];
                 }
             }
         }
 
-        return resSquare;
+        return resultSquare;
     }
 
     /**

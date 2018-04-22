@@ -3,14 +3,20 @@ package org.minions.devfund.marylin;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Created by Marylin Moya on 4/22/2018.
+ */
 public class WhackAMole {
+    private int score;
+    private int molesLeft;
+    private int attemptsLeft;
+    private char[][] moleGrid;
 
-    int score;
-    int molesLeft;
-    int attemptsLeft;
-    char moleGrid[][];
-
-    // Constructor
+    /**
+     * Constructor.
+     * @param numAttempts number of attemps.
+     * @param gridDimension size of the grid.
+     */
     WhackAMole(int numAttempts, int gridDimension) {
         this.score = 0;
         this.molesLeft = 0;
@@ -24,6 +30,12 @@ public class WhackAMole {
         }
     }
 
+    /**
+     * Fill a specific cell.
+     * @param x axis.
+     * @param y axis.
+     * @return true if the cell value is M, false otherwise.
+     */
     boolean place(int x, int y) {
         this.moleGrid[x][y] = 'M';
         if (this.moleGrid[x][y] == 'M') {
@@ -34,6 +46,11 @@ public class WhackAMole {
         }
     }
 
+    /**
+     * Whack a specific cell.
+     * @param x axis.
+     * @param y axis.
+     */
     void whack(int x, int y) {
         if (this.moleGrid[x][y] == 'M') {
             this.score = this.score + 1;
@@ -44,6 +61,9 @@ public class WhackAMole {
         this.attemptsLeft = this.attemptsLeft - 1;
     }
 
+    /**
+     * Print the user grid.
+     */
     void printGridToUser() {
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
@@ -57,6 +77,9 @@ public class WhackAMole {
         }
     }
 
+    /**
+     * Print the grid with all the values on it.
+     */
     void printGrid() {
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
@@ -66,19 +89,23 @@ public class WhackAMole {
         }
     }
 
-    public static void main(String[] args) {
-        int gridLength = 10;
-        int attemps = 50;
-        int number_of_moles = 10;
+    /**
+     * Main method.
+     * @param args parameters.
+     */
+    public static void main(final String[] args) {
+        final int gridLength = 10;
+        final int attemps = 50;
+        final int numberOfMoles = 10;
 
         // create a 10 by 10 grid
         WhackAMole whackamole = new WhackAMole(attemps, gridLength);
 
         // randomly place 10 moles
-        for (int i = 0; i < number_of_moles; i++) {
+        for (int i = 0; i < numberOfMoles; i++) {
             Random rand = new Random();
-            int x = rand.nextInt(number_of_moles);
-            int y = rand.nextInt(number_of_moles);
+            int x = rand.nextInt(numberOfMoles);
+            int y = rand.nextInt(numberOfMoles);
             whackamole.place(x, y);
             System.out.println("Mole places at " + x + "," + y);
         }

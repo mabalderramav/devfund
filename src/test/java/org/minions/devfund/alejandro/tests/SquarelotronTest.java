@@ -131,8 +131,8 @@ public class SquarelotronTest {
     @Test
     public void testMainDiagonalFlipSize5With2Ring() {
 
-        final int[][] expected = {{1, 2, 3, 4, 5}, {6, 7, 12, 17, 22}, {11, 8, 13, 18, 15},
-                {16, 9, 14, 19, 24}, {21, 10, 23, 20, 25}};
+        final int[][] expected = {{1, 2, 3, 4, 5}, {6, 7, 12, 17, 10}, {11, 8, 13, 18, 15},
+                {16, 9, 14, 19, 20}, {21, 22, 23, 24, 25}};
         final int localSize = 5;
         final int ring = 2;
         Squarelotron square = new Squarelotron(localSize);
@@ -275,5 +275,18 @@ public class SquarelotronTest {
         assert Arrays.deepEquals(squarelotron.getSquarelotron(), expected);
 
     }
+    /**
+     * this test flip a matrix with dimension of four and rign 2.
+     */
+    @Test
+    public void testMainDiagonalFlipDimension4Ring2() {
 
+        final int localSize = 4;
+        final int ring = 2;
+        Squarelotron square = new Squarelotron(localSize);
+        actualSquarelotron = square.mainDiagonalFlip(ring);
+        final int[][] expected = {{1, 2, 3, 4}, {5, 6, 10, 8}, {9, 7, 11, 12}, {13, 14, 15, 16}};
+        int[][] actual = actualSquarelotron.getSquarelotron();
+        assert Arrays.deepEquals(actual, expected);
+    }
 }

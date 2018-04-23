@@ -34,8 +34,8 @@ public class Squarelotron {
 
         Squarelotron swapSquare = new Squarelotron(this.size);
         Squarelotron resultSquare = new Squarelotron(this.size);
-
         swapSquare.squarelotron = this.getSquarelotron();
+
         if (ring > 0 && ring <= this.size / 2) {
             int controlSize = this.size - 1;
             int[] row;
@@ -70,8 +70,8 @@ public class Squarelotron {
         Squarelotron resultSquare = new Squarelotron(this.size);
 
         if (ring > 0 && ring <= this.size / 2) {
-            for (int i = ring - 1; i <= this.size - 1; i++) {
-                for (int j = ring - 1; j <= this.size - 1; j++) {
+            for (int i = ring - 1; i <= this.size - ring; i++) {
+                for (int j = ring - 1; j <= this.size - ring; j++) {
                     if (i == ring - 1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
                         resultSquare.squarelotron[i][j] = this.squarelotron[j][i];
                     }

@@ -5,8 +5,8 @@ package org.minions.devfund.alejandro;
  */
 public class Squarelotron {
 
-    public int[][] squarelotron;
-    int size;
+    private int[][] squarelotron;
+    private int size;
 
     /**
      * It fills the 2-dimensional array with the numbers 1 to n squared, in order.
@@ -17,7 +17,7 @@ public class Squarelotron {
         this.size = n;
         n = 1;
         squarelotron = new int[this.size][this.size];
-        for (int x = 0; x < this.size; x++){
+        for (int x = 0; x < this.size; x++) {
             for (int y = 0; y < this.size; y++) {
                 squarelotron[x][y] = n++;
             }
@@ -35,12 +35,12 @@ public class Squarelotron {
         Squarelotron swapSquare = new Squarelotron(this.size);
         Squarelotron resultSquare = new Squarelotron(this.size);
 
-        if(ring > 0 && ring <= this.size / 2) {
+        if (ring > 0 && ring <= this.size / 2) {
             int controlSize = this.size - 1;
             int[] row;
             int[] row1;
 
-            for(int i = 0; i < this.size/2; i++) {
+            for (int i = 0; i < this.size / 2; i++) {
                 row = swapSquare.squarelotron[i];
                 row1 = swapSquare.squarelotron[controlSize];
                 swapSquare.squarelotron[i] = row1;
@@ -48,9 +48,9 @@ public class Squarelotron {
                 controlSize--;
             }
 
-            for(int i = ring - 1; i <= this.size - ring; i++){
-                for(int j = ring - 1; j <= this.size - ring; j++){
-                    if(i == ring -1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
+            for (int i = ring - 1; i <= this.size - ring; i++) {
+                for (int j = ring - 1; j <= this.size - ring; j++) {
+                    if (i == ring - 1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
                         resultSquare.squarelotron[i][j] = swapSquare.squarelotron[i][j];
                     }
                 }
@@ -68,9 +68,9 @@ public class Squarelotron {
     public Squarelotron mainDiagonalFlip(int ring) {
         Squarelotron resultSquare = new Squarelotron(this.size);
 
-        for(int i = ring - 1; i <= this.size - 1; i++){
-            for(int j = ring - 1; j <= this.size - 1; j++){
-                if(i == ring -1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
+        for (int i = ring - 1; i <= this.size - 1; i++) {
+            for (int j = ring - 1; j <= this.size - 1; j++) {
+                if (i == ring - 1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
                     resultSquare.squarelotron[i][j] = this.squarelotron[j][i];
                 }
             }
@@ -84,20 +84,26 @@ public class Squarelotron {
      * Any integer, including zero and negative integers, is allowable as the argument.
      * A value of -1 indicates a 90° counterclockwise rotation.
      * This method modifies the internal representation of the squarelotron; it does not create a new squarelotron.
-     * @param numberOfTurns
+     * @param numberOfTurns the amount of times that will be rotated.
      */
     public void rotateRight(int numberOfTurns) {
-        
-        if(numberOfTurns >= 0) {
+
+        if (numberOfTurns >= 0) {
             rotateClockWise(numberOfTurns);
-        } else rotateCounterClockWise(numberOfTurns);
+        } else {
+            rotateCounterClockWise(numberOfTurns);
+        }
     }
 
+    /**
+     * This method will rotate the matrix to the right.
+     * @param numberOfTurns the amount of times that will be rotated.
+     */
     private void rotateClockWise(int numberOfTurns) {
 
         Squarelotron tempSquare = new Squarelotron(this.size);
 
-        while(numberOfTurns > 0) {
+        while (numberOfTurns > 0) {
             for (int i = 0; i < this.size; i++) {
                 for (int j = 0; j < this.size; j++) {
                     this.squarelotron[j][this.size - 1 - i] = tempSquare.squarelotron[i][j];
@@ -110,6 +116,10 @@ public class Squarelotron {
         }
     }
 
+    /**
+     * This method will rotate the matrix to the left.
+     * @param numberOfTurns the amount of times that will be rotated.
+     */
     private void rotateCounterClockWise(int numberOfTurns) {
 
         Squarelotron tempSquare = new Squarelotron(this.size);
@@ -125,5 +135,14 @@ public class Squarelotron {
             }
             numberOfTurns++;
         }
+    }
+
+    /**
+     * This method return the squarelotron matrix.
+     * @return a bi dimensional array.
+     */
+    public int[][] getSquarelotron() {
+        int[][] squareToReturn = this.squarelotron;
+        return squareToReturn;
     }
 }

@@ -35,7 +35,7 @@ public class Squarelotron {
         Squarelotron swapSquare = new Squarelotron(this.size);
         Squarelotron resultSquare = new Squarelotron(this.size);
 
-        if(ring > 0) {
+        if(ring > 0 && ring <= this.size / 2) {
             int controlSize = this.size - 1;
             int[] row;
             int[] row1;

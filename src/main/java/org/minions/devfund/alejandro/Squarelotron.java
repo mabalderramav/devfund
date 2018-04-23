@@ -35,6 +35,7 @@ public class Squarelotron {
         Squarelotron swapSquare = new Squarelotron(this.size);
         Squarelotron resultSquare = new Squarelotron(this.size);
 
+        swapSquare.squarelotron = this.getSquarelotron();
         if (ring > 0 && ring <= this.size / 2) {
             int controlSize = this.size - 1;
             int[] row;
@@ -68,16 +69,17 @@ public class Squarelotron {
     public Squarelotron mainDiagonalFlip(int ring) {
         Squarelotron resultSquare = new Squarelotron(this.size);
 
-        for (int i = ring - 1; i <= this.size - 1; i++) {
-            for (int j = ring - 1; j <= this.size - 1; j++) {
-                if (i == ring - 1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
-                    resultSquare.squarelotron[i][j] = this.squarelotron[j][i];
+        if (ring > 0 && ring <= this.size / 2) {
+            for (int i = ring - 1; i <= this.size - 1; i++) {
+                for (int j = ring - 1; j <= this.size - 1; j++) {
+                    if (i == ring - 1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
+                        resultSquare.squarelotron[i][j] = this.squarelotron[j][i];
+                    }
                 }
             }
         }
         return resultSquare;
     }
-
 
     /**
      * The argument numberOfTurns indicates the number of times the entire squarelotron should be rotated 90° clockwise.

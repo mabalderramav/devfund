@@ -1,7 +1,7 @@
 package org.minions.devfund.alejandro;
 
 /**
- * Squareotron class
+ * Squareotron class.
  */
 public class Squarelotron {
 
@@ -35,26 +35,27 @@ public class Squarelotron {
         Squarelotron swapSquare = new Squarelotron(this.size);
         Squarelotron resultSquare = new Squarelotron(this.size);
 
-        int controlSize = ring - 1;
-        int[] row;
-        int[] row1;
+        if(ring > 0) {
+            int controlSize = this.size - 1;
+            int[] row;
+            int[] row1;
 
-        for(int i = this.size - ring; i < ring/2; i++) {
-            row = swapSquare.squarelotron[i];
-            row1 = swapSquare.squarelotron[controlSize];
-            swapSquare.squarelotron[i] = row1;
-            swapSquare.squarelotron[controlSize] = row;
-            controlSize--;
-        }
+            for(int i = 0; i < this.size/2; i++) {
+                row = swapSquare.squarelotron[i];
+                row1 = swapSquare.squarelotron[controlSize];
+                swapSquare.squarelotron[i] = row1;
+                swapSquare.squarelotron[controlSize] = row;
+                controlSize--;
+            }
 
-        for(int i = this.size - ring; i < ring; i++){
-            for(int j = this.size - ring; j < ring; j++){
-                if(i == this.size - ring || j == this.size - ring || i == ring - 1 || j == ring - 1) {
-                    resultSquare.squarelotron[i][j] = swapSquare.squarelotron[i][j];
+            for(int i = ring - 1; i <= this.size - ring; i++){
+                for(int j = ring - 1; j <= this.size - ring; j++){
+                    if(i == ring -1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
+                        resultSquare.squarelotron[i][j] = swapSquare.squarelotron[i][j];
+                    }
                 }
             }
         }
-
         return resultSquare;
     }
 
@@ -66,12 +67,11 @@ public class Squarelotron {
      */
     public Squarelotron mainDiagonalFlip(int ring) {
         Squarelotron resultSquare = new Squarelotron(this.size);
-        Squarelotron temporarlSquare = new Squarelotron(this.size);
 
-        for(int i = this.size - ring; i < ring; i++) {
-            for(int j = this.size - ring; j < ring; j++) {
-                if(i == this.size - ring || j == this.size - ring || i == ring - 1 || j == ring -1) {
-                    resultSquare.squarelotron[i][j] = temporarlSquare.squarelotron[j][i];
+        for(int i = ring - 1; i <= this.size - 1; i++){
+            for(int j = ring - 1; j <= this.size - 1; j++){
+                if(i == ring -1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
+                    resultSquare.squarelotron[i][j] = this.squarelotron[j][i];
                 }
             }
         }
@@ -86,7 +86,44 @@ public class Squarelotron {
      * This method modifies the internal representation of the squarelotron; it does not create a new squarelotron.
      * @param numberOfTurns
      */
-    void rotateRight(int numberOfTurns) {
+    public void rotateRight(int numberOfTurns) {
+        
+        if(numberOfTurns >= 0) {
+            rotateClockWise(numberOfTurns);
+        } else rotateCounterClockWise(numberOfTurns);
+    }
 
+    private void rotateClockWise(int numberOfTurns) {
+
+        Squarelotron tempSquare = new Squarelotron(this.size);
+
+        while(numberOfTurns > 0) {
+            for (int i = 0; i < this.size; i++) {
+                for (int j = 0; j < this.size; j++) {
+                    this.squarelotron[j][this.size - 1 - i] = tempSquare.squarelotron[i][j];
+                }
+            }
+            for (int i = 0; i < this.size; i++) {
+                System.arraycopy(this.squarelotron[i], 0, tempSquare.squarelotron[i], 0, this.size);
+            }
+            numberOfTurns--;
+        }
+    }
+
+    private void rotateCounterClockWise(int numberOfTurns) {
+
+        Squarelotron tempSquare = new Squarelotron(this.size);
+
+        while (numberOfTurns < 0) {
+            for (int i = 0; i < this.size; i++) {
+                for (int j = 0; j < this.size; j++) {
+                    this.squarelotron[this.size - 1 - j][i] = tempSquare.squarelotron[i][j];
+                }
+            }
+            for (int i = 0; i < this.size; i++) {
+                System.arraycopy(this.squarelotron[i], 0, tempSquare.squarelotron[i], 0, this.size);
+            }
+            numberOfTurns++;
+        }
     }
 }

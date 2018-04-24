@@ -189,15 +189,13 @@ public class SquarelotronTest {
      */
     @Test
     public void testRotateRight1() {
-        //    Failed: arrays first differed at element [0]; expected:<3> but was:<9>
         final int localSize = 3;
         final int times = 1;
         final int[][] expected = {{7, 4, 1}, {8, 5, 2}, {9, 6, 3}};
         actualSquarelotron = new Squarelotron(localSize);
         actualSquarelotron.rotateRight(times);
+        printMatrix(localSize, actualSquarelotron.getSquarelotron());
         assert Arrays.deepEquals(actualSquarelotron.getSquarelotron(), expected);
-
-
     }
 
     /**
@@ -205,13 +203,13 @@ public class SquarelotronTest {
      */
     @Test
     public void testRotateRight2() {
-        //    Failed: arrays first differed at element [0]; expected:<2> but was:<3>
 
         final int localSize = 2;
         final int times = 1;
         final int[][] expected = {{3, 1}, {4, 2}};
         actualSquarelotron = new Squarelotron(localSize);
         actualSquarelotron.rotateRight(times);
+        printMatrix(localSize, actualSquarelotron.getSquarelotron());
         assert Arrays.deepEquals(actualSquarelotron.getSquarelotron(), expected);
     }
 
@@ -220,7 +218,6 @@ public class SquarelotronTest {
      */
     @Test
     public void testRotateRight6() {
-        //null
 
         final int localSize = 6;
         final int times = 1;
@@ -236,7 +233,6 @@ public class SquarelotronTest {
      */
     @Test
     public void testMainDiagonalFlipDimensionFiveRingThree() {
-        //null
 
         final int localSize = 5;
         final int ring = 3;
@@ -268,10 +264,12 @@ public class SquarelotronTest {
     @Test
     public void testUpsideDownFlipDimensionThree() {
 
+        //Null
         final int[][] expected = {{7, 8, 9}, {4, 5, 6}, {1, 2, 3}};
         final int localSize = 3;
         Squarelotron actualSquare = new Squarelotron(localSize);
         squarelotron = actualSquare.upsideDownFlip(1);
+        printMatrix(localSize, squarelotron.getSquarelotron());
         assert Arrays.deepEquals(squarelotron.getSquarelotron(), expected);
 
     }
@@ -288,5 +286,14 @@ public class SquarelotronTest {
         final int[][] expected = {{1, 2, 3, 4}, {5, 6, 10, 8}, {9, 7, 11, 12}, {13, 14, 15, 16}};
         int[][] actual = actualSquarelotron.getSquarelotron();
         assert Arrays.deepEquals(actual, expected);
+    }
+
+    public void printMatrix(int localSize, int[][] squareletron) {
+        for (int i = 0; i < localSize; i++) {
+            for (int j = 0; j < localSize; j++) {
+                System.out.print(squareletron[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }

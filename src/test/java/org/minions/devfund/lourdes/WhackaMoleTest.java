@@ -25,10 +25,32 @@ public class WhackaMoleTest {
     }
 
     /**
+     * Method that verify the Grid dimension initial value defined in the constructor.
+     */
+    @Test
+    public void testConstructorGrid() {
+        final int numAttempts = 3;
+        final int gridDimension = 5;
+        whackAMole = new WhackAMole(numAttempts, gridDimension);
+        assertEquals(whackAMole.getMoleGrid().length, gridDimension);
+    }
+
+    /**
+     * Method that verify the initial value for number of attempts that is defined in the constructor.
+     */
+    @Test
+    public void testConstructorNumOfAttempts() {
+        final int numAttempts = 2;
+        final int gridDimension = 3;
+        whackAMole = new WhackAMole(numAttempts, gridDimension);
+        assertEquals(whackAMole.getAttemptsLeft(), numAttempts);
+    }
+
+    /**
      * Verify that a Mole is placed in the given position.
      */
     @Test
-    public void testPlaceMole() {
+    public void testPlaceSucceed() {
         final int positionX = 6;
         final int positionY = 5;
         assertTrue(whackAMole.place(positionX, positionY));
@@ -38,7 +60,7 @@ public class WhackaMoleTest {
      * Verify that a Mole is not assigned in a position that has been already assigned.
      */
     @Test
-    public void testPlaceMoleInSamePosition() {
+    public void testPlaceFail() {
         final int positionX = 1;
         final int positionY = 2;
         whackAMole.place(positionX, positionY);
@@ -49,7 +71,7 @@ public class WhackaMoleTest {
      * Verify a whack is done in the given position.
      */
     @Test
-    public void testWhack() {
+    public void testWhackSucceedAttempts() {
         final int positionX = 4;
         final int positionY = 3;
         whackAMole.place(positionX, positionY);
@@ -59,16 +81,75 @@ public class WhackaMoleTest {
     }
 
     /**
+     * Method that verify a whack is not done in wrong position.
+     */
+    @Test
+    public void testWhackFailAttempts() {
+        final int positionX = 4;
+        final int positionY = 3;
+        final int positionToWhackX = 1;
+        final int positionToWhackY = 2;
+        whackAMole.place(positionX, positionY);
+        whackAMole.whack(positionToWhackX, positionToWhackY);
+        char[][] grid = whackAMole.getMoleGrid();
+        assertEquals(grid[positionX][positionY], 'M');
+    }
+
+
+    /**
+     * Verify the moles left is not modified when a whack is not done in the right position.
+     */
+    @Test
+    public void testWhackFailMolesLeft() {
+        final int positionX = 4;
+        final int positionY = 3;
+        final int positionToWhackX = 1;
+        final int positionToWhackY = 2;
+        final int molesLeft = whackAMole.getMolesLeft();
+        whackAMole.place(positionX, positionY);
+        whackAMole.whack(positionToWhackX, positionToWhackY);
+        assertEquals(whackAMole.getMolesLeft(), molesLeft + 1);
+    }
+
+    /**
+     * Verify the moles left is decremented when a whack is successful.
+     */
+    @Test
+    public void testWhackSucceedMolesLeft() {
+        final int positionX = 4;
+        final int positionY = 3;
+        final int molesLeft = whackAMole.getMolesLeft();
+        whackAMole.place(positionX, positionY);
+        whackAMole.whack(positionX, positionY);
+        assertEquals(whackAMole.getMolesLeft(), molesLeft);
+    }
+
+    /**
      * Verify the score is incremented when a whack is successful.
      */
     @Test
-    public void testScore() {
+    public void testWhackScoreSucceed() {
         final int positionX = 2;
         final int positionY = 3;
         int score = whackAMole.getScore();
         whackAMole.place(positionX, positionY);
         whackAMole.whack(positionX, positionY);
         assertEquals(whackAMole.getScore(), score + 1);
+    }
+
+    /**
+     * Verify the score is not modified when a whack is not right.
+     */
+    @Test
+    public void testWhackScoreFail() {
+        final int positionX = 2;
+        final int positionY = 3;
+        final int positionToWhackX = 1;
+        final int positionToWhackY = 2;
+        int score = whackAMole.getScore();
+        whackAMole.place(positionX, positionY);
+        whackAMole.whack(positionToWhackX, positionToWhackY);
+        assertEquals(whackAMole.getScore(), score);
     }
 
     /**

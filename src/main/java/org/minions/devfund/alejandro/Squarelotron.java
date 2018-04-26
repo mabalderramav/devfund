@@ -33,30 +33,54 @@ public class Squarelotron {
     public Squarelotron upsideDownFlip(int ring) {
 
         Squarelotron resultSquare = new Squarelotron(this.size);
-        int[][] swapedMatrix = this.getSquarelotron();
+        int[][] swappedMatrix = this.getSquarelotron();
 
         if (ring > 0 && ring <= this.size / 2) {
-            int controlSize = this.size - 1;
-            int[] row;
-            int[] row1;
 
-            for (int i = 0; i < this.size / 2; i++) {
-                row = swapedMatrix[i];
-                row1 = swapedMatrix[controlSize];
-                swapedMatrix[i] = row1;
-                swapedMatrix[controlSize] = row;
-                controlSize--;
-            }
+            swappedMatrix = swapMatrix(swappedMatrix);
+            resultSquare.squarelotron = flipSquarelotron(ring, resultSquare.getSquarelotron(), swappedMatrix);
+        }
+        return resultSquare;
+    }
 
-            for (int i = ring - 1; i <= this.size - ring; i++) {
-                for (int j = ring - 1; j <= this.size - ring; j++) {
-                    if (i == ring - 1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
-                        resultSquare.squarelotron[i][j] = swapedMatrix[i][j];
-                    }
+    /**
+     * This method will swap a matrix.
+     * @param matrix The matrix that will be swapped.
+     * @return the same matrix but swapped.
+     */
+    private int[][] swapMatrix(final int[][] matrix) {
+
+        int controlSize = this.size - 1;
+        int[] row;
+        int[] row1;
+
+        for (int i = 0; i < this.size / 2; i++) {
+            row = matrix[i];
+            row1 = matrix[controlSize];
+            matrix[i] = row1;
+            matrix[controlSize] = row;
+            controlSize--;
+        }
+        return matrix;
+    }
+
+    /**
+     * This method will flip a matrix in a determined ring.
+     * @param ring the ring that will be flipped in the square.
+     * @param squarelotronFlipedMatrix is the matrix that will be flipped.
+     * @param swapedMatrix the swapped matrix.
+     * @return the flipped matrix.
+     */
+    private int[][] flipSquarelotron(int ring, final int[][] squarelotronFlipedMatrix, final int[][] swapedMatrix) {
+
+        for (int i = ring - 1; i <= this.size - ring; i++) {
+            for (int j = ring - 1; j <= this.size - ring; j++) {
+                if (i == ring - 1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
+                    squarelotronFlipedMatrix[i][j] = swapedMatrix[i][j];
                 }
             }
         }
-        return resultSquare;
+        return squarelotronFlipedMatrix;
     }
 
     /**

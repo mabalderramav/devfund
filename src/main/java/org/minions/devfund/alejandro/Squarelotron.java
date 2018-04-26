@@ -26,7 +26,7 @@ public class Squarelotron {
 
     /**
      * This method performs the Upside-Down Flip of the squarelotronMatrix,
-     * and returns the new squarelotronMatrix. The original squarelotronMatrix should not be modified (we will check for this).
+     * and returns the new squarelotronMatrix. The original squarelotronMatrix should not be modified.
      * @param ring the ring that will be flipped.
      * @return A modified instance of a new Squarelotron.
      */
@@ -38,7 +38,8 @@ public class Squarelotron {
         if (ring > 0 && ring <= this.size / 2) {
 
             swapMatrix(swappedMatrix);
-            resultSquare.squarelotronMatrix = flipSquarelotron(ring, resultSquare.getSquarelotronMatrix(), swappedMatrix);
+            resultSquare.squarelotronMatrix =
+                    flipSquarelotron(ring, resultSquare.getSquarelotronMatrix(), swappedMatrix);
         }
         return resultSquare;
     }
@@ -85,7 +86,7 @@ public class Squarelotron {
 
     /**
      * This method performs the Main Diagonal Flip of the squarelotronMatrix,
-     * and returns the new squarelotronMatrix. The original squarelotronMatrix should not be modified (we will check for this).
+     * and returns the new squarelotronMatrix. The original squarelotronMatrix should not be modified.
      * @param ring the ring that will be flipped.
      * @return A modified instance of a new Squarelotron.
      */
@@ -105,10 +106,12 @@ public class Squarelotron {
     }
 
     /**
-     * The argument numberOfTurns indicates the number of times the entire squarelotronMatrix should be rotated 90° clockwise.
+     * The argument numberOfTurns indicates the number of times the entire squarelotronMatrix should be rotated 90°
+     * clockwise.
      * Any integer, including zero and negative integers, is allowable as the argument.
      * A value of -1 indicates a 90° counterclockwise rotation.
-     * This method modifies the internal representation of the squarelotronMatrix; it does not create a new squarelotronMatrix.
+     * This method modifies the internal representation of the squarelotronMatrix; it does not create a new
+     * squarelotronMatrix.
      * @param numberOfTurns the amount of times that will be rotated.
      */
     public void rotateRight(int numberOfTurns) {

@@ -5,7 +5,7 @@ package org.minions.devfund.alejandro;
  */
 public class Squarelotron {
 
-    private int[][] squarelotron;
+    private int[][] squarelotronMatrix;
     private int size;
 
     /**
@@ -16,29 +16,29 @@ public class Squarelotron {
     public Squarelotron(int n) {
         this.size = n;
         n = 1;
-        squarelotron = new int[this.size][this.size];
+        squarelotronMatrix = new int[this.size][this.size];
         for (int x = 0; x < this.size; x++) {
             for (int y = 0; y < this.size; y++) {
-                squarelotron[x][y] = n++;
+                squarelotronMatrix[x][y] = n++;
             }
         }
     }
 
     /**
-     * This method performs the Upside-Down Flip of the squarelotron,
-     * and returns the new squarelotron. The original squarelotron should not be modified (we will check for this).
+     * This method performs the Upside-Down Flip of the squarelotronMatrix,
+     * and returns the new squarelotronMatrix. The original squarelotronMatrix should not be modified (we will check for this).
      * @param ring the ring that will be flipped.
      * @return A modified instance of a new Squarelotron.
      */
     public Squarelotron upsideDownFlip(int ring) {
 
         Squarelotron resultSquare = new Squarelotron(this.size);
-        int[][] swappedMatrix = this.getSquarelotron();
+        int[][] swappedMatrix = this.getSquarelotronMatrix();
 
         if (ring > 0 && ring <= this.size / 2) {
 
-            swappedMatrix = swapMatrix(swappedMatrix);
-            resultSquare.squarelotron = flipSquarelotron(ring, resultSquare.getSquarelotron(), swappedMatrix);
+            swapMatrix(swappedMatrix);
+            resultSquare.squarelotronMatrix = flipSquarelotron(ring, resultSquare.getSquarelotronMatrix(), swappedMatrix);
         }
         return resultSquare;
     }
@@ -84,8 +84,8 @@ public class Squarelotron {
     }
 
     /**
-     * This method performs the Main Diagonal Flip of the squarelotron,
-     * and returns the new squarelotron. The original squarelotron should not be modified (we will check for this).
+     * This method performs the Main Diagonal Flip of the squarelotronMatrix,
+     * and returns the new squarelotronMatrix. The original squarelotronMatrix should not be modified (we will check for this).
      * @param ring the ring that will be flipped.
      * @return A modified instance of a new Squarelotron.
      */
@@ -96,7 +96,7 @@ public class Squarelotron {
             for (int i = ring - 1; i <= this.size - ring; i++) {
                 for (int j = ring - 1; j <= this.size - ring; j++) {
                     if (i == ring - 1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
-                        resultSquare.squarelotron[i][j] = this.squarelotron[j][i];
+                        resultSquare.squarelotronMatrix[i][j] = this.squarelotronMatrix[j][i];
                     }
                 }
             }
@@ -105,10 +105,10 @@ public class Squarelotron {
     }
 
     /**
-     * The argument numberOfTurns indicates the number of times the entire squarelotron should be rotated 90° clockwise.
+     * The argument numberOfTurns indicates the number of times the entire squarelotronMatrix should be rotated 90° clockwise.
      * Any integer, including zero and negative integers, is allowable as the argument.
      * A value of -1 indicates a 90° counterclockwise rotation.
-     * This method modifies the internal representation of the squarelotron; it does not create a new squarelotron.
+     * This method modifies the internal representation of the squarelotronMatrix; it does not create a new squarelotronMatrix.
      * @param numberOfTurns the amount of times that will be rotated.
      */
     public void rotateRight(int numberOfTurns) {
@@ -131,12 +131,12 @@ public class Squarelotron {
             for (int i = 0; i <= (length) / 2; i++) {
                 for (int j = i; j < length - i; j++) {
 
-                    int temp = this.squarelotron[i][j];
+                    int temp = this.squarelotronMatrix[i][j];
 
-                    this.squarelotron[i][j] = this.squarelotron[length - j][i];
-                    this.squarelotron[length - j][i] = this.squarelotron[length - i][length - j];
-                    this.squarelotron[length - i][length - j] = this.squarelotron[j][length - i];
-                    this.squarelotron[j][length - i] = temp;
+                    this.squarelotronMatrix[i][j] = this.squarelotronMatrix[length - j][i];
+                    this.squarelotronMatrix[length - j][i] = this.squarelotronMatrix[length - i][length - j];
+                    this.squarelotronMatrix[length - i][length - j] = this.squarelotronMatrix[j][length - i];
+                    this.squarelotronMatrix[j][length - i] = temp;
                 }
             }
             numberOfTurns--;
@@ -154,12 +154,12 @@ public class Squarelotron {
             for (int i = 0; i <= (length) / 2; i++) {
                 for (int j = i; j < length - i; j++) {
 
-                    int temp = this.squarelotron[i][j];
+                    int temp = this.squarelotronMatrix[i][j];
 
-                    this.squarelotron[i][j] = this.squarelotron[j][length - i];
-                    this.squarelotron[j][length - i] = this.squarelotron[length - i][length - j];
-                    this.squarelotron[length - i][length - j] = this.squarelotron[length - j][i];
-                    this.squarelotron[length - j][i] = temp;
+                    this.squarelotronMatrix[i][j] = this.squarelotronMatrix[j][length - i];
+                    this.squarelotronMatrix[j][length - i] = this.squarelotronMatrix[length - i][length - j];
+                    this.squarelotronMatrix[length - i][length - j] = this.squarelotronMatrix[length - j][i];
+                    this.squarelotronMatrix[length - j][i] = temp;
                 }
             }
             numberOfTurns++;
@@ -167,10 +167,10 @@ public class Squarelotron {
     }
 
     /**
-     * This method return the squarelotron matrix.
+     * This method return the squarelotronMatrix matrix.
      * @return a bi dimensional array.
      */
-    public int[][] getSquarelotron() {
-        return this.squarelotron.clone();
+    public int[][] getSquarelotronMatrix() {
+        return this.squarelotronMatrix.clone();
     }
 }

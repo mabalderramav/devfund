@@ -35,7 +35,7 @@ public class SquarelotronTest {
         final int localSize = 5;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare = actualSquare.upsideDownFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -49,7 +49,7 @@ public class SquarelotronTest {
         final int ring = 2;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare = actualSquare.upsideDownFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -63,7 +63,7 @@ public class SquarelotronTest {
         final int ring = 3;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare = actualSquare.upsideDownFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -77,7 +77,7 @@ public class SquarelotronTest {
         final int ring = 1;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare = actualSquare.mainDiagonalFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -91,7 +91,7 @@ public class SquarelotronTest {
         final int ring = 1;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare = actualSquare.mainDiagonalFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -106,7 +106,7 @@ public class SquarelotronTest {
         final int ring = 1;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare = actualSquare.mainDiagonalFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -121,7 +121,7 @@ public class SquarelotronTest {
         final int ring = 2;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare = actualSquare.mainDiagonalFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -135,7 +135,7 @@ public class SquarelotronTest {
         final int times = 2;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare.rotateRight(times);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -149,7 +149,7 @@ public class SquarelotronTest {
         final int times = -3;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare.rotateRight(times);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -163,7 +163,7 @@ public class SquarelotronTest {
         final int times = 0;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare.rotateRight(times);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
 
@@ -177,7 +177,7 @@ public class SquarelotronTest {
         final int[][] expected = {{7, 4, 1}, {8, 5, 2}, {9, 6, 3}};
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare.rotateRight(times);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -191,7 +191,7 @@ public class SquarelotronTest {
         final int[][] expected = {{3, 1}, {4, 2}};
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare.rotateRight(times);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -206,7 +206,7 @@ public class SquarelotronTest {
                 {34, 28, 22, 16, 10, 4}, {35, 29, 23, 17, 11, 5}, {36, 30, 24, 18, 12, 6 }};
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare.rotateRight(times);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -221,7 +221,7 @@ public class SquarelotronTest {
         final int ring = 3;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare = actualSquare.mainDiagonalFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -235,7 +235,7 @@ public class SquarelotronTest {
         final int ring = 2;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare = actualSquare.upsideDownFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -249,7 +249,7 @@ public class SquarelotronTest {
         final int ring = 1;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare = actualSquare.upsideDownFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -263,7 +263,7 @@ public class SquarelotronTest {
         final int ring = 2;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare = actualSquare.mainDiagonalFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -277,7 +277,7 @@ public class SquarelotronTest {
         final int ring = -1;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare = actualSquare.mainDiagonalFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 
     /**
@@ -291,6 +291,6 @@ public class SquarelotronTest {
         final int ring = -1;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare = actualSquare.upsideDownFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getSquarelotron(), expected);
+        assert Arrays.deepEquals(actualSquare.getSquarelotronMatrix(), expected);
     }
 }

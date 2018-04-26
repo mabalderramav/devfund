@@ -32,8 +32,8 @@ public class Squarelotron {
      */
     public Squarelotron upsideDownFlip(int ring) {
 
-        Squarelotron swapSquare = new Squarelotron(this.size);
         Squarelotron resultSquare = new Squarelotron(this.size);
+        int[][] swapedMatrix = this.getSquarelotron();
 
         if (ring > 0 && ring <= this.size / 2) {
             int controlSize = this.size - 1;
@@ -41,17 +41,17 @@ public class Squarelotron {
             int[] row1;
 
             for (int i = 0; i < this.size / 2; i++) {
-                row = swapSquare.squarelotron[i];
-                row1 = swapSquare.squarelotron[controlSize];
-                swapSquare.squarelotron[i] = row1;
-                swapSquare.squarelotron[controlSize] = row;
+                row = swapedMatrix[i];
+                row1 = swapedMatrix[controlSize];
+                swapedMatrix[i] = row1;
+                swapedMatrix[controlSize] = row;
                 controlSize--;
             }
 
             for (int i = ring - 1; i <= this.size - ring; i++) {
                 for (int j = ring - 1; j <= this.size - ring; j++) {
                     if (i == ring - 1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
-                        resultSquare.squarelotron[i][j] = swapSquare.squarelotron[i][j];
+                        resultSquare.squarelotron[i][j] = swapedMatrix[i][j];
                     }
                 }
             }

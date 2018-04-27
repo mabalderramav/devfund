@@ -1,7 +1,6 @@
-package org.minions.devfund.alejandro.tests;
+package org.minions.devfund.alejandro;
 
 import org.junit.Test;
-import org.minions.devfund.alejandro.Squarelotron;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 

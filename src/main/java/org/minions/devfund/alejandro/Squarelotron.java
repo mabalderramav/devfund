@@ -31,17 +31,29 @@ public class Squarelotron {
      * @return A modified instance of a new Squarelotron.
      */
     public Squarelotron upsideDownFlip(int ring) {
-
         Squarelotron resultSquare = new Squarelotron(this.size);
-        int[][] swappedMatrix = this.getSquarelotronMatrix();
-
         if (ring > 0 && ring <= this.size / 2) {
-
-            swapMatrix(swappedMatrix);
-            resultSquare.squarelotronMatrix =
-                    flipSquarelotron(ring, resultSquare.getSquarelotronMatrix(), swappedMatrix);
+            resultSquare.squarelotronMatrix = flipSquarelotron(ring, resultSquare.getSquarelotronMatrix());
         }
         return resultSquare;
+    }
+
+    /**
+     * This method will flip a matrix in a determined ring.
+     * @param ring the ring that will be flipped in the square.
+     * @param squarelotronMatrix is the matrix that will be flipped.
+     * @return the flipped matrix.
+     */
+    private int[][] flipSquarelotron(int ring, final int[][] squarelotronMatrix) {
+        int[][] swappedMatrix = swapMatrix(this.squarelotronMatrix);
+        for (int i = ring - 1; i <= this.size - ring; i++) {
+            for (int j = ring - 1; j <= this.size - ring; j++) {
+                if (isPositionInRing(ring, i, j)) {
+                    squarelotronMatrix[i][j] = swappedMatrix[i][j];
+                }
+            }
+        }
+        return squarelotronMatrix;
     }
 
     /**
@@ -50,38 +62,26 @@ public class Squarelotron {
      * @return the same matrix but swapped.
      */
     private int[][] swapMatrix(final int[][] matrix) {
-
         int controlSize = this.size - 1;
-        int[] row;
-        int[] row1;
-
         for (int i = 0; i < this.size / 2; i++) {
-            row = matrix[i];
-            row1 = matrix[controlSize];
-            matrix[i] = row1;
-            matrix[controlSize] = row;
+            int[] rowUpside = matrix[i];
+            int[] rowDown = matrix[controlSize];
+            matrix[i] = rowDown;
+            matrix[controlSize] = rowUpside;
             controlSize--;
         }
         return matrix;
     }
 
     /**
-     * This method will flip a matrix in a determined ring.
-     * @param ring the ring that will be flipped in the square.
-     * @param squarelotronFlipedMatrix is the matrix that will be flipped.
-     * @param swapedMatrix the swapped matrix.
-     * @return the flipped matrix.
+     * This method will verify that the position does not belong to ring's position.
+     * @param ring the ring we are looking in the matrix.
+     * @param i position x in the matrix.
+     * @param j position y in the matrix.
+     * @return true if the position belong to the ring and false otherwise.
      */
-    private int[][] flipSquarelotron(int ring, final int[][] squarelotronFlipedMatrix, final int[][] swapedMatrix) {
-
-        for (int i = ring - 1; i <= this.size - ring; i++) {
-            for (int j = ring - 1; j <= this.size - ring; j++) {
-                if (i == ring - 1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
-                    squarelotronFlipedMatrix[i][j] = swapedMatrix[i][j];
-                }
-            }
-        }
-        return squarelotronFlipedMatrix;
+    private boolean isPositionInRing(int ring, int i, int j) {
+        return i == ring - 1 || j == ring - 1 || i == this.size - ring || j == this.size - ring;
     }
 
     /**

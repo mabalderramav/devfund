@@ -99,6 +99,21 @@ public class WhackAMoleTest {
     }
 
     /**
+     * Tests Do not the game with positive and negative values.
+     */
+    @Test
+    public void doNotGiveUpTheGamePosiveNegarive() {
+        final int attempts = 25;
+        final int dimension = 10;
+        final int positive = 5;
+        final int negative = -1;
+
+        whackAMole = new WhackAMole(attempts, dimension);
+        Assert.assertFalse(whackAMole.giveUp(positive, negative));
+        Assert.assertFalse(whackAMole.giveUp(negative, positive));
+    }
+
+    /**
      * Tests do not give up the game.
      */
     @Test
@@ -197,5 +212,33 @@ public class WhackAMoleTest {
         whackAMole = new WhackAMole(attempts, dimension);
         Assert.assertFalse(whackAMole.place(invalidPos, 0));
         Assert.assertFalse(whackAMole.place(0, invalidPos));
+    }
+
+    /**
+     * Test place negative and positive.
+     */
+    @Test
+    public void testPlaceNegativePositive() {
+        final int attempts = 2;
+        final int dimension = 10;
+        final int negative = -5;
+        final int positve = 4;
+        whackAMole = new WhackAMole(attempts, dimension);
+        Assert.assertFalse(whackAMole.place(negative, positve));
+        Assert.assertFalse(whackAMole.place(positve, negative));
+    }
+
+    /**
+     * Test place out of mole grid dimensions.
+     */
+    @Test
+    public void testPlaceOutOfMoleDimensions() {
+        final int attempts = 2;
+        final int dimension = 10;
+        final int inToTheRange = 5;
+        final int outOfTheRange = 14;
+        whackAMole = new WhackAMole(attempts, dimension);
+        Assert.assertFalse(whackAMole.place(inToTheRange, outOfTheRange));
+        Assert.assertFalse(whackAMole.place(outOfTheRange, inToTheRange));
     }
 }

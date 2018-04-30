@@ -43,6 +43,7 @@ public class MovieDatabase {
 
                 if (!actorExists) {
                     Actor newActor = new Actor(actor);
+                    this.actorList.add(newActor);
                     newActor.setNewMovie(movie);
                 }
             }
@@ -106,7 +107,7 @@ public class MovieDatabase {
     String getBestMovie() {
 
         String movieName = " ";
-        double rating = 0;
+        double rating;
         double highestRating = 0;
 
         for (Movie movie : this.movieList) {

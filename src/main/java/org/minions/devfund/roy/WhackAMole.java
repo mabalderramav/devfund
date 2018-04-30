@@ -56,7 +56,6 @@ public class WhackAMole {
             if (moleGrid[x][y] == MOLE) {
                 moleGrid[x][y] = WHACKED_MOLE;
                 score++;
-                attemptsLeft--;
                 molesLeft--;
             }
             attemptsLeft--;

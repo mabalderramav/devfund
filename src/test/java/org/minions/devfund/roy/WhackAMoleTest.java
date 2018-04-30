@@ -178,6 +178,7 @@ public class WhackAMoleTest {
         Assert.assertTrue(whackAMole.getAttemptsLeft() == 0);
     }
 
+
     /**
      * Tests gridBuilder Method.
      */

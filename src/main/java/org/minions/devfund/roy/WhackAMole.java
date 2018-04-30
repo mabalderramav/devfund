@@ -61,6 +61,7 @@ public class WhackAMole {
         }
     }
 
+
     /**
      * Verifies if the player gives up.
      *

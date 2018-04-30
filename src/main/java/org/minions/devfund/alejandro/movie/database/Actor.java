@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class Actor {
 
     private String name;
-    private ArrayList<Movie>movies;
+    private ArrayList<Movie> movies;
 
     /**
      * Constructor of the Actor class.
      * @param name the name of the actor.
      */
-    public Actor(String name) {
+    public Actor(final String name) {
         this.name = name;
         this.movies = new ArrayList<Movie>();
     }
@@ -31,7 +31,7 @@ public class Actor {
      * This method will update the name of the actor.
      * @param newName The new name of the actor.
      */
-    public void setName(String newName) {
+    public void setName(final String newName) {
         this.name = newName;
     }
 
@@ -40,14 +40,14 @@ public class Actor {
      * @return and ArrayList.
      */
     public ArrayList<Movie> getMovies() {
-        return movies;
+        return this.movies;
     }
 
     /**
      * This method will add a new movie where the actor acted.
      * @param newMovie A movie object to add to the list.
      */
-    public void setNewMovie(Movie newMovie) {
+    public void setNewMovie(final Movie newMovie) {
         this.movies.add(newMovie);
     }
 }

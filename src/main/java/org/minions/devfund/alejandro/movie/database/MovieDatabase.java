@@ -7,9 +7,12 @@ import java.util.ArrayList;
  */
 public class MovieDatabase {
 
-    private ArrayList<Movie>movieList;
-    private ArrayList<Actor>actorList;
+    private ArrayList<Movie> movieList;
+    private ArrayList<Actor> actorList;
 
+    /**
+     * This method is the constructor for movieDatabase class.
+     */
     public MovieDatabase() {
         movieList = new ArrayList<>();
         actorList = new ArrayList<>();
@@ -24,8 +27,26 @@ public class MovieDatabase {
      * @param name the name of the movie.
      * @param actors a list of actors that act in the movie.
      */
-    void addMovie(String name, String[] actors) {
+    void addMovie(final String name, final String[] actors) {
 
+        if (!isMovieOnList(name)) {
+            Movie movie = new Movie(name);
+            movieList.add(movie);
+            for (String actor : actors) {
+                boolean actorExists = false;
+                for (Actor actorInList : actorList) {
+                    if (actorInList.getName().equals(actor)) {
+                        actorExists = true;
+                        actorInList.setNewMovie(movie);
+                    }
+                }
+
+                if (!actorExists) {
+                    Actor newActor = new Actor(actor);
+                    newActor.setNewMovie(movie);
+                }
+            }
+        }
     }
 
     /**
@@ -34,8 +55,9 @@ public class MovieDatabase {
      * @param name The name of a movie that is currently on tha DB.
      * @param rating The rating that will movie will be assign.
      */
-    void addRating(String name, double rating) {
+    void addRating(final String name, final double rating) {
 
+        updateRating(name, rating);
     }
 
     /**
@@ -44,8 +66,13 @@ public class MovieDatabase {
      * @param name The name of a movie that is currently on tha DB.
      * @param newRating The rating that will movie will be assign.
      */
-    void updateRating(String name, double newRating) {
+    void updateRating(final String name, final double newRating) {
 
+        for (Movie movie : this.movieList) {
+            if (movie.getName().equals(name)) {
+                movie.setRating(newRating);
+            }
+        }
     }
 
     /**
@@ -53,7 +80,23 @@ public class MovieDatabase {
      * @return the actor with the best rating.
      */
     String getBestActor() {
-        return "implement";
+
+        String actorName = " ";
+        double actorRating = 0;
+        double rating = 0;
+        int movieCount = 0;
+        for (Actor actor : this.actorList) {
+            for (Movie movie : actor.getMovies()) {
+                movieCount++;
+                rating = rating + movie.getRating();
+            }
+            rating = rating / movieCount;
+            if (rating > actorRating) {
+                actorRating = rating;
+                actorName = actor.getName();
+            }
+        }
+        return actorName;
     }
 
     /**
@@ -61,7 +104,28 @@ public class MovieDatabase {
      * @return Return the name of the movie.
      */
     String getBestMovie() {
-        return "implement";
+
+        String movieName = " ";
+        double rating = 0;
+        double highestRating = 0;
+
+        for (Movie movie : this.movieList) {
+            rating = movie.getRating();
+            if (rating > highestRating) {
+                movieName = movie.getName();
+            }
+        }
+
+        return movieName;
     }
 
+    boolean isMovieOnList(String movieName) {
+        boolean movieExists = false;
+        for (Movie movie : this.movieList) {
+            if (movie.getName().equals(movieName)) {
+                movieExists = true;
+            }
+        }
+        return movieExists;
+    }
 }

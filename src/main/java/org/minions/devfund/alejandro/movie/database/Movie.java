@@ -7,10 +7,14 @@ import java.util.ArrayList;
  */
 public class Movie {
     private String name;
-    private ArrayList<Actor>actors;
+    private ArrayList<Actor> actors;
     private double rating;
 
-    public Movie(String name) {
+    /**
+     * This method is the constructor for movie class.
+     * @param name The name of the movie.
+     */
+    public Movie(final String name) {
         this.name = name;
         this.actors = new ArrayList<Actor>();
     }
@@ -43,7 +47,7 @@ public class Movie {
      * This method set a rating for the movie.
      * @param newRating the new rating for the movie.
      */
-    public void setRating(double newRating) {
+    public void setRating(final double newRating) {
         this.rating = newRating;
     }
 
@@ -51,7 +55,7 @@ public class Movie {
      * This method will set a new name to the movie.
      * @param newName an string that will change the name.
      */
-    public void setName(String newName) {
+    public void setName(final String newName) {
         this.name = newName;
     }
 
@@ -59,7 +63,7 @@ public class Movie {
      * This method will add a new actor to the movie.
      * @param actor an object for the actor instance.
      */
-    public void addNewActor(Actor actor) {
+    public void addNewActor(final Actor actor) {
         this.actors.add(actor);
     }
 }

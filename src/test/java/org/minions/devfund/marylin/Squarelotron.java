@@ -1,12 +1,17 @@
 package org.minions.devfund.marylin;
 
+import java.util.Arrays;
+
+/**
+ * Squarelotron class.
+ */
 public class Squarelotron {
-    int[][] squarelotron;
-    int size;
-    int numberOfRings;
+    private int[][] squarelotron;
+    private int size;
+    private int numberOfRings;
 
     /**
-     * Constructor of the matrix n x n initialized with consecutive values from 1 to m
+     * Constructor of the matrix n x n initialized with consecutive values from 1 to m.
      *
      * @param n size of the matrix
      */
@@ -24,11 +29,11 @@ public class Squarelotron {
     }
 
     /**
-     * Constructs an Squarelotron from an array of array
+     * Constructs an Squarelotron from an array of array.
      *
-     * @param squarelotron instance of an Squarelotron
+     * @param squarelotron instance of an Squarelotron.
      */
-    public Squarelotron(int[][] squarelotron) {
+    public Squarelotron(final int[][] squarelotron) {
         this.size = squarelotron.length;
         this.numberOfRings = this.size - (this.size / 2);
         this.squarelotron = new int[this.size][this.size];
@@ -40,14 +45,20 @@ public class Squarelotron {
         }
     }
 
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(squarelotron);
+    }
+
     /**
-     * Compare two Squarelotron
+     * Compare two Squarelotron.
      *
-     * @param object Squarelotron instance
-     * @return Squarelotron instance
+     * @param object Squarelotron instance.
+     * @return Squarelotron instance.
      */
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
         if (!(object instanceof Squarelotron)) {
             return false;
         }
@@ -64,12 +75,12 @@ public class Squarelotron {
     }
 
     /**
-     * Duplicates an array of arrays
+     * Duplicates an array of arrays.
      *
-     * @param original array of array
-     * @return the duplicated array
+     * @param original array of array.
+     * @return the duplicated array.
      */
-    private int[][] duplicateGrid(int[][] original) {
+    private int[][] duplicateGrid(final int[][] original) {
         int size = original.length;
         int[][] backupGrid = new int[size][size];
         for (int i = 0; i < size; i++) {
@@ -81,7 +92,7 @@ public class Squarelotron {
     }
 
     /**
-     * Prints the Squarelotron
+     * Prints the Squarelotron.
      */
     void printSquarelotron() {
         for (int i = 0; i < squarelotron.length; i++) {
@@ -93,42 +104,70 @@ public class Squarelotron {
     }
 
     /**
-     * Upside Down Flip
+     * upsideDownFlipCompleteMatrix without check rings.
      *
-     * @param ring number
-     * @return an instance of Squarelotron
+     * @param matrix array.
+     * @return the matrix that is upside down flip completely.
+     */
+    int[][] upsideDownFlipCompleteMatrix(final int[][] matrix) {
+        int[][] resultGrid = duplicateGrid(matrix);
+        int size = matrix.length;
+        int temp = 0;
+        for (int i = size - 1; i >= size / 2; i--) {
+            for (int j = 0; j < size; j++) {
+                resultGrid[i][j] = matrix[temp][j];
+                resultGrid[temp][j] = matrix[i][j];
+            }
+            temp++;
+        }
+        return resultGrid;
+    }
+
+    /**
+     * upsideDownFlipInternalMatrix distinc to ring #1.
+     *
+     * @param matrix to be upside down flip the internal matrix.
+     * @return the matrix result-
+     */
+    int[][] upsideDownFlipInternalMatrix(final int[][] matrix) {
+        int[][] resultGrid = duplicateGrid(matrix);
+        int size = matrix.length;
+        int temp = 1;
+        for (int i = size - 2; i >= size / 2; i--) {
+            for (int j = 1; j < size - 1; j++) {
+                resultGrid[i][j] = matrix[temp][j];
+                resultGrid[temp][j] = matrix[i][j];
+            }
+            temp++;
+        }
+        return resultGrid;
+    }
+
+    /**
+     * Upside Down Flip.
+     *
+     * @param ring number.
+     * @return an instance of Squarelotron.
      */
     Squarelotron upsideDownFlip(int ring) {
         int[][] resultGrid = duplicateGrid(this.squarelotron);
+        int size = resultGrid.length;
 
-        //Returns the same squarelotron if the ring number is equal to the number of rings of a matrix n x n
-        if (this.size % 2 == 1 && ring == this.numberOfRings) {
+        //Returns the same squarelotron if the ring number is equal to the number of rings of a matrix n x n.
+        if (size % 2 == 1 && ring == this.numberOfRings) {
             return this;
         }
 
-        //
+        //If the ring is the internal rings.
         if (ring != 1) {
-            int temp = 1;
-            for (int i = this.size - 2; i >= this.size / 2; i--) {
-                for (int j = 1; j < this.size - 1; j++) {
-                    resultGrid[i][j] = this.squarelotron[temp][j];
-                    resultGrid[temp][j] = this.squarelotron[i][j];
-                }
-                temp++;
-            }
-        } else { //
-            int temp = 0;
-            for (int i = this.size - 1; i >= this.size / 2; i--) {
-                for (int j = 0; j < this.size; j++) {
-                    resultGrid[i][j] = this.squarelotron[temp][j];
-                    resultGrid[temp][j] = this.squarelotron[i][j];
-                }
-                temp++;
-            }
+            resultGrid = upsideDownFlipInternalMatrix(this.squarelotron);
+        } else {
+            //complete Upside Down Flip.
+            resultGrid = upsideDownFlipCompleteMatrix(this.squarelotron);
 
-            // Restore values of the internal rings if there are
-            for (int i = 1; i < this.size - 1; i++) {
-                for (int j = 1; j < this.size - 1; j++) {
+            // Restore values of the internal rings if there are.
+            for (int i = 1; i < size - 1; i++) {
+                for (int j = 1; j < size - 1; j++) {
                     resultGrid[i][j] = this.squarelotron[i][j];
                 }
             }
@@ -136,64 +175,93 @@ public class Squarelotron {
         return new Squarelotron(resultGrid);
     }
 
-    Squarelotron mainDiagonalFlip(int ring) {
-        int[][] resultGrid = duplicateGrid(this.squarelotron);
-
-        if (this.size % 2 == 1 && ring == this.numberOfRings) {
-            return this; // returns the same squarelotron if the ring number is equal to the number of rings
+    /**
+     * flipExternalRing.
+     *
+     * @param matrix to be flip.
+     * @return the matrix result.
+     */
+    private int[][] flipExternalRing(final int[][] matrix) {
+        int[][] resultGrid = duplicateGrid(matrix);
+        int size = matrix.length;
+        int tempJ = 0;
+        for (int i = 1; i < size; i++) {
+            resultGrid[i][tempJ] = matrix[tempJ][i];
+            resultGrid[tempJ][i] = matrix[i][tempJ];
         }
-        if (ring != 1) {
-            int temp_j = 1;
-            for (int i = 1; i < this.size - 1; i++) {
-                resultGrid[i][temp_j] = this.squarelotron[temp_j][i];
-                resultGrid[temp_j][i] = this.squarelotron[i][temp_j];
-            }
 
-            int temp_i = this.size - 2;
-            for (int j = 1; j < this.size - 2; j++) {
-                resultGrid[temp_i][j] = this.squarelotron[j][temp_i];
-                resultGrid[j][temp_i] = this.squarelotron[temp_i][j];
-            }
-        } else {
-            int temp_j = 0;
-            for (int i = 1; i < this.size; i++) {
-                resultGrid[i][temp_j] = this.squarelotron[temp_j][i];
-                resultGrid[temp_j][i] = this.squarelotron[i][temp_j];
-            }
-
-            int temp_i = this.size - 1;
-            for (int j = 1; j < this.size - 1; j++) {
-                resultGrid[temp_i][j] = this.squarelotron[j][temp_i];
-                resultGrid[j][temp_i] = this.squarelotron[temp_i][j];
-            }
-        }
-        return new Squarelotron(resultGrid);
-    }
-
-    int[][] completeUpsideDownFlip() {
-        int[][] resultGrid = duplicateGrid(this.squarelotron);
-        int temp = 0;
-        for (int i = this.size - 1; i >= this.size / 2; i--) {
-            for (int j = 0; j < this.size; j++) {
-                resultGrid[i][j] = this.squarelotron[temp][j];
-                resultGrid[temp][j] = this.squarelotron[i][j];
-            }
-            temp++;
+        int tempI = size - 1;
+        for (int j = 1; j < size - 1; j++) {
+            resultGrid[tempI][j] = matrix[j][tempI];
+            resultGrid[j][tempI] = matrix[tempI][j];
         }
         return resultGrid;
     }
 
-    Squarelotron rotateRight(int numberOfTurns) {
-        int[][] resultGrid = completeUpsideDownFlip();
-        Squarelotron squarelotron = null;
-        while (numberOfTurns > 0) {
-            squarelotron = new Squarelotron(resultGrid);
-            for (int i = 0; i <= numberOfTurns; i++) {
-                squarelotron = squarelotron.mainDiagonalFlip(i + 1);
-            }
-            resultGrid = squarelotron.squarelotron;
-            numberOfTurns--;
+    /**
+     * flipInternalRing.
+     *
+     * @param matrix to be flip.
+     * @return matrix result
+     */
+    private int[][] flipInternalRing(final int[][] matrix) {
+        int[][] resultGrid = duplicateGrid(matrix);
+        int size = matrix.length;
+        int tempJ = 1;
+        for (int i = 1; i < size - 1; i++) {
+            resultGrid[i][tempJ] = matrix[tempJ][i];
+            resultGrid[tempJ][i] = matrix[i][tempJ];
         }
-        return squarelotron;
+
+        int tempI = size - 2;
+        for (int j = 1; j < size - 2; j++) {
+            resultGrid[tempI][j] = matrix[j][tempI];
+            resultGrid[j][tempI] = matrix[tempI][j];
+        }
+        return resultGrid;
+    }
+
+    /**
+     * mainDiagonalFlip.
+     *
+     * @param ring number.
+     * @return the Squarelotron.
+     */
+    Squarelotron mainDiagonalFlip(int ring) {
+        int[][] resultGrid = null;
+        if (this.size % 2 == 1 && ring == this.numberOfRings) {
+            return this; // returns the same squarelotron if the ring number is equal to the number of rings.
+        }
+        if (ring != 1) {
+            resultGrid = flipInternalRing(this.squarelotron);
+        } else {
+            resultGrid = flipExternalRing(this.squarelotron);
+        }
+        return new Squarelotron(resultGrid);
+    }
+
+    /**
+     * Rotates the matrix.
+     *
+     * @param numberOfTurns number.
+     */
+    void rotateRight(int numberOfTurns) {
+        final int zeroNumberOfTurns = 0;
+        final int maxNumberOfTurns = 4;
+        if (numberOfTurns < maxNumberOfTurns && numberOfTurns != 0) {
+            int[][] resultGrid = null;
+            Squarelotron squarelotron = new Squarelotron(this.squarelotron);
+            while (numberOfTurns > 0) {
+                for (int i = 1; i <= squarelotron.size; i++) {
+                    squarelotron = squarelotron.upsideDownFlip(i);
+                }
+                for (int i = 1; i <= squarelotron.size; i++) {
+                    squarelotron = squarelotron.mainDiagonalFlip(i);
+                }
+                resultGrid = squarelotron.squarelotron;
+                numberOfTurns--;
+            }
+            this.squarelotron = resultGrid;
+        }
     }
 }

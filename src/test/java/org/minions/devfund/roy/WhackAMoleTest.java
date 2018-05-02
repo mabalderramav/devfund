@@ -165,7 +165,7 @@ public class WhackAMoleTest {
     }
 
     /**
-     * Tests gridBuilder for user Method.
+     * Tests gridBuilder Method.
      */
     @Test
     public void gridBuilder() {

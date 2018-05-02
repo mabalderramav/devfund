@@ -4,7 +4,7 @@ package org.minions.devfund.mauricioz;
  */
 public class Squarelotron {
 
-    private int[][] squarelotron;
+    private int[][] twoDimentionalSquarelotron;
     private int size;
 
     /**
@@ -15,40 +15,40 @@ public class Squarelotron {
     public Squarelotron(int n) {
         this.size = n;
         n = 1;
-        squarelotron = new int[this.size][this.size];
+        twoDimentionalSquarelotron = new int[this.size][this.size];
         initializeSquarelotron(n);
     }
 
     /**
-     * Populate squarelotron with initial values.
-     * @param n size of the squarelotron
+     * Populate twoDimentionalSquarelotron with initial values.
+     * @param n size of the twoDimentionalSquarelotron
      */
     private void initializeSquarelotron(int n) {
         for (int x = 0; x < getSize(); x++) {
             for (int y = 0; y < getSize(); y++) {
-                squarelotron[x][y] = n++;
+                twoDimentionalSquarelotron[x][y] = n++;
             }
         }
     }
 
     /**
-     * This method return the squarelotron size.
-     * @return squarelotron size
+     * This method return the twoDimentionalSquarelotron size.
+     * @return twoDimentionalSquarelotron size
      */
     private int getSize() {
         return size;
     }
 
     /**
-     * Upside-Down Flip of the squarelotron,
-     * and returns the new squarelotron. The original squarelotron should not be modified.
+     * Upside-Down Flip of the twoDimentionalSquarelotron,
+     * and returns the new twoDimentionalSquarelotron. The original twoDimentionalSquarelotron should not be modified.
      * @param ring the ring that will be flipped.
      * @return A upside-down flipped squrelotron on a new instance.
      */
     public Squarelotron upsideDownFlip(int ring) {
         Squarelotron flippedSquarelotron = new Squarelotron(getSize());
         if (ring > 0 && ring <= this.getSize() / 2) {
-            flippedSquarelotron.squarelotron = flipSquarelotron(ring, flippedSquarelotron.getSquarelotron());
+            flippedSquarelotron.twoDimentionalSquarelotron = flipSquarelotron(ring, flippedSquarelotron.getTwoDimentionalSquarelotron());
         }
         return flippedSquarelotron;
     }
@@ -60,7 +60,7 @@ public class Squarelotron {
      * @return the flipped 2D array.
      */
     private int[][] flipSquarelotron(int ring, final int[][] flippedSquarelotron) {
-        int[][] swappedMatrix = inverseMatrix(this.squarelotron);
+        int[][] swappedMatrix = inverseMatrix(this.twoDimentionalSquarelotron);
         for (int i = ring - 1; i <= this.getSize() - ring; i++) {
             for (int j = ring - 1; j <= this.getSize() - ring; j++) {
                 if (isPositionInRing(ring, i, j)) {
@@ -100,7 +100,7 @@ public class Squarelotron {
     }
 
     /**
-     * This method performs the Main Diagonal Flip of the squarelotron into a new instance of Squarelotron.
+     * This method performs the Main Diagonal Flip of the twoDimentionalSquarelotron into a new instance of Squarelotron.
      * @param ring the ring that will be flipped.
      * @return A modified instance of a new Squarelotron.
      */
@@ -111,7 +111,7 @@ public class Squarelotron {
             for (int i = ring - 1; i <= this.getSize() - ring; i++) {
                 for (int j = ring - 1; j <= this.getSize() - ring; j++) {
                     if (isPositionInRing(ring, i, j)) {
-                        squarelotronResultant.squarelotron[i][j] = this.squarelotron[j][i];
+                        squarelotronResultant.twoDimentionalSquarelotron[i][j] = this.twoDimentionalSquarelotron[j][i];
                     }
                 }
             }
@@ -120,12 +120,12 @@ public class Squarelotron {
     }
 
     /**
-     * The argument numberOfTurns indicates the number of times the entire squarelotron should be rotated 90°
+     * The argument numberOfTurns indicates the number of times the entire twoDimentionalSquarelotron should be rotated 90°
      * clockwise.
      * Any integer, including zero and negative integers, is allowable as the argument.
      * A value of -1 indicates a 90° counterclockwise rotation.
-     * This method modifies the internal representation of the squarelotron; it does not create a new
-     * squarelotron.
+     * This method modifies the internal representation of the twoDimentionalSquarelotron; it does not create a new
+     * twoDimentionalSquarelotron.
      * @param numberOfTurns the amount of times that will be rotated.
      */
     public void rotateRight(int numberOfTurns) {
@@ -148,12 +148,12 @@ public class Squarelotron {
             for (int i = 0; i <= (length) / 2; i++) {
                 for (int j = i; j < length - i; j++) {
 
-                    int temp = this.squarelotron[i][j];
+                    int temp = this.twoDimentionalSquarelotron[i][j];
 
-                    this.squarelotron[i][j] = this.squarelotron[length - j][i];
-                    this.squarelotron[length - j][i] = this.squarelotron[length - i][length - j];
-                    this.squarelotron[length - i][length - j] = this.squarelotron[j][length - i];
-                    this.squarelotron[j][length - i] = temp;
+                    this.twoDimentionalSquarelotron[i][j] = this.twoDimentionalSquarelotron[length - j][i];
+                    this.twoDimentionalSquarelotron[length - j][i] = this.twoDimentionalSquarelotron[length - i][length - j];
+                    this.twoDimentionalSquarelotron[length - i][length - j] = this.twoDimentionalSquarelotron[j][length - i];
+                    this.twoDimentionalSquarelotron[j][length - i] = temp;
                 }
             }
             numberOfTurns--;
@@ -161,8 +161,8 @@ public class Squarelotron {
     }
 
     /**
-     * This method will rotate the squarelotron to the left.
-     * @param numberOfTurns the amount of times that squarelotron will be rotated to the left.
+     * This method will rotate the twoDimentionalSquarelotron to the left.
+     * @param numberOfTurns the amount of times that twoDimentionalSquarelotron will be rotated to the left.
      */
     private void rotateCounterClockWise(int numberOfTurns) {
 
@@ -171,12 +171,12 @@ public class Squarelotron {
             for (int i = 0; i <= (length) / 2; i++) {
                 for (int j = i; j < length - i; j++) {
 
-                    int temp = this.squarelotron[i][j];
+                    int temp = this.twoDimentionalSquarelotron[i][j];
 
-                    this.squarelotron[i][j] = this.squarelotron[j][length - i];
-                    this.squarelotron[j][length - i] = this.squarelotron[length - i][length - j];
-                    this.squarelotron[length - i][length - j] = this.squarelotron[length - j][i];
-                    this.squarelotron[length - j][i] = temp;
+                    this.twoDimentionalSquarelotron[i][j] = this.twoDimentionalSquarelotron[j][length - i];
+                    this.twoDimentionalSquarelotron[j][length - i] = this.twoDimentionalSquarelotron[length - i][length - j];
+                    this.twoDimentionalSquarelotron[length - i][length - j] = this.twoDimentionalSquarelotron[length - j][i];
+                    this.twoDimentionalSquarelotron[length - j][i] = temp;
                 }
             }
             numberOfTurns++;
@@ -184,10 +184,10 @@ public class Squarelotron {
     }
 
     /**
-     * This method return the squarelotron matrix.
+     * This method return the twoDimentionalSquarelotron matrix.
      * @return a bi dimensional array.
      */
-    public int[][] getSquarelotron() {
-        return this.squarelotron.clone();
+    public int[][] getTwoDimentionalSquarelotron() {
+        return this.twoDimentionalSquarelotron.clone();
     }
 }

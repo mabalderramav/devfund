@@ -50,6 +50,15 @@ public class MovieDatabaseTest {
     }
 
     /**
+     * Verifies movie was added.
+     */
+    @Test
+    public void testMovieWasNotAdded() {
+        movieDatabase.addMovie(MOVIE_NAME, new String[2]);
+        assertEquals(1, movieDatabase.getMovieList().size());
+    }
+
+    /**
      * Verifies rating was added.
      */
     @Test

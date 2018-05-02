@@ -16,14 +16,14 @@ public class MovieDatabaseTest {
 
     private MovieDatabase movieDatabase;
     private static final String MOVIE_NAME = "Infinity War";
-
+    private static final String BEST_ACTOR = "Robert Downey";
     /**
      * Preconditions.
      */
     @Before
     public void setup() {
         movieDatabase = new MovieDatabase();
-        movieDatabase.addMovie(MOVIE_NAME, new String[]{"Robert Downey", "Chris Hemsworth", "Chris Evans"});
+        movieDatabase.addMovie(MOVIE_NAME, new String[]{BEST_ACTOR, "Chris Hemsworth", "Chris Evans"});
     }
 
     /**
@@ -32,7 +32,7 @@ public class MovieDatabaseTest {
     @Test
     public void testActorsAdded() {
         final List<Actor> actors = new ArrayList<>();
-        actors.add(new Actor("Robert Downey"));
+        actors.add(new Actor(BEST_ACTOR));
         actors.add(new Actor("Chris Hemsworth"));
         actors.add(new Actor("Chris Evans"));
         for (Actor actor : actors) {
@@ -80,7 +80,7 @@ public class MovieDatabaseTest {
      */
     @Test
     public void testGetBestActor() {
-        assertEquals("Robert Downey", movieDatabase.getBestActor());
+        assertEquals(BEST_ACTOR, movieDatabase.getBestActor());
     }
 
     /**

@@ -48,7 +48,8 @@ public class Squarelotron {
     public Squarelotron upsideDownFlip(int ring) {
         Squarelotron flippedSquarelotron = new Squarelotron(getSize());
         if (ring > 0 && ring <= this.getSize() / 2) {
-            flippedSquarelotron.twoDimentionalSquarelotron = flipSquarelotron(ring, flippedSquarelotron.getTwoDimentionalSquarelotron());
+            flippedSquarelotron.twoDimentionalSquarelotron = flipSquarelotron(ring,
+                    flippedSquarelotron.getTwoDimentionalSquarelotron());
         }
         return flippedSquarelotron;
     }
@@ -100,7 +101,8 @@ public class Squarelotron {
     }
 
     /**
-     * This method performs the Main Diagonal Flip of the twoDimentionalSquarelotron into a new instance of Squarelotron.
+     * This method performs the Main Diagonal Flip of the twoDimentionalSquarelotron into a
+     * new instance of Squarelotron.
      * @param ring the ring that will be flipped.
      * @return A modified instance of a new Squarelotron.
      */
@@ -120,8 +122,8 @@ public class Squarelotron {
     }
 
     /**
-     * The argument numberOfTurns indicates the number of times the entire twoDimentionalSquarelotron should be rotated 90°
-     * clockwise.
+     * The argument numberOfTurns indicates the number of times the entire twoDimentionalSquarelotron
+     * should be rotated 90° clockwise.
      * Any integer, including zero and negative integers, is allowable as the argument.
      * A value of -1 indicates a 90° counterclockwise rotation.
      * This method modifies the internal representation of the twoDimentionalSquarelotron; it does not create a new
@@ -151,8 +153,10 @@ public class Squarelotron {
                     int temp = this.twoDimentionalSquarelotron[i][j];
 
                     this.twoDimentionalSquarelotron[i][j] = this.twoDimentionalSquarelotron[length - j][i];
-                    this.twoDimentionalSquarelotron[length - j][i] = this.twoDimentionalSquarelotron[length - i][length - j];
-                    this.twoDimentionalSquarelotron[length - i][length - j] = this.twoDimentionalSquarelotron[j][length - i];
+                    this.twoDimentionalSquarelotron[length - j][i] =
+                            this.twoDimentionalSquarelotron[length - i][length - j];
+                    this.twoDimentionalSquarelotron[length - i][length - j] =
+                            this.twoDimentionalSquarelotron[j][length - i];
                     this.twoDimentionalSquarelotron[j][length - i] = temp;
                 }
             }
@@ -174,8 +178,10 @@ public class Squarelotron {
                     int temp = this.twoDimentionalSquarelotron[i][j];
 
                     this.twoDimentionalSquarelotron[i][j] = this.twoDimentionalSquarelotron[j][length - i];
-                    this.twoDimentionalSquarelotron[j][length - i] = this.twoDimentionalSquarelotron[length - i][length - j];
-                    this.twoDimentionalSquarelotron[length - i][length - j] = this.twoDimentionalSquarelotron[length - j][i];
+                    this.twoDimentionalSquarelotron[j][length - i] =
+                            this.twoDimentionalSquarelotron[length - i][length - j];
+                    this.twoDimentionalSquarelotron[length - i][length - j] =
+                            this.twoDimentionalSquarelotron[length - j][i];
                     this.twoDimentionalSquarelotron[length - j][i] = temp;
                 }
             }

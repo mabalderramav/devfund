@@ -1,82 +1,173 @@
 package org.minions.devfund.sergio.movie_database;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
 public class MovieDatabase {
-    ArrayList<Movie> movieList;
-    ArrayList<Actor> actorList;
-    Map<String, Integer> rankingList;
+    private ArrayList<Movie> movieList;
+    private ArrayList<Actor> actorList;
 
     public MovieDatabase() {
         this.movieList = new ArrayList<>();
         this.actorList = new ArrayList<>();
-        rankingList = new HashMap<>();
-        loadDate();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MovieDatabase that = (MovieDatabase) o;
+
+        if (!movieList.equals(that.movieList)) return false;
+        return actorList.equals(that.actorList);
+    }
+
+
+    @Override
+    public int hashCode() {
+        int result = movieList.hashCode();
+        result = 31 * result + actorList.hashCode();
+        return result;
+    }
+
+
+    public ArrayList<Movie> getMovieList() {
+        return this.movieList;
+    }
+
+
+    public ArrayList<Actor> getActorList() {
+        return this.actorList;
+    }
+
+
+    private ArrayList<String> getMovieNames() {
+        ArrayList<String> movieNames = new ArrayList<>();
+        for (Movie movie: this.movieList) {
+            movieNames.add(movie.getName());
+        }
+        return movieNames;
+    }
+
 
     public void addMovie(String name, String[] actors) {
-        Movie movie = new Movie(name);
-        movie.setActors(actorList);
-        movieList.add(movie);
+        if (!this.getMovieNames().contains(name)) {
+            ArrayList<Movie> movieList = new ArrayList<>();
+            Movie newMovie = new Movie(name);
+            movieList.add(newMovie);
+            for (String actorName: actors) {
+                Actor newActor = new Actor(actorName, movieList);
+                newMovie.addActor(newActor);
+                boolean added = false;
+                for (Actor actor: this.actorList) {
+                    if (actorName.equals(actor.getName())) {
+                        actor.addMovie(newMovie);
+                        added = true;
+                    }
+                }
+                if (!added) this.actorList.add(newActor);
+
+            }
+            this.movieList.add(newMovie);
+        }
     }
 
-    public void addRating(String name, int rating) {
-        rankingList.put(name, rating);
+    public void addRating(String name, double rating) {
+        for (Movie movie: movieList) {
+            if (movie.getName().equals(name)) {
+                movie.setRating(rating);
+            } else {
+                continue;
+            }
+        }
     }
 
-    public void updateRating(String name, int newRating) {
-        if (rankingList.containsKey(name))
-            rankingList.replace(name, newRating);
+    public void updateRating(String name, double newRating) {
+        this.addRating(name, newRating);
     }
 
     public String getBestActor() {
-        return "to do";
-    }
+        String actorName = "";
+        double averageRating = 0.0;
 
-    public String getBestMovie() {
-        String bestMovie = "";
-        Integer maxValueInMap = (Collections.max(rankingList.values()));
-        System.out.println("**********all these movies has the same rankings***********");
-        for (Map.Entry<String, Integer> entry : rankingList.entrySet()) {
-            if (entry.getValue() == maxValueInMap) {
-                bestMovie = entry.getKey();
+        for (Actor actor: actorList) {
+            double totalRating = 0.0;
+            for (Movie movie: actor.getMovies()) {
+                totalRating += movie.getRating();
+            }
+            double average = totalRating/actor.getMovies().size();
 
-                System.out.println(bestMovie);
+            if (average > averageRating) {
+                averageRating = average;
+                actorName = actor.getName();
             }
         }
-        System.out.println("****************************************");
-        return bestMovie;
+        return actorName;
     }
 
-    private void loadDate() {
-        File f = new File("D:\\ratings.txt");
-        BufferedReader entrada = null;
-        try {
-            entrada = new BufferedReader(new FileReader(f));
-            String linea;
-            entrada.readLine();
-            while (entrada.ready()) {
-                linea = entrada.readLine();
-                int ranking = Integer.parseInt(linea.substring(linea.length() - 3, linea.length()).trim());
-                String name = linea.substring(0, linea.length() - 3);
-                addRating(name, ranking);
+
+    public String getBestMovie() {
+        double bestRating = 0.0;
+        String movieName = "";
+        for (Movie movie: this.movieList) {
+            if (movie.getRating() > bestRating) {
+                bestRating = movie.getRating();
+                movieName = movie.getName();
+            }
+        }
+        return movieName;
+    }
+
+
+    public static void main(String[] args) {
+
+        MovieDatabase mdb = new MovieDatabase();
+        String moviesText = "./submissions/Homeworks/SD1x/movie_database/files/movies.txt";
+        String splitBy = ",";
+        String line;
+
+        // Add movies and actors to the database
+        try (BufferedReader br = new BufferedReader(new FileReader(moviesText))) {
+            while ((line = br.readLine()) != null) {
+                String[] movie = line.split(splitBy);
+                String[] actor = new String[1];
+                for (int i = 0; i < movie.length; i++) {
+                    if (i == 0) {
+                        actor[i] = movie[i];
+                    }
+                    else {
+                        mdb.addMovie(movie[i].trim(), actor);
+                    }
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                entrada.close();
-            } catch (IOException e1) {
-            }
         }
-    }
 
-    public static void main(String[] args) {
-        MovieDatabase movieDatabase = new MovieDatabase();
-        System.out.println("the best movies is: " + movieDatabase.getBestMovie());
+        // Add the ratings of the various movies
+        String ratingsText = "./submissions/Homeworks/SD1x/movie_database/files/ratings.txt";
+        splitBy = "\t";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(ratingsText))) {
+            while ((line = br.readLine()) != null) {
+                String[] rating = line.split(splitBy);
+                try {
+                    double value = Double.parseDouble(rating[1]);
+                    mdb.addRating(rating[0].trim(), value);
+                } catch (NumberFormatException e) {
+                    continue;
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Print out best actor and best movie
+        System.out.println(mdb.getBestActor());
+        System.out.println(mdb.getBestMovie());
     }
 }

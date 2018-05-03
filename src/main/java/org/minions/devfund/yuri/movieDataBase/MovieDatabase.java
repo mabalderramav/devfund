@@ -13,23 +13,100 @@ public class MovieDatabase {
      * Constructor Method..
      */
     public MovieDatabase() {
-        movieList = new ArrayList<Movie>();
-        actorList = new ArrayList<Actor>();
+        movieList = new ArrayList<>();
+        actorList = new ArrayList<>();
     }
 
+    /**
+     * Adds a movie to list.
+     *
+     * @param name   movie name.
+     * @param actors actors.
+     */
     public void addMovie(final String name, final String[] actors) {
-        for (String actor:actors) {
-            new A
+        if (!movieList.contains(new Movie(name))) {
+            movieList.add(new Movie(name));
+            for (int i = 0; i < actors.length; i++) {
+                if (!actorList.contains(new Actor(actors[i]))) {
+                    actorList.add(new Actor(actors[i]));
+                }
+            }
         }
-        movieList.add(new Movie(name, new ArrayList<Actor>() ))
-
     }
 
-    public ArrayList<Movie> getMovieList(){
+    /**
+     * Adds rating an specific movie.
+     *
+     * @param name   movie name.
+     * @param rating movie rating.
+     */
+    public void addRating(final String name, final double rating) {
+        if (movieList.indexOf(new Movie(name)) >= 0) {
+            Movie movie = movieList.get(movieList.indexOf(new Movie(name)));
+            movie.setRating(movie.getRating() + rating);
+        }
+    }
+
+    /**
+     * Updates the movie rating.
+     *
+     * @param name   movie name.
+     * @param rating movie rating.
+     */
+    public void updateRating(final String name, final double rating) {
+        if (movieList.indexOf(new Movie(name)) >= 0) {
+            Movie movie = movieList.get(movieList.indexOf(new Movie(name)));
+            movie.setRating(rating);
+        }
+    }
+
+    /**
+     * Gets the actor with best average rating.
+     *
+     * @return
+     */
+    public String getBestActor() {
+        Actor bestActor = new Actor("");
+        for (Actor actor : actorList) {
+            if (actor.getAverage() >= bestActor.getAverage()) {
+                bestActor = actor;
+            }
+        }
+        return bestActor.getName();
+    }
+
+    /**
+     * Gets the movie with the highest rating.
+     *
+     * @return
+     */
+    public String getBestMovie() {
+        Movie bestMovie = new Movie("");
+        for (Movie movie : movieList) {
+            if (movie.getRating() >= bestMovie.getRating()) {
+                bestMovie = movie;
+            }
+        }
+        return bestMovie.getName();
+    }
+
+
+    /**
+     * Gets movie list.
+     *
+     * @return movie list.
+     */
+    public ArrayList<Movie> getMovieList() {
         return movieList;
     }
 
+    /**
+     * Gets Actor list.
+     *
+     * @return actor list.
+     */
     public ArrayList<Actor> getActorList() {
         return actorList;
     }
+
 }

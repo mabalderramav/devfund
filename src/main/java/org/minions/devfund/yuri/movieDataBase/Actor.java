@@ -12,12 +12,11 @@ public class Actor {
     /**
      * Constructor method.
      *
-     * @param name   actor name.
-     * @param movies movies list.
+     * @param name actor name.
      */
-    public Actor(final String name, final ArrayList<Movie> movies) {
+    public Actor(final String name) {
         this.name = name;
-        this.movies = movies;
+        this.movies = new ArrayList<>();
     }
 
     /**
@@ -54,5 +53,17 @@ public class Actor {
      */
     public ArrayList<Movie> getMovies() {
         return movies;
+    }
+
+    /**
+     * Gets the actor average.
+     * @return actor average.
+     */
+    public double getAverage() {
+        double result = 0;
+        for (Movie movie : movies) {
+            result = result + movie.getRating();
+        }
+        return result / movies.size();
     }
 }

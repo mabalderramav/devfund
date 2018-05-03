@@ -14,13 +14,26 @@ public class Movie {
      * Constructor method.
      *
      * @param name   movie name.
-     * @param actors actors list.
      */
-    public Movie(final String name, final ArrayList<Actor> actors) {
+    public Movie(final String name) {
         this.name = name;
-        this.actors = actors;
+        this.actors = new ArrayList<>();
     }
 
+    /**
+     * Gets actor list.
+     * @return actors list.
+     */
+    public ArrayList<Actor> getActors() {
+        return actors;
+    }
+    /**
+     * Gets the movie name.
+     * @return movie name.
+     */
+    public String getName() {
+        return name;
+    }
     /**
      * Sets the movie name.
      *
@@ -30,6 +43,13 @@ public class Movie {
         this.name = name;
     }
 
+    /**
+     * Gets the movie rating.
+     * @return movie rating.
+     */
+    public double getRating() {
+        return rating;
+    }
     /**
      * Sets the movie rating.
      *

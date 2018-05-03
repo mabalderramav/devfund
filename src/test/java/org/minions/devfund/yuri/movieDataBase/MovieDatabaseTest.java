@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -18,9 +19,10 @@ public class MovieDatabaseTest {
    */
   @Test
   public void testAddMovieNotInDb() {
+    final int movieSizeExpected = 1;
     MovieDatabase movieDatabase = new MovieDatabase();
     movieDatabase.addMovie("test", new String[]{"Yuri", "Agus"});
-    Movie expectedMovie = new Movie("test", RATING, new ArrayList<Actor>());
-    assertTrue(movieDatabase.getMovieList().contains(expectedMovie));
+    final int movieSizeActual = movieDatabase.getMovieList().size();
+    assertEquals(movieSizeExpected, movieSizeActual);
   }
 }

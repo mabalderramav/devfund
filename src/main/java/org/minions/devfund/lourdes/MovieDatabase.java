@@ -12,42 +12,42 @@ public class MovieDatabase {
     }
 
     public void addMovie(String name, String[] actors) {
-        for (Movie movie : movieList) {
-            if (movie.getName().equals(name)) {
-                return;
-            }
-        }
-
-        Movie newMovie = new Movie(name);
-
+        Movie movie =  createMovie(name);
         ArrayList<Actor> movieActors = new ArrayList<Actor>();
         for (String actorName : actors) {
-            Actor newActor = new Actor(actorName);
-            newActor.addMovie(newMovie);
-            movieActors.add(newActor);
-
-            if (isNewActor(actorName)) {
-                actorList.add(newActor);
-            }
+            Actor actor = createActor(actorName);
+            actor.addMovie(movie);
+            movieActors.add(actor);
         }
-
-        newMovie.setActors(movieActors);
-        movieList.add(newMovie);
+        movie.setActors(movieActors);
     }
 
-    public boolean isNewActor(String actorName) {
-        for (Actor actor : actorList) {
-            if (actor.getName().equals(actorName)) {
-                return true;
+    public Movie createMovie(String movieName){
+        for (Movie movie : movieList) {
+            if (movie.getName().equals(movieName)) {
+                return movie;
             }
         }
-        return false;
+        Movie movie = new Movie(movieName);
+        movieList.add(movie);
+        return movie;
+    }
+
+    public Actor createActor(String actorName) {
+        for (Actor actor : actorList) {
+            if (actor.getName().equals(actorName)) {
+                return actor;
+            }
+        }
+        Actor newActor = new Actor(actorName);
+        actorList.add(newActor);
+        return newActor;
     }
 
 
     public void addRating(String name, double rating) {
         for (Movie movie : movieList) {
-            if(movie.getName().equals(name)){
+            if (movie.getName().equals(name)) {
                 movie.setRating(rating);
             }
         }
@@ -55,7 +55,7 @@ public class MovieDatabase {
 
     public void updateRating(String name, double newRating) {
         for (Movie movie : movieList) {
-            if(movie.getName().equals(name)){
+            if (movie.getName().equals(name)) {
                 movie.setRating(newRating);
             }
         }
@@ -64,8 +64,8 @@ public class MovieDatabase {
     public String getBestActor() {
         double highAverage = -1;
         String bestActor = "";
-        for (Actor actor:actorList) {
-            if (actor.averageRating() > highAverage){
+        for (Actor actor : actorList) {
+            if (actor.averageRating() > highAverage) {
                 highAverage = actor.averageRating();
                 bestActor = actor.getName();
             }
@@ -75,10 +75,10 @@ public class MovieDatabase {
     }
 
     public String getBestMovie() {
-        String bestMovie="";
+        String bestMovie = "";
         double bestRating = -1;
-        for (Movie movie:movieList) {
-            if(movie.getRating()>bestRating){
+        for (Movie movie : movieList) {
+            if (movie.getRating() > bestRating) {
                 bestRating = movie.getRating();
                 bestMovie = movie.getName();
             }

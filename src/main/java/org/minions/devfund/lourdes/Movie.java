@@ -12,7 +12,11 @@ public class Movie {
         this.actors = new ArrayList<Actor>();
     }
 
-    public void addActor(String actorName){
+    public Movie() {
+        this("");
+    }
+
+    public void addActor(String actorName) {
         Actor newActor = new Actor(actorName);
         newActor.addMovie(this);
         actors.add(newActor);

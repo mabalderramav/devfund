@@ -12,19 +12,26 @@ public class Actor {
         this.movies = new ArrayList<Movie>();
     }
 
-    public void addMovie(Movie movie){
+    public Actor() {
+        this("");
+    }
+
+    public void addMovie(Movie movie) {
         movies.add(movie);
     }
-    public double averageRating(){
+
+    public double averageRating() {
         double average = 0;
-        for (Movie movie: movies) {
-            average+=movie.getRating();
+        for (Movie movie : movies) {
+            average += movie.getRating();
         }
-        return average/movies.size();
+        return average / movies.size();
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }

@@ -4,7 +4,7 @@ package org.minions.devfund.reinaldo;
  * Class the handle the squarelotron logic.
  */
 public class Squarelotron {
-    private int[][] squarelotron;
+    private int[][] squarelotronVariable;
     private int size;
 
     /**
@@ -12,7 +12,7 @@ public class Squarelotron {
      */
     public Squarelotron(final int n) {
         size = n;
-        squarelotron = new int[n][n];
+        squarelotronVariable = new int[n][n];
         fillSquarelotron();
     }
 
@@ -22,7 +22,7 @@ public class Squarelotron {
      * @return current squarelotron value.
      */
     public int[][] getSquarelotron() {
-        return squarelotron.clone();
+        return squarelotronVariable.clone();
     }
 
     /**
@@ -31,7 +31,7 @@ public class Squarelotron {
     public void fillSquarelotron() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                squarelotron[i][j] = size * i + j + 1;
+                squarelotronVariable[i][j] = size * i + j + 1;
             }
         }
     }
@@ -55,9 +55,9 @@ public class Squarelotron {
     public void moveTheFirstAndLasColummn(final Squarelotron squarelotronCopy, final int j, final int ring) {
         for (int i = ring - 1; i < getSizeSquare(); i++) {
 
-            int temp = squarelotronCopy.squarelotron[i][j];
-            squarelotronCopy.squarelotron[i][j] = squarelotronCopy.squarelotron[size - 1 - i][j];
-            squarelotronCopy.squarelotron[size - 1 - i][j] = temp;
+            int temp = squarelotronCopy.squarelotronVariable[i][j];
+            squarelotronCopy.squarelotronVariable[i][j] = squarelotronCopy.squarelotronVariable[size - 1 - i][j];
+            squarelotronCopy.squarelotronVariable[size - 1 - i][j] = temp;
         }
     }
 
@@ -69,8 +69,8 @@ public class Squarelotron {
      * @param ring             the ring.
      */
     public void moveTheDistintSFirstAndLasColummn(final Squarelotron squarelotronCopy, final int j, final int ring) {
-        squarelotronCopy.squarelotron[ring - 1][j] = squarelotron[size - ring][j];
-        squarelotronCopy.squarelotron[size - ring][j] = squarelotron[ring - 1][j];
+        squarelotronCopy.squarelotronVariable[ring - 1][j] = squarelotronVariable[size - ring][j];
+        squarelotronCopy.squarelotronVariable[size - ring][j] = squarelotronVariable[ring - 1][j];
     }
 
     /**
@@ -103,8 +103,8 @@ public class Squarelotron {
     public void moveDiagonalRight(final Squarelotron squarelotronCopy, final int j, final int ring) {
         for (int i = ring - 1; i <= size - ring; i++) {
             if (j != i) {
-                squarelotronCopy.squarelotron[i][j] = squarelotron[j][i];
-                squarelotronCopy.squarelotron[j][i] = squarelotron[i][j];
+                squarelotronCopy.squarelotronVariable[i][j] = squarelotronVariable[j][i];
+                squarelotronCopy.squarelotronVariable[j][i] = squarelotronVariable[i][j];
             }
         }
     }
@@ -119,8 +119,8 @@ public class Squarelotron {
     public void moveDiagonalLeft(final Squarelotron squarelotronCopy, final int j, final int ring) {
         for (int i = size - ring; i >= ring; i--) {
             if (j != i) {
-                squarelotronCopy.squarelotron[i][j] = squarelotron[j][i];
-                squarelotronCopy.squarelotron[j][i] = squarelotron[i][j];
+                squarelotronCopy.squarelotronVariable[i][j] = squarelotronVariable[j][i];
+                squarelotronCopy.squarelotronVariable[j][i] = squarelotronVariable[i][j];
             }
         }
 
@@ -165,10 +165,10 @@ public class Squarelotron {
 
         for (int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j) {
-                squarelotronClone[i][j] = squarelotron[(size - 1) - j][i];
+                squarelotronClone[i][j] = squarelotronVariable[(size - 1) - j][i];
             }
         }
-        squarelotron = squarelotronClone.clone();
+        squarelotronVariable = squarelotronClone.clone();
     }
 
     /**
@@ -180,10 +180,10 @@ public class Squarelotron {
 
         for (int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j) {
-                squarelotronClone[i][j] = squarelotron[j][(size - 1) - i];
+                squarelotronClone[i][j] = squarelotronVariable[j][(size - 1) - i];
             }
         }
 
-        squarelotron = squarelotronClone.clone();
+        squarelotronVariable = squarelotronClone.clone();
     }
 }

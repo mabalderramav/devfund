@@ -37,17 +37,6 @@ public class SquarelotronTest {
     }
 
     /**
-     * Test for optainer the testUpsideDownFlipDimensionThree.
-     */
-    @Test
-    public void testUpsideDownFlipDimensionThree() {
-
-        final int[][] expectedResult = new int[][]{{13, 14, 15, 16}, {9, 6, 7, 12}, {5, 10, 11, 8}, {1, 2, 3, 4}};
-        int[][] actualResult = squarelotron.upsideDownFlip(1).getSquarelotron();
-        assertArrayEquals(expectedResult, actualResult);
-    }
-
-    /**
      * Test for optainer the testwhenUpsideDownFlipThreeRing.
      */
     @Test

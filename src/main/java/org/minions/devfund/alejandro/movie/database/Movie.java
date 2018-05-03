@@ -20,6 +20,14 @@ public class Movie {
     }
 
     /**
+     * This method is the constructor for movie class.
+     */
+    public Movie() {
+        this.name = " ";
+        this.actors = new ArrayList<Actor>();
+    }
+
+    /**
      * This method return the name of the movie.
      * @return the name of the movie.
      */
@@ -48,6 +56,7 @@ public class Movie {
      * @param newRating the new rating for the movie.
      */
     public void setRating(final double newRating) {
+
         this.rating = newRating;
     }
 

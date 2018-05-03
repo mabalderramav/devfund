@@ -29,24 +29,33 @@ public class MovieDatabase {
      */
     void addMovie(final String name, final String[] actors) {
 
-        if (!isMovieOnList(name)) {
+        if (!getMovieOnList(name)) {
             Movie movie = new Movie(name);
             movieList.add(movie);
             for (String actor : actors) {
-                boolean actorExists = false;
-                for (Actor actorInList : actorList) {
-                    if (actorInList.getName().equals(actor)) {
-                        actorExists = true;
-                        actorInList.setNewMovie(movie);
-                    }
-                }
-
-                if (!actorExists) {
-                    Actor newActor = new Actor(actor);
-                    this.actorList.add(newActor);
-                    newActor.setNewMovie(movie);
-                }
+                updateActorList(actor, movie);
             }
+        }
+    }
+
+    /**
+     * This method will update the actor list and create a new one if the actor is new.
+     * @param actorsName String that represent the name of the actor.
+     * @param movie An object that is the movie where the actor acted.
+     */
+    private void updateActorList(final String actorsName, final Movie movie) {
+        boolean actorExists = false;
+        for (Actor actorInList : actorList) {
+            if (actorInList.getName().equals(actorsName)) {
+                actorExists = true;
+                actorInList.setNewMovie(movie);
+            }
+        }
+
+        if (!actorExists) {
+            Actor newActor = new Actor(actorsName);
+            this.actorList.add(newActor);
+            newActor.setNewMovie(movie);
         }
     }
 
@@ -113,14 +122,19 @@ public class MovieDatabase {
         for (Movie movie : this.movieList) {
             rating = movie.getRating();
             if (rating > highestRating) {
+                highestRating = rating;
                 movieName = movie.getName();
             }
         }
-
         return movieName;
     }
 
-    boolean isMovieOnList(String movieName) {
+    /**
+     * This method return if a movie is on the movie list.
+     * @param movieName the name of the movie.
+     * @return true or false depending if the movie was found.
+     */
+    boolean getMovieOnList(final String movieName) {
         boolean movieExists = false;
         for (Movie movie : this.movieList) {
             if (movie.getName().equals(movieName)) {
@@ -128,5 +142,21 @@ public class MovieDatabase {
             }
         }
         return movieExists;
+    }
+
+    /**
+     * Return the movie list as an array.
+     * @return an array of movies.
+     */
+    ArrayList<Movie> getMovieList() {
+        return this.movieList;
+    }
+
+    /**
+     * Return the actor list as an array.
+     * @return an array of actors.
+     */
+    ArrayList<Actor> getActorList() {
+        return this.actorList;
     }
 }

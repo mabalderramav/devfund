@@ -1,15 +1,17 @@
 package org.minions.devfund.alejandro.movie.database;
 
 import org.junit.Test;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+/**
+ * This class contains all test for Actor class.
+ */
 public class ActorTests {
 
+    /**
+     * This method verify the Actor constructor.
+     */
     @Test
     public void testActorConstructor() {
         final String actorName = "test123";
@@ -17,6 +19,9 @@ public class ActorTests {
         assertThat(actor, instanceOf(Actor.class));
     }
 
+    /**
+     * This method test getName method.
+     */
     @Test
     public void testActorGetName() {
         final String actorName = "test123";
@@ -24,6 +29,9 @@ public class ActorTests {
         assert actor.getName().equals(actorName);
     }
 
+    /**
+     * This method test getName method modifying a name.
+     */
     @Test
     public void testActorGetNewName() {
         final String actorName = "test123";
@@ -31,15 +39,5 @@ public class ActorTests {
         Actor actor = new Actor(actorName);
         actor.setName(newActorName);
         assert actor.getName().equals(newActorName);
-    }
-
-    @Test
-    public void testGetMovies() {
-        final String actorName = "test123";
-        final ArrayList<Actor> expectedArrayList = new ArrayList<>();
-        Actor actor = new Actor(actorName);
-        System.out.println(actor.getMovies());
-        System.out.println(expectedArrayList);
-        assert actor.getMovies().equals(expectedArrayList);
     }
 }

@@ -20,6 +20,15 @@ public class Actor {
     }
 
     /**
+     * Constructor of the Actor class.
+     */
+    public Actor() {
+        this.name = " ";
+        this.movies = new ArrayList<Movie>();
+    }
+
+
+    /**
      * This method returns the name of the actor.
      * @return The name of the actor.
      */

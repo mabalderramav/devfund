@@ -10,12 +10,26 @@ public class MovieDatabase {
     private ArrayList<Actor> actorList;
 
     /**
-     * Constructor Method.
-     * @param movieList movie list.
-     * @param actorList actor list.
+     * Constructor Method..
      */
-    public MovieDatabase(final ArrayList<Movie> movieList, final ArrayList<Actor> actorList) {
-        this.movieList = movieList;
-        this.actorList = actorList;
+    public MovieDatabase() {
+        movieList = new ArrayList<Movie>();
+        actorList = new ArrayList<Actor>();
+    }
+
+    public void addMovie(final String name, final String[] actors) {
+        for (String actor:actors) {
+            new A
+        }
+        movieList.add(new Movie(name, new ArrayList<Actor>() ))
+
+    }
+
+    public ArrayList<Movie> getMovieList(){
+        return movieList;
+    }
+
+    public ArrayList<Actor> getActorList() {
+        return actorList;
     }
 }

@@ -1,7 +1,8 @@
-package org.minions.devfund.yuri;
+package org.minions.devfund.yuri.WackAMole;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.minions.devfund.yuri.WhackAMole;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;

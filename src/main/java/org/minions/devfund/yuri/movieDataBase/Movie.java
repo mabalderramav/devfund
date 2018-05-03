@@ -14,12 +14,10 @@ public class Movie {
      * Constructor method.
      *
      * @param name   movie name.
-     * @param rating movie rating.
      * @param actors actors list.
      */
-    public Movie(final String name, final double rating, final ArrayList<Actor> actors) {
+    public Movie(final String name, final ArrayList<Actor> actors) {
         this.name = name;
-        this.rating = rating;
         this.actors = actors;
     }
 

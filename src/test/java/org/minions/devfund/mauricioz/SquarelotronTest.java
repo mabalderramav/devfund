@@ -80,6 +80,20 @@ public class SquarelotronTest {
     }
 
     /**
+     * This method will test a diagonal flip with size 2 on the first and negative ring ring.
+     */
+    @Test
+    public void testMainDiagonalFlipSize2WithNegativeRing() {
+
+        final int[][] expected = {{1, 2}, {3, 4}};
+        final int localSize = 2;
+        final int ring = -1;
+        Squarelotron actualSquare = new Squarelotron(localSize);
+        actualSquare = actualSquare.mainDiagonalFlip(ring);
+        assert Arrays.deepEquals(actualSquare.getTwoDimentionalSquarelotron(), expected);
+    }
+
+    /**
      * This method will test a diagonal flip with size 3 on the first and only ring.
      */
     @Test

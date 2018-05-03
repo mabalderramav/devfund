@@ -37,7 +37,7 @@ public class WhackAMole {
         int gridLength = moleGrid.length;
         for (int row = 0; row < gridLength; row++) {
             for (int col = 0; col < gridLength; col++) {
-                moleGrid[row][col] = "o";
+                moleGrid[row][col] = "*";
             }
         }
     }
@@ -65,7 +65,7 @@ public class WhackAMole {
      * @return the place with the mole hide if is necessary.
      */
     public String hideMole(final String moleGrid) {
-        return moleGrid.equals("M") ? BLANK_SPACE.concat("o").concat(BLANK_SPACE)
+        return moleGrid.equals("M") ? BLANK_SPACE.concat("*").concat(BLANK_SPACE)
                 : BLANK_SPACE.concat(moleGrid).concat(BLANK_SPACE);
     }
 
@@ -78,7 +78,7 @@ public class WhackAMole {
      */
     public boolean place(final int xMole, final int yMole) {
         boolean isPlaceMole = !moleGrid[xMole][yMole].equals("M");
-        moleGrid[xMole][yMole] = isPlaceMole ? "M" : "o";
+        moleGrid[xMole][yMole] = isPlaceMole ? "M" : "*";
         molesLeft += 1;
         return isPlaceMole;
     }
@@ -132,13 +132,13 @@ public class WhackAMole {
     public boolean checkTheMoleInTheGrid(final int xWhack, final int yWhack) {
         boolean isWhackAMole = false;
         if (moleGrid[xWhack][yWhack].equals("M")) {
-            moleGrid[xWhack][yWhack] = "W";
+            moleGrid[xWhack][yWhack] = "M";
             molesLeft--;
             score++;
             isWhackAMole = true;
             System.out.println("You hit a mole!\n");
         } else {
-            moleGrid[xWhack][yWhack] = "*";
+            moleGrid[xWhack][yWhack] = "W";
             System.out.println("Oops! No mole there!\n");
         }
         attemptsLeft--;

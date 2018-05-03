@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by reinaldo on 19-04-18.
@@ -23,6 +24,19 @@ public class SquarelotronTest {
     @Before
     public void setUp() {
         squarelotron = new Squarelotron(SIZEMATRIXFOURT);
+    }
+
+    /**
+     * Test for optainer the upside down flip two ring.
+     */
+    @Test
+    public void methodVerifyTheOdd() {
+
+        final int expectedResult = 2;
+        assertEquals(expectedResult, squarelotron.getSizeSquare());
+        squarelotron = new Squarelotron(SIZEMATRIXTHREE);
+        final int expectedResult2 = 1;
+        assertEquals(expectedResult2, squarelotron.getSizeSquare());
     }
 
     /**

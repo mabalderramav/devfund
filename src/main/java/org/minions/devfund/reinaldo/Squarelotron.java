@@ -83,14 +83,25 @@ public class Squarelotron {
         Squarelotron squarelotronCopy = new Squarelotron(size);
         for (int columnJ = ring - 1; columnJ <= size - ring; columnJ++) {
 
-            if (columnJ == ring - 1 || columnJ == size - ring) {
-                moveTheFirstAndLasColummn(squarelotronCopy, columnJ, ring);
-            } else {
-                moveTheDistintSFirstAndLasColummn(squarelotronCopy, columnJ, ring);
-            }
+            isColumfirstAndColumnlast(ring, squarelotronCopy, columnJ);
         }
 
         return squarelotronCopy;
+    }
+
+    /**
+     * Methods tha execute moveTheFirstAndLasColumm and moveTheDistintSFirstAndLasColummn.
+     *
+     * @param ring             rign.
+     * @param squarelotronCopy matrix copy.
+     * @param columnJ          columns.
+     */
+    private void isColumfirstAndColumnlast(int ring, final Squarelotron squarelotronCopy, int columnJ) {
+        if (columnJ == ring - 1 || columnJ == size - ring) {
+            moveTheFirstAndLasColummn(squarelotronCopy, columnJ, ring);
+        } else {
+            moveTheDistintSFirstAndLasColummn(squarelotronCopy, columnJ, ring);
+        }
     }
 
     /**
@@ -102,10 +113,21 @@ public class Squarelotron {
      */
     public void moveDiagonalRight(final Squarelotron squarelotronCopy, final int j, final int ring) {
         for (int i = ring - 1; i <= size - ring; i++) {
-            if (j != i) {
-                squarelotronCopy.squarelotronVariable[i][j] = squarelotronVariable[j][i];
-                squarelotronCopy.squarelotronVariable[j][i] = squarelotronVariable[i][j];
-            }
+            isTheDiagonalCenterValues(squarelotronCopy, j, i);
+        }
+    }
+
+    /**
+     * Methods tha verife the values centers.
+     *
+     * @param squarelotronCopy squarelotronCopy.
+     * @param j                columns.
+     * @param i                rows.
+     */
+    private void isTheDiagonalCenterValues(final Squarelotron squarelotronCopy, int j, int i) {
+        if (j != i) {
+            squarelotronCopy.squarelotronVariable[i][j] = squarelotronVariable[j][i];
+            squarelotronCopy.squarelotronVariable[j][i] = squarelotronVariable[i][j];
         }
     }
 
@@ -118,10 +140,7 @@ public class Squarelotron {
      */
     public void moveDiagonalLeft(final Squarelotron squarelotronCopy, final int j, final int ring) {
         for (int i = size - ring; i >= ring; i--) {
-            if (j != i) {
-                squarelotronCopy.squarelotronVariable[i][j] = squarelotronVariable[j][i];
-                squarelotronCopy.squarelotronVariable[j][i] = squarelotronVariable[i][j];
-            }
+            isTheDiagonalCenterValues(squarelotronCopy, j, i);
         }
 
     }

@@ -80,6 +80,8 @@ public class WhackAMole {
 	    for (int j = 0; j < this.moleGrid[i].length; j++) {
 		if (this.moleGrid[i][j] != 'M') {
 		    System.out.print("[ " + this.moleGrid[i][j] + " ]");
+		} else {
+		    System.out.print("[ * ]");
 		}
 	    }
 
@@ -143,16 +145,15 @@ public class WhackAMole {
      *            indicate the mole's number.
      */
     public void putTheMoles(int quantity) {
-	int x, y;
+	int x, y, counter;
+	counter = 0;
 
-	for (int i = 0; i < quantity; i++) {
+	while (counter < quantity) {
 	    x = (int) (Math.random() * (this.moleGrid.length - 1) + 1);
 	    y = (int) (Math.random() * (this.moleGrid.length - 1) + 1);
 
-	    if (!place(x, y)) {
-		x = (int) (Math.random() * (this.moleGrid.length - 1) + 1);
-		y = (int) (Math.random() * (this.moleGrid.length - 1) + 1);
-		place(x, y);
+	    if (place(x, y)) {
+		counter++;
 	    }
 	}
     }

@@ -20,6 +20,12 @@ public class Actor {
     }
 
     /**
+     * Constructor method by default.
+     */
+    public Actor() {
+        this("");
+    }
+    /**
      * Sets the name of the actor.
      *
      * @param name new actor name.

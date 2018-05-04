@@ -21,6 +21,12 @@ public class Movie {
     }
 
     /**
+     * Constructor method by default.
+     */
+    public Movie() {
+        this("");
+    }
+    /**
      * Gets actor list.
      * @return actors list.
      */

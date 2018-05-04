@@ -24,11 +24,15 @@ public class MovieDatabase {
      * @param actors actors.
      */
     public void addMovie(final String name, final String[] actors) {
-        if (!movieList.contains(new Movie(name))) {
-            movieList.add(new Movie(name));
-            for (int i = 0; i < actors.length; i++) {
-                if (!actorList.contains(new Actor(actors[i]))) {
-                    actorList.add(new Actor(actors[i]));
+        Movie movie = new Movie(name);
+        if (!movieList.contains(movie)) {
+            movieList.add(movie);
+            for (String actorName : actors) {
+                Actor actor = new Actor(actorName);
+                movie.getActors().add(actor);
+                actor.getMovies().add(movie);
+                if (!actorList.contains(actor)) {
+                    actorList.add(actor);
                 }
             }
         }
@@ -63,10 +67,10 @@ public class MovieDatabase {
     /**
      * Gets the actor with best average rating.
      *
-     * @return
+     * @return best actor.
      */
     public String getBestActor() {
-        Actor bestActor = new Actor("");
+        Actor bestActor = new Actor();
         for (Actor actor : actorList) {
             if (actor.getAverage() >= bestActor.getAverage()) {
                 bestActor = actor;
@@ -78,10 +82,10 @@ public class MovieDatabase {
     /**
      * Gets the movie with the highest rating.
      *
-     * @return
+     * @return best movie.
      */
     public String getBestMovie() {
-        Movie bestMovie = new Movie("");
+        Movie bestMovie = new Movie();
         for (Movie movie : movieList) {
             if (movie.getRating() >= bestMovie.getRating()) {
                 bestMovie = movie;

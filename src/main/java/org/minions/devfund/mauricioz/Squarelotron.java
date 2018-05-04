@@ -14,29 +14,20 @@ public class Squarelotron {
      */
     public Squarelotron(int n) {
         this.size = n;
-        n = 1;
         twoDimentionalSquarelotron = new int[this.size][this.size];
-        initializeSquarelotron(n);
+        initializeSquarelotron();
     }
 
     /**
      * Populate twoDimentionalSquarelotron with initial values.
-     * @param n size of the twoDimentionalSquarelotron
      */
-    private void initializeSquarelotron(int n) {
-        for (int x = 0; x < getSize(); x++) {
-            for (int y = 0; y < getSize(); y++) {
+    private void initializeSquarelotron() {
+        int n = 1;
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
                 twoDimentionalSquarelotron[x][y] = n++;
             }
         }
-    }
-
-    /**
-     * This method return the twoDimentionalSquarelotron size.
-     * @return twoDimentionalSquarelotron size
-     */
-    private int getSize() {
-        return size;
     }
 
     /**
@@ -46,47 +37,18 @@ public class Squarelotron {
      * @return A upside-down flipped squrelotron on a new instance.
      */
     public Squarelotron upsideDownFlip(int ring) {
-        Squarelotron flippedSquarelotron = new Squarelotron(getSize());
-        if (ring > 0 && ring <= this.getSize() / 2) {
-            flippedSquarelotron.twoDimentionalSquarelotron = flipSquarelotron(ring,
-                    flippedSquarelotron.getTwoDimentionalSquarelotron());
-        }
-        return flippedSquarelotron;
-    }
-
-    /**
-     * This method perform a flip of the 2D array for a given ring.
-     * @param ring the ring that will be flipped in the square.
-     * @param flippedSquarelotron 2D array that will be flipped.
-     * @return the flipped 2D array.
-     */
-    private int[][] flipSquarelotron(int ring, final int[][] flippedSquarelotron) {
-        int[][] swappedMatrix = inverseMatrix(this.twoDimentionalSquarelotron);
-        for (int i = ring - 1; i <= this.getSize() - ring; i++) {
-            for (int j = ring - 1; j <= this.getSize() - ring; j++) {
-                if (isPositionInRing(ring, i, j)) {
-                    flippedSquarelotron[i][j] = swappedMatrix[i][j];
+        Squarelotron flippedSquarelotron = new Squarelotron(size);
+        if (ring > 0 && ring <= size / 2) {
+            for (int fil = 0; fil < size; fil++) {
+                for (int col = 0; col < size; col++) {
+                    if (isPositionInRing(ring, fil, col)) {
+                        flippedSquarelotron.twoDimentionalSquarelotron[fil][col] =
+                                this.twoDimentionalSquarelotron[size - 1 - fil][col];
+                    }
                 }
             }
         }
         return flippedSquarelotron;
-    }
-
-    /**
-     * This method will invert the 2D array.
-     * @param matrix 2D that will be inverted.
-     * @return the 2D array but inverted.
-     */
-    private int[][] inverseMatrix(final int[][] matrix) {
-        int controlSize = this.getSize() - 1;
-        for (int i = 0; i < this.getSize() / 2; i++) {
-            int[] rowUpside = matrix[i];
-            int[] rowDown = matrix[controlSize];
-            matrix[i] = rowDown;
-            matrix[controlSize] = rowUpside;
-            controlSize--;
-        }
-        return matrix;
     }
 
     /**
@@ -97,7 +59,7 @@ public class Squarelotron {
      * @return true if the position belong to the ring and false otherwise.
      */
     private boolean isPositionInRing(int ring, int x, int y) {
-        return x == ring - 1 || y == ring - 1 || x == this.getSize() - ring || y == this.getSize() - ring;
+        return x == ring - 1 || y == ring - 1 || x == size - ring || y == size - ring;
     }
 
     /**
@@ -107,11 +69,11 @@ public class Squarelotron {
      * @return A modified instance of a new Squarelotron.
      */
     public Squarelotron mainDiagonalFlip(int ring) {
-        Squarelotron squarelotronResultant = new Squarelotron(this.getSize());
+        Squarelotron squarelotronResultant = new Squarelotron(size);
 
-        if (ring > 0 && ring <= this.getSize() / 2) {
-            for (int i = ring - 1; i <= this.getSize() - ring; i++) {
-                for (int j = ring - 1; j <= this.getSize() - ring; j++) {
+        if (ring > 0 && ring <= size / 2) {
+            for (int i = ring - 1; i <= size - ring; i++) {
+                for (int j = ring - 1; j <= size - ring; j++) {
                     if (isPositionInRing(ring, i, j)) {
                         squarelotronResultant.twoDimentionalSquarelotron[i][j] = this.twoDimentionalSquarelotron[j][i];
                     }

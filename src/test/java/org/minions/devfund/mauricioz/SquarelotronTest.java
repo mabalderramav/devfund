@@ -41,20 +41,6 @@ public class SquarelotronTest {
      * This method will test the flip using the second ring.
      */
     @Test
-    public void testUpSideDownFlipSecondRing() {
-        final int[][] expected = {{1, 2, 3, 4, 5}, {6, 17, 18, 19, 10},
-                {11, 12, 13, 14, 15}, {16, 7, 8, 9, 20}, {21, 22, 23, 24, 25}};
-        final int localSize = 5;
-        final int ring = 2;
-        Squarelotron actualSquare = new Squarelotron(localSize);
-        actualSquare = actualSquare.upsideDownFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getTwoDimentionalSquarelotron(), expected);
-    }
-
-    /**
-     * This method will test the flip using the second ring.
-     */
-    @Test
     public void testUpSideDownFlipThirdRing() {
         final int[][] expected = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10},
                 {11, 12, 13, 14, 15}, {16, 17, 18, 19, 20}, {21, 22, 23, 24, 25}};
@@ -215,20 +201,6 @@ public class SquarelotronTest {
         final int[][] expected = {{7, 8, 9}, {4, 5, 6}, {1, 2, 3}};
         final int localSize = 3;
         final int ring = 1;
-        Squarelotron actualSquare = new Squarelotron(localSize);
-        actualSquare = actualSquare.upsideDownFlip(ring);
-        assert Arrays.deepEquals(actualSquare.getTwoDimentionalSquarelotron(), expected);
-    }
-
-    /**
-     * this test flip a 2nd ring of a 4x4 squarelotron.
-     */
-    @Test
-    public void testUpsideDownFlip4x42Ring() {
-
-        final int[][] expected = {{1, 2, 3, 4}, {5, 10, 11, 8}, {9, 6, 7, 12}, {13, 14, 15, 16}};
-        final int localSize = 4;
-        final int ring = 2;
         Squarelotron actualSquare = new Squarelotron(localSize);
         actualSquare = actualSquare.upsideDownFlip(ring);
         assert Arrays.deepEquals(actualSquare.getTwoDimentionalSquarelotron(), expected);

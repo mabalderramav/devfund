@@ -1,20 +1,21 @@
 package org.minions.devfund.mauricioz;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Actor Class.
  */
 public class Actor {
     private String name;
-    private ArrayList<Movie> movies;
+    private List<Movie> movies;
 
     /**
      * Constructor.
      */
     public Actor() {
         this.name = "";
-        this.movies = new ArrayList<Movie>();
+        this.movies = new ArrayList<>();
     }
 
     /**
@@ -37,7 +38,7 @@ public class Actor {
      * get movies where actor worked.
      * @return list of movies.
      */
-    public ArrayList<Movie> getMovies() {
+    public List<Movie> getMovies() {
         return movies;
     }
 
@@ -45,7 +46,7 @@ public class Actor {
      * set movies list.
      * @param movies list of movies
      */
-    public void setMovies(final ArrayList<Movie> movies) {
+    public void setMovies(final List<Movie> movies) {
         this.movies = movies;
     }
 }

@@ -1,20 +1,21 @@
 package org.minions.devfund.mauricioz;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * move data base class definition.
  */
 public class MovieDatabase {
-    private ArrayList<Movie> movies;
-    private ArrayList<Actor> actors;
+    private List<Movie> movies;
+    private List<Actor> actors;
 
     /**
      * constructor.
      */
     public MovieDatabase() {
-        this.movies = new ArrayList<Movie>();
-        this.actors = new ArrayList<Actor>();
+        this.movies = new ArrayList<>();
+        this.actors = new ArrayList<>();
     }
 
     /**
@@ -27,7 +28,7 @@ public class MovieDatabase {
             Movie newMovie = new Movie(name);
             movies.add(newMovie);
             Actor actor;
-            ArrayList<Actor> casting = new ArrayList<Actor>();
+            List<Actor> casting = new ArrayList<>();
             for (String actorName : actors) {
                 actor = new Actor();
                 actor.setName(actorName);
@@ -102,7 +103,7 @@ public class MovieDatabase {
         String bestActorName = this.actors.get(0).getName();
         double averageMovieRating = ratingAverage(this.actors.get(0).getMovies());
         for (Actor actor : this.actors) {
-            ArrayList<Movie> actorMoviesList = actor.getMovies();
+            List<Movie> actorMoviesList = actor.getMovies();
             if (ratingAverage(actorMoviesList) > averageMovieRating) {
                 averageMovieRating = ratingAverage(actorMoviesList);
                 bestActorName = actor.getName();
@@ -116,7 +117,7 @@ public class MovieDatabase {
      * @param movies list of movies for the actor.
      * @return average rating.
      */
-    private double ratingAverage(final ArrayList<Movie> movies) {
+    private double ratingAverage(final List<Movie> movies) {
         double ratingAvg = 0;
         for (Movie mov : movies) {
             ratingAvg += mov.getRating();
@@ -144,7 +145,7 @@ public class MovieDatabase {
      * list of movies in the DB.
      * @return list of movies
      */
-    public ArrayList<Movie> getMovieList() {
+    public List<Movie> getMovieList() {
         return movies;
     }
 
@@ -152,7 +153,7 @@ public class MovieDatabase {
      * get actors list.
      * @return list of actors.
      */
-    public ArrayList<Actor> getActorList() {
+    public List<Actor> getActorList() {
         return actors;
     }
 }

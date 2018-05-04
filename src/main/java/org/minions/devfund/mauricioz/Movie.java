@@ -1,13 +1,14 @@
 package org.minions.devfund.mauricioz;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Movie Class definition.
  */
 public class Movie {
     private String name;
-    private ArrayList<Actor> actors;
+    private List<Actor> actors;
     private double rating;
 
     /**
@@ -16,6 +17,7 @@ public class Movie {
      */
     public Movie(final String name) {
         this.name = name;
+        this.actors = new ArrayList <>();
         this.rating = 0.0;
     }
 
@@ -39,7 +41,7 @@ public class Movie {
      * getting a list of actors of a movie.
      * @return list of actors.
      */
-    public ArrayList<Actor> getActors() {
+    public List<Actor> getActors() {
         return actors;
     }
 
@@ -47,7 +49,7 @@ public class Movie {
      * adding an actor to the movie.
      * @param actors Actor to be added to the movie.
      */
-    public void setActors(final ArrayList<Actor> actors) {
+    public void setActors(final List<Actor> actors) {
         this.actors = actors;
     }
 

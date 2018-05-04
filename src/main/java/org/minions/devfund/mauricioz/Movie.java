@@ -17,7 +17,7 @@ public class Movie {
      */
     public Movie(final String name) {
         this.name = name;
-        this.actors = new ArrayList <>();
+        this.actors = new ArrayList<>();
         this.rating = 0.0;
     }
 

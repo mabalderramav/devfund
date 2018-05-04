@@ -64,4 +64,12 @@ public class Movie {
     public void setRating(final double rating) {
         this.rating = rating;
     }
+
+    /**
+     * Sets the actor list.
+     * @param actors actor list.
+     */
+    public void setActors(final ArrayList<Actor> actors) {
+        this.actors = actors;
+    }
 }

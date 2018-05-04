@@ -58,7 +58,7 @@ public class MovieDatabase {
      * @param rating movie rating.
      */
     public void updateRating(final String name, final double rating) {
-        if (movieList.indexOf(new Movie(name)) >= 0) {
+        if (movieList.indexOf(new Movie(name)) > 0) {
             Movie movie = movieList.get(movieList.indexOf(new Movie(name)));
             movie.setRating(rating);
         }
@@ -72,7 +72,7 @@ public class MovieDatabase {
     public String getBestActor() {
         Actor bestActor = new Actor();
         for (Actor actor : actorList) {
-            if (actor.getAverage() >= bestActor.getAverage()) {
+            if (actor.getAverage() > bestActor.getAverage()) {
                 bestActor = actor;
             }
         }
@@ -87,7 +87,7 @@ public class MovieDatabase {
     public String getBestMovie() {
         Movie bestMovie = new Movie();
         for (Movie movie : movieList) {
-            if (movie.getRating() >= bestMovie.getRating()) {
+            if (movie.getRating() > bestMovie.getRating()) {
                 bestMovie = movie;
             }
         }

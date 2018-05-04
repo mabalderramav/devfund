@@ -12,6 +12,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 public class MovieDatabaseTest {
     private MovieDatabase movieDB;
+    private String movieName;
+    private String[] actor;
+    private Actor newActor;
 
     /**
      * before test cases setup.
@@ -19,6 +22,12 @@ public class MovieDatabaseTest {
     @Before
     public void setUp() {
         movieDB = new MovieDatabase();
+        movieName = "Sleepers";
+        actor = new String[] {"Brad Pitt"};
+        movieDB.addMovie(movieName, actor);
+        newActor = new Actor();
+        newActor.setName(actor[0]);
+
     }
 
     /**
@@ -34,10 +43,28 @@ public class MovieDatabaseTest {
      */
     @Test
     public void testAddMovie() {
-        String movieName = "Sleepers";
-        String[] actor = {"Brad Pitt"};
-        movieDB.addMovie(movieName, actor);
         assertEquals(movieName, movieDB.getMovieList().get(0).getName());
+        assertEquals(newActor.getName(), movieDB.getActorList().get(0).getName());
+    }
+
+    /**
+     * test add rating to a movie.
+     */
+    @Test
+    public void testAddRating() {
+        final double rating = 5.0;
+        movieDB.addRating(movieName, rating);
+        assertEquals(rating, movieDB.getMovieList().get(0).getRating());
+    }
+
+    /**
+     * test update movie rating.
+     */
+    @Test
+    public void testUpdateRating() {
+        final double ratingUpdated = 8.0;
+        movieDB.updateRating(movieName, ratingUpdated);
+        assertEquals(ratingUpdated, movieDB.getMovieList().get(0).getRating());
     }
 
 }

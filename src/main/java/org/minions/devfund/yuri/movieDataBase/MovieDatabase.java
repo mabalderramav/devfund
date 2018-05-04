@@ -25,13 +25,13 @@ public class MovieDatabase {
      */
     public void addMovie(final String name, final String[] actors) {
         Movie movie = new Movie(name);
-        if (!movieList.contains(movie)) {
+        if (!existentMovie(movie.getName())) {
             movieList.add(movie);
             for (String actorName : actors) {
                 Actor actor = new Actor(actorName);
                 movie.getActors().add(actor);
                 actor.getMovies().add(movie);
-                if (!actorList.contains(actor)) {
+                if (!existentActor(actor.getName())) {
                     actorList.add(actor);
                 }
             }
@@ -45,10 +45,8 @@ public class MovieDatabase {
      * @param rating movie rating.
      */
     public void addRating(final String name, final double rating) {
-        if (movieList.indexOf(new Movie(name)) >= 0) {
-            Movie movie = movieList.get(movieList.indexOf(new Movie(name)));
-            movie.setRating(movie.getRating() + rating);
-        }
+        Movie movie = getMovieByName(name);
+        movie.setRating(movie.getRating() + rating);
     }
 
     /**
@@ -58,10 +56,8 @@ public class MovieDatabase {
      * @param rating movie rating.
      */
     public void updateRating(final String name, final double rating) {
-        if (movieList.indexOf(new Movie(name)) > 0) {
-            Movie movie = movieList.get(movieList.indexOf(new Movie(name)));
-            movie.setRating(rating);
-        }
+        Movie movie = getMovieByName(name);
+        movie.setRating(rating);
     }
 
     /**
@@ -113,4 +109,53 @@ public class MovieDatabase {
         return actorList;
     }
 
+    /**
+     * Verifies that a movie is existent.
+     *
+     * @param movieName movie name.
+     * @return <CODE>true</CODE> if the movie is existent.
+     * <CODE>false</CODE> if the movie is new.
+     */
+    private boolean existentMovie(final String movieName) {
+        boolean flag = false;
+        for (Movie movie : movieList) {
+            if (movie.getName().equalsIgnoreCase(movieName)) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * Verifies that an actor is existent.
+     *
+     * @param actorName movie name.
+     * @return <CODE>true</CODE> if the actor is existent.
+     * <CODE>false</CODE> if the actor is new.
+     */
+    private boolean existentActor(final String actorName) {
+        boolean flag = false;
+        for (Actor actor : actorList) {
+            if (actor.getName().equalsIgnoreCase(actorName)) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * Gets the an specific movie by name of movie list.
+     *
+     * @param movieName movie name.
+     * @return movie searched.
+     */
+    private Movie getMovieByName(final String movieName) {
+        Movie movieResult = new Movie();
+        for (Movie movie : movieList) {
+            if (movie.getName().equalsIgnoreCase(movieName)) {
+                movieResult = movie;
+            }
+        }
+        return movieResult;
+    }
 }

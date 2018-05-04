@@ -25,6 +25,7 @@ public class Actor {
     public Actor() {
         this("");
     }
+
     /**
      * Sets the name of the actor.
      *
@@ -63,6 +64,7 @@ public class Actor {
 
     /**
      * Gets the actor average.
+     *
      * @return actor average.
      */
     public double getAverage() {
@@ -70,6 +72,6 @@ public class Actor {
         for (Movie movie : movies) {
             result = result + movie.getRating();
         }
-        return result / movies.size();
+        return movies.isEmpty() ? 0 : result / movies.size();
     }
 }

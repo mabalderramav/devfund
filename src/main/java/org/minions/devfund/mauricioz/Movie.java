@@ -1,0 +1,69 @@
+package org.minions.devfund.mauricioz;
+
+import java.util.ArrayList;
+
+/**
+ * Movie Class definition.
+ */
+public class Movie {
+    private String name;
+    private ArrayList<Actor> actors;
+    private double rating;
+
+    /**
+     * Constructor.
+     * @param name movie name.
+     */
+    public Movie(final String name) {
+        this.name = name;
+        this.rating = 0.0;
+    }
+
+    /**
+     * get movie name.
+     * @return movie name.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * setting a movie name.
+     * @param name new movie name.
+     */
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    /**
+     * getting a list of actors of a movie.
+     * @return list of actors.
+     */
+    public ArrayList<Actor> getActors() {
+        return actors;
+    }
+
+    /**
+     * adding an actor to the movie.
+     * @param actors Actor to be added to the movie.
+     */
+    public void setActors(final ArrayList<Actor> actors) {
+        this.actors = actors;
+    }
+
+    /**
+     * getting the movie rating.
+     * @return movie rating.
+     */
+    public double getRating() {
+        return rating;
+    }
+
+    /**
+     * setting the movie rating.
+     * @param rating set the movie rating.
+     */
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+}

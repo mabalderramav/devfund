@@ -1,0 +1,158 @@
+package org.minions.devfund.mauricioz;
+
+import java.util.ArrayList;
+
+/**
+ * move data base class definition.
+ */
+public class MovieDatabase {
+    private ArrayList<Movie> movies;
+    private ArrayList<Actor> actors;
+
+    /**
+     * constructor.
+     */
+    public MovieDatabase() {
+        this.movies = new ArrayList<Movie>();
+        this.actors = new ArrayList<Actor>();
+    }
+
+    /**
+     * add a new movie in the db.
+     * @param name movie name.
+     * @param actors casting list.
+     */
+    public void addMovie(final String name, final String[] actors) {
+        if (!isAlreadyRegistered(name)) {
+            Movie newMovie = new Movie(name);
+            movies.add(newMovie);
+            Actor actor;
+            ArrayList<Actor> casting = new ArrayList<Actor>();
+            for (String actorName : actors) {
+                actor = new Actor();
+                actor.setName(actorName);
+                casting.add(actor);
+                if (!actorIntheDB(actorName)) {
+                    this.actors.add(actor);
+                }
+            }
+            newMovie.setActors(casting);
+        }
+    }
+
+    /**
+     * verify actor already exist.
+     * @param actorName name.
+     * @return true or false.
+     */
+    private boolean actorIntheDB(final String actorName) {
+        for (Actor actor : actors) {
+            if (actor.getName().equals(actorName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * verify if movie already exists into the DB.
+     * @param name movie name
+     * @return true or false
+     */
+    private boolean isAlreadyRegistered(final String name) {
+        for (Movie mov : movies) {
+            if (mov.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Rate a movie.
+     * @param name movie name.
+     * @param rating rating that will be assigned to the movie.
+     */
+    public void addRating(final String name, final double rating) {
+        for (Movie mov : movies) {
+            if (mov.getName().equals(name)) {
+                mov.setRating(rating);
+            }
+        }
+    }
+
+    /**
+     * update Rate of a movie.
+     * @param name movie name.
+     * @param rating rating that will be assigned to the movie.
+     */
+    public void updateRating(final String name, final double rating) {
+        for (Movie mov : movies) {
+            if (mov.getName().equals(name)) {
+                mov.setRating(rating);
+            }
+        }
+    }
+
+    /**
+     * get best actor.
+     * @return best actor name.
+     */
+    public String getBestActor() {
+        String bestActorName = this.actors.get(0).getName();
+        double averageMovieRating = ratingAverage(this.actors.get(0).getMovies());
+        for (Actor actor : this.actors) {
+            ArrayList<Movie> actorMoviesList = actor.getMovies();
+            if (ratingAverage(actorMoviesList) > averageMovieRating) {
+                averageMovieRating = ratingAverage(actorMoviesList);
+                bestActorName = actor.getName();
+            }
+        }
+        return bestActorName;
+    }
+
+    /**
+     * method to get the average rating for movies of a given actor.
+     * @param movies list of movies for the actor.
+     * @return average rating.
+     */
+    private double ratingAverage(final ArrayList<Movie> movies) {
+        double ratingAvg = 0;
+        for (Movie mov : movies) {
+            ratingAvg += mov.getRating();
+        }
+        return ratingAvg / (movies.size() - 1);
+    }
+
+    /**
+     * get the best movie rated.
+     * @return movie name
+     */
+    public String getBestMovie() {
+        String movieName = this.movies.get(0).getName();
+        double rating = this.movies.get(0).getRating();
+        for (Movie mov : movies) {
+            if (mov.getRating() > rating) {
+                rating = mov.getRating();
+                movieName = mov.getName();
+            }
+        }
+        return movieName;
+    }
+
+    /**
+     * list of movies in the DB.
+     * @return list of movies
+     */
+    public ArrayList<Movie> getMovieList() {
+        return movies;
+    }
+
+    /**
+     * get actors list.
+     * @return list of actors.
+     */
+    public ArrayList<Actor> getActorList() {
+        return actors;
+    }
+}

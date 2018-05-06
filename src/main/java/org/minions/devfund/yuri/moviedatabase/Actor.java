@@ -41,7 +41,7 @@ public class Actor {
      *
      * @param movies list of movies.
      */
-    public void setMovies(final ArrayList<Movie> movies) {
+    public void setMovies(final List<Movie> movies) {
         this.movies = movies;
     }
 

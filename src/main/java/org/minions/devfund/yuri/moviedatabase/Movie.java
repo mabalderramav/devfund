@@ -70,7 +70,7 @@ public class Movie {
      * Sets the actor list.
      * @param actors actor list.
      */
-    public void setActors(final ArrayList<Actor> actors) {
+    public void setActors(final List<Actor> actors) {
         this.actors = actors;
     }
 }

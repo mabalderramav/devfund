@@ -1,30 +1,48 @@
-package MovieDatabase;
+package org.minions.devfund.chelo;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Scanner;
 
+/**
+ * MovieDatabase class.
+ */
 public class MovieDatabase {
-    ArrayList<Movie> movieList;
-    ArrayList<Actor> actorList;
+    private ArrayList<Movie> movieList;
+    private ArrayList<Actor> actorList;
 
+    /**
+     * MovieDatabase constructor.
+     */
     MovieDatabase() {
-        movieList = new ArrayList<Movie>();
-        actorList =  new ArrayList<Actor>();
+        movieList = new ArrayList<>();
+        actorList =  new ArrayList<>();
     }
 
+    /**
+     * Getter for MovieList.
+     * @return movie list
+     */
     public ArrayList<Movie> getMovieList() {
         return movieList;
     }
 
+    /**
+     * Getter for ActorList.
+     * @return actor list
+     */
     public ArrayList<Actor> getActorList() {
         return actorList;
     }
 
-    void addMovie(String name, String[] actors) {
+    /**
+     * This method takes in the name of a movie that is not currently in the database.
+     * Along with a list of actors for that movie.
+     * @param name movie name
+     * @param actors actors list
+     */
+    void addMovie(final String name, final String[] actors) {
         if (!getMovieList().contains(new Movie(name))) {
             Movie newMovie = new Movie(name);
             newMovie.setName(name);
@@ -72,7 +90,7 @@ public class MovieDatabase {
      * @param name of the movie
      * @param rating of the movie
      */
-    void addRating(String name, double rating) {
+    void addRating(final String name, final double rating) {
         for (Movie movie: getMovieList()) {
             if (movie.getName().contains(name)) {
                 movie.setRating(rating);
@@ -86,27 +104,34 @@ public class MovieDatabase {
      * @param name of the movie.
      * @param newRating of the movie.
      */
-    void updateRating(String name, double newRating) {
+    void updateRating(final String name, final double newRating) {
         movieList.get(movieList.indexOf(new Movie(name))).setRating(newRating);
     }
 
+    /**
+     * Returns the name of the actor that has the best average rating for their movies.
+     * @return the name of the best actor.
+     */
     String getBestActor() {
         double maxActorRating = 0;
         String maxActorName = null;
-        for (Actor actor :
-                getActorList())
+        for (Actor actor : getActorList()) {
             if (actor.getActorRating(getMovieList()) >= maxActorRating) {
                 maxActorRating = actor.getActorRating(getMovieList());
                 maxActorName = actor.getName();
             }
+        }
         return maxActorName;
     }
 
+    /**
+     * Returns the name of the movie with the highest rating.
+     * @return best movie.
+     */
     String getBestMovie() {
         double maxRatingMovie = 0;
         String maxRatingMovieName = null;
-        for (Movie movie :
-                getMovieList()) {
+        for (Movie movie : getMovieList()) {
             if (movie.getRating() >= maxRatingMovie) {
                 maxRatingMovie = movie.getRating();
                 maxRatingMovieName = movie.getName();
@@ -115,60 +140,46 @@ public class MovieDatabase {
         return maxRatingMovieName;
     }
 
-    public static void main(String[] args) {
+    /**
+     * Main method.
+     * @param args args
+     */
+    public static void main(final String[] args) {
         MovieDatabase movieDatabase = new MovieDatabase();
-        String fileName = "./resources/movies.txt";
-        String line;
+        File fileName = new File("./resources/movies.txt");
         try {
-            FileReader fileReader =
-                    new FileReader(fileName);
+            Scanner read = new Scanner(fileName, "UTF-8");
 
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-            while((line = bufferedReader.readLine()) != null) {
-                String[] actorMovies = line.split(",", -1);
+            while (read.hasNextLine()) {
+                String[] actorMovies = read.nextLine().split(",", -1);
                 for (int i = 1; i < actorMovies.length; i++) {
-                    movieDatabase.addMovie(actorMovies[i], new String[]{ actorMovies[0] });
+                    movieDatabase.addMovie(actorMovies[i], new String[]{actorMovies[0] });
                 }
             }
-            bufferedReader.close();
-        }
-        catch(FileNotFoundException ex) {
+            read.close();
+        } catch (FileNotFoundException ex) {
             System.out.println(
                     "Unable to open file '" + fileName + "'");
         }
-        catch(IOException ex) {
-            System.out.println(
-                    "Error reading file '" + fileName + "'");
-        }
 
-        String ratingsFile = "./resources/ratings.txt";
-        String lineRating;
+        File ratingsFile = new File("./resources/ratings.txt");
+
         try {
-            FileReader fileReader =
-                    new FileReader(ratingsFile);
+            Scanner read = new Scanner(ratingsFile, "UTF-8");
 
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-            while(bufferedReader.readLine() != null) {
-                while ((lineRating = bufferedReader.readLine()) != null) {
-                    String[] movieRating = lineRating.split("\t", -1);
+            read.nextLine();
+                while (read.hasNextLine()) {
+                    String[] movieRating = read.nextLine().split("\t", -1);
                     for (int i = 1; i < movieRating.length; i++) {
                         movieDatabase.addRating(movieRating[0], Double.parseDouble(movieRating[1]));
                     }
                 }
-            }
-            bufferedReader.close();
-        }
-        catch(FileNotFoundException ex) {
+
+            read.close();
+        } catch (FileNotFoundException ex) {
             System.out.println(
                     "Unable to open file '" + ratingsFile + "'");
         }
-        catch(IOException ex) {
-            System.out.println(
-                    "Error reading file '" + ratingsFile + "'");
-        }
-
         System.out.println(movieDatabase.getBestActor());
         System.out.println(movieDatabase.getBestMovie());
     }

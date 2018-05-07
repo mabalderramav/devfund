@@ -18,7 +18,7 @@ public class Movie {
      */
     public Movie(final String name) {
         this.name = name;
-        this.actors = new ArrayList<Actor>();
+        this.actors = new ArrayList<>();
     }
 
     /**
@@ -60,7 +60,7 @@ public class Movie {
      *
      * @param actors the list of actors
      */
-    public void setActors(final ArrayList<Actor> actors) {
+    public void setActors(final List<Actor> actors) {
         this.actors = actors;
     }
 

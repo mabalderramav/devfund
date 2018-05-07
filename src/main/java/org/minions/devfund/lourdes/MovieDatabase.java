@@ -1,20 +1,21 @@
 package org.minions.devfund.lourdes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class that manage the movie information.
  */
 public class MovieDatabase {
-    private ArrayList<Movie> movieList;
-    private ArrayList<Actor> actorList;
+    private List<Movie> movieList;
+    private List<Actor> actorList;
 
     /**
      * Constructor.
      */
     public MovieDatabase() {
-        this.movieList = new ArrayList<Movie>();
-        this.actorList = new ArrayList<Actor>();
+        this.movieList = new ArrayList<>();
+        this.actorList = new ArrayList<>();
     }
 
     /**
@@ -25,7 +26,7 @@ public class MovieDatabase {
      */
     public void addMovie(final String name, final String[] actors) {
         Movie movie = createMovie(name);
-        ArrayList<Actor> movieActors = new ArrayList<Actor>();
+        ArrayList<Actor> movieActors = new ArrayList<>();
         for (String actorName : actors) {
             Actor actor = createActor(actorName);
             actor.addMovie(movie);
@@ -138,7 +139,7 @@ public class MovieDatabase {
      * @return the movie list.
      */
 
-    public ArrayList<Movie> getMovieList() {
+    public List<Movie> getMovieList() {
         return movieList;
     }
 
@@ -147,7 +148,7 @@ public class MovieDatabase {
      *
      * @return return the actor List.
      */
-    public ArrayList<Actor> getActorList() {
+    public List<Actor> getActorList() {
         return actorList;
     }
 

@@ -1,13 +1,14 @@
 package org.minions.devfund.lourdes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class that define the Movie entity.
  */
 public class Movie {
     private String name;
-    private ArrayList<Actor> actors;
+    private List<Actor> actors;
     private double rating;
 
     /**
@@ -50,7 +51,7 @@ public class Movie {
      *
      * @return the actor list.
      */
-    public ArrayList<Actor> getActors() {
+    public List<Actor> getActors() {
         return actors;
     }
 

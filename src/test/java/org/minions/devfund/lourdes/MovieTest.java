@@ -28,7 +28,7 @@ public class MovieTest {
         final String actorName = "Robert Downey";
         final String movieName = "Iron Man I";
         Actor actor = new Actor(actorName);
-        final ArrayList<Actor> actors = new ArrayList<Actor>();
+        final ArrayList<Actor> actors = new ArrayList<>();
         actors.add(actor);
         Movie movie = new Movie(movieName);
         movie.setActors(actors);

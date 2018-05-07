@@ -1,13 +1,14 @@
 package org.minions.devfund.lourdes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class that define the Actor entity.
  */
 public class Actor {
     private String name;
-    private ArrayList<Movie> movies;
+    private List<Movie> movies;
 
     /**
      * Constructor that recieves the actor name.
@@ -16,7 +17,7 @@ public class Actor {
      */
     public Actor(final String name) {
         this.name = name;
-        this.movies = new ArrayList<Movie>();
+        this.movies = new ArrayList<>();
     }
 
     /**
@@ -80,7 +81,7 @@ public class Actor {
      *
      * @return movie list.
      */
-    public ArrayList<Movie> getMovies() {
+    public List<Movie> getMovies() {
         return movies;
     }
 }

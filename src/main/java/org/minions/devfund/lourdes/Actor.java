@@ -2,24 +2,44 @@ package org.minions.devfund.lourdes;
 
 import java.util.ArrayList;
 
+/**
+ * Class that define the Actor entity.
+ */
 public class Actor {
     private String name;
-
     private ArrayList<Movie> movies;
 
-    public Actor(String name) {
+    /**
+     * Constructor that recieves the actor name.
+     *
+     * @param name represents the actor name.
+     */
+    public Actor(final String name) {
         this.name = name;
         this.movies = new ArrayList<Movie>();
     }
 
+    /**
+     * Constructor.
+     */
     public Actor() {
         this("");
     }
 
-    public void addMovie(Movie movie) {
+    /**
+     * Method that add a movie to the actor list.
+     *
+     * @param movie represents the object Movie.
+     */
+    public void addMovie(final Movie movie) {
         movies.add(movie);
     }
 
+    /**
+     * Method that get the average rating of the actor.
+     *
+     * @return the average rating.
+     */
     public double averageRating() {
         double average = 0;
         for (Movie movie : movies) {
@@ -28,18 +48,38 @@ public class Actor {
         return average / movies.size();
     }
 
+    /**
+     * Method that get the actor name.
+     *
+     * @return the name of Actor.
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    /**
+     * Method that set the actor Name.
+     *
+     * @param name represents the actor name.
+     */
+    public void setName(final String name) {
         this.name = name;
     }
 
-    public void setMovies(ArrayList<Movie> movies) {
+    /**
+     * Method that set the movies of the actor.
+     *
+     * @param movies movie list.
+     */
+    public void setMovies(final ArrayList<Movie> movies) {
         this.movies = movies;
     }
 
+    /**
+     * Method that get the movies of the actor.
+     *
+     * @return movie list.
+     */
     public ArrayList<Movie> getMovies() {
         return movies;
     }

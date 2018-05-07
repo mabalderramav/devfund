@@ -2,46 +2,81 @@ package org.minions.devfund.lourdes;
 
 import java.util.ArrayList;
 
+/**
+ * Class that define the Movie entity.
+ */
 public class Movie {
     private String name;
     private ArrayList<Actor> actors;
     private double rating;
 
-    public Movie(String name) {
+    /**
+     * Constructor that receive the Movie Name.
+     *
+     * @param name represents the movie name.
+     */
+    public Movie(final String name) {
         this.name = name;
         this.actors = new ArrayList<Actor>();
     }
 
+    /**
+     * Constructor.
+     */
     public Movie() {
         this("");
     }
 
-    public void addActor(String actorName) {
-        Actor newActor = new Actor(actorName);
-        newActor.addMovie(this);
-        actors.add(newActor);
-    }
-
+    /**
+     * Method that get the name of the movie.
+     *
+     * @return the movie name.
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    /**
+     * Method that set the movie name.
+     *
+     * @param name movie name.
+     */
+    public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * Method that get the actor list.
+     *
+     * @return the actor list.
+     */
     public ArrayList<Actor> getActors() {
         return actors;
     }
 
-    public void setActors(ArrayList<Actor> actors) {
+    /**
+     * Method that set actor list to the movie.
+     *
+     * @param actors the list of actors
+     */
+    public void setActors(final ArrayList<Actor> actors) {
         this.actors = actors;
     }
 
+    /**
+     * Method that get the rating of the movie.
+     *
+     * @return the rating.
+     */
     public double getRating() {
         return rating;
     }
 
+    /**
+     * Method that set the rating of the movie.
+     *
+     * @param rating represents the rating of the movie.
+     */
     public void setRating(double rating) {
         this.rating = rating;
     }

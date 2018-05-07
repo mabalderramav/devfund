@@ -2,33 +2,41 @@ package org.minions.devfund.lourdes;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.*;
-
+/**
+ * Implemented tests for {@link Actor}.
+ */
 public class ActorTest {
 
+    /**
+     * Verify Add movie to an actor.
+     */
     @Test
     public void testAddMovie() {
-        String name="Robert Downey";
-        Actor actor = new Actor(name);
+        final String name = "Robert Downey";
+        final Actor actor = new Actor(name);
         Movie movie = new Movie("Iron Man I");
         actor.addMovie(movie);
-        assertEquals(actor.getMovies().get(0),movie);
+        assertEquals(actor.getMovies().get(0), movie);
     }
 
+    /**
+     * Verify the average rating for an actor.
+     */
     @Test
     public void testAverageRating() {
-        String name="Robert Downey";
+        final String name = "Robert Downey";
+        final double ratingMovie1 = 45;
+        final double ratingMovie2 = 50.8;
         Actor actor = new Actor(name);
         Movie movie1 = new Movie("Iron Man I");
-        movie1.setRating(45);
+        movie1.setRating(ratingMovie1);
         actor.addMovie(movie1);
         Movie movie2 = new Movie("Avengers");
-        movie2.setRating(50.8);
+        movie2.setRating(ratingMovie2);
         actor.addMovie(movie2);
-        double expected_average = (45+50.8)/2;
-        assertEquals(actor.averageRating(),expected_average, 0);
+        double expectedAverage = (ratingMovie1 + ratingMovie2) / 2;
+        assertEquals(actor.averageRating(), expectedAverage, 0);
     }
 }

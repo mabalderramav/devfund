@@ -11,10 +11,11 @@ import static org.junit.Assert.assertEquals;
  * Implemented tests for {@link MovieDatabase}.
  */
 public class MovieDatabaseTest {
+    private static final String ACTOR_NAME = "Bruce Willis";
     private static final String MOVIE_NAME_1 = "Sexto sentido";
     private static final String MOVIE_NAME_2 = "Duro de Matar";
-    private static final String[] ACTORS_1 = new String[]{"Bruce Willis", "Haley Joel"};
-    private static final String[] ACTORS_2 = new String[]{"Bruce Willis", "Alam Rickman"};
+    private static final String[] ACTORS_1 = new String[]{ACTOR_NAME, "Haley Joel"};
+    private static final String[] ACTORS_2 = new String[]{ACTOR_NAME, "Alam Rickman"};
     private MovieDatabase movieDatabase;
 
     /**
@@ -131,7 +132,7 @@ public class MovieDatabaseTest {
     public void testGetBestActor() {
         movieDatabase.addMovie(MOVIE_NAME_1, ACTORS_1);
         movieDatabase.addMovie(MOVIE_NAME_2, ACTORS_2);
-        assertEquals(movieDatabase.getBestActor(), "Bruce Willis");
+        assertEquals(movieDatabase.getBestActor(), ACTOR_NAME);
     }
 
     /**

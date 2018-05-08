@@ -1,6 +1,7 @@
 package org.minions.devfund.lourdes;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -70,31 +71,17 @@ public class MovieDatabase {
     }
 
     /**
-     * Method that add a rating to a given movie.
-     *
-     * @param name   represents the movie name.
-     * @param rating rating of the movie.
-     */
-    public void addRating(final String name, final double rating) {
-        for (Movie movie : movieList) {
-            if (movie.getName().equals(name)) {
-                movie.setRating(rating);
-            }
-        }
-    }
-
-    /**
      * Method that update the rating of the given movie name.
      *
      * @param name      represents the movie name.
      * @param newRating the new rating to be set.
      */
     public void updateRating(final String name, double newRating) {
-        for (Movie movie : movieList) {
-            if (movie.getName().equals(name)) {
-                movie.setRating(newRating);
-            }
-        }
+        movieList.stream()
+                .filter(movie -> movie.getName().equals(name))
+                .findFirst()
+                .get()
+                .setRating(newRating);
     }
 
     /**
@@ -103,16 +90,10 @@ public class MovieDatabase {
      * @return the best actor.
      */
     public String getBestActor() {
-        double highAverage = -1;
-        String bestActor = "";
-        for (Actor actor : actorList) {
-            if (actor.averageRating() > highAverage) {
-                highAverage = actor.averageRating();
-                bestActor = actor.getName();
-            }
-
-        }
-        return bestActor;
+        return actorList.stream()
+                .max(Comparator.comparingDouble(Actor::averageRating))
+                .get()
+                .getName();
     }
 
     /**
@@ -121,17 +102,11 @@ public class MovieDatabase {
      * @return the best movie.
      */
     public String getBestMovie() {
-        String bestMovie = "";
-        double bestRating = -1;
-        for (Movie movie : movieList) {
-            if (movie.getRating() > bestRating) {
-                bestRating = movie.getRating();
-                bestMovie = movie.getName();
-            }
-
-        }
-        return bestMovie;
-    }
+        return movieList.stream()
+                .max(Comparator.comparingDouble(Movie::getRating))
+                .get()
+                .getName();
+   }
 
     /**
      * Method that return the movie list.
@@ -151,31 +126,4 @@ public class MovieDatabase {
     public List<Actor> getActorList() {
         return actorList;
     }
-
-    /**
-     * Method that get an actor bye name.
-     *
-     * @param actorName the name of the actor.
-     * @return the actor object.
-     */
-    public Actor getActorByName(final String actorName) {
-        return actorList.stream()
-                .filter(actor -> actorName.equals(actor.getName()))
-                .findFirst()
-                .orElse(null);
-    }
-
-    /**
-     * Method that return a movie given a name.
-     *
-     * @param movieName represents the movie name.
-     * @return the movie object.
-     */
-    public Movie getMovieByName(final String movieName) {
-        return movieList.stream()
-                .filter(movie -> movieName.equals(movie.getName()))
-                .findFirst()
-                .orElse(null);
-    }
-
 }

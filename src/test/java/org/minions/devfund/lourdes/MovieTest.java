@@ -21,6 +21,15 @@ public class MovieTest {
     }
 
     /**
+     * Verify Movie constructor with empty params.
+     */
+    @Test
+    public void testMovieConstructorEmptyParam() {
+        Movie movie = new Movie();
+        assertEquals(movie.getName(), "");
+    }
+
+    /**
      * Verify Add actor to a movie.
      */
     @Test
@@ -33,5 +42,16 @@ public class MovieTest {
         Movie movie = new Movie(movieName);
         movie.setActors(actors);
         assertEquals(movie.getActors().get(0).getName(), actorName);
+    }
+
+    /**
+     * Verify set Movie Name.
+     */
+    @Test
+    public void testSetName() {
+        final String movieName = "Terminator";
+        Movie movie = new Movie();
+        movie.setName(movieName);
+        assertEquals(movie.getName(), movieName);
     }
 }

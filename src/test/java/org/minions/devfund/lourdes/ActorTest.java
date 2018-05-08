@@ -65,4 +65,15 @@ public class ActorTest {
         assertEquals(actor.getMovies().get(0).getName(), movieName);
 
     }
+
+    /**
+     * Verify set Name.
+     */
+    @Test
+    public void testSetName() {
+        Actor actor = new Actor();
+        actor.setName(ACTOR_NAME);
+        assertEquals(actor.getName(), ACTOR_NAME);
+
+    }
 }

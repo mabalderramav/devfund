@@ -3,6 +3,7 @@ package org.minions.devfund.lourdes;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Class that manage the movie information.
@@ -77,11 +78,10 @@ public class MovieDatabase {
      * @param newRating the new rating to be set.
      */
     public void updateRating(final String name, double newRating) {
-        movieList.stream()
+        Optional<Movie> movieRating = movieList.stream()
                 .filter(movie -> movie.getName().equals(name))
-                .findFirst()
-                .get()
-                .setRating(newRating);
+                .findFirst();
+        movieRating.ifPresent(movie -> movie.setRating(newRating));
     }
 
     /**
@@ -92,8 +92,9 @@ public class MovieDatabase {
     public String getBestActor() {
         return actorList.stream()
                 .max(Comparator.comparingDouble(Actor::averageRating))
-                .get()
+                .orElse(new Actor())
                 .getName();
+
     }
 
     /**
@@ -104,9 +105,9 @@ public class MovieDatabase {
     public String getBestMovie() {
         return movieList.stream()
                 .max(Comparator.comparingDouble(Movie::getRating))
-                .get()
+                .orElse(new Movie())
                 .getName();
-   }
+    }
 
     /**
      * Method that return the movie list.

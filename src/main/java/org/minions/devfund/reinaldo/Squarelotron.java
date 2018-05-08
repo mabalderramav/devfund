@@ -4,7 +4,7 @@ package org.minions.devfund.reinaldo;
  * Class the handle the squarelotron logic.
  */
 public class Squarelotron {
-    private int[][] squarelotron;
+    private int[][] squarelotronVarialble;
     private int size;
 
     /**
@@ -12,7 +12,7 @@ public class Squarelotron {
      */
     public Squarelotron(final int n) {
         size = n;
-        squarelotron = new int[n][n];
+        squarelotronVarialble = new int[n][n];
         fillSquarelotron();
     }
 
@@ -22,7 +22,7 @@ public class Squarelotron {
      * @return current squarelotron value.
      */
     public int[][] getSquarelotron() {
-        return squarelotron.clone();
+        return squarelotronVarialble.clone();
     }
 
     /**
@@ -31,7 +31,7 @@ public class Squarelotron {
     public void fillSquarelotron() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                squarelotron[i][j] = size * i + j + 1;
+                squarelotronVarialble[i][j] = size * i + j + 1;
             }
         }
     }
@@ -63,11 +63,11 @@ public class Squarelotron {
         for (int j = 0; j <= sizeMatrix; j++) {
             if (i == first || i == last) {
                 if (j >= first && j <= last) {
-                    squarelotronCopy.squarelotron[i][j] = squarelotron[sizeMatrix - i][j];
+                    squarelotronCopy.squarelotronVarialble[i][j] = squarelotronVarialble[sizeMatrix - i][j];
                 }
             } else {
                 if (i > first && i < last && (j == first || j == last)) {
-                    squarelotronCopy.squarelotron[i][j] = squarelotron[sizeMatrix - i][j];
+                    squarelotronCopy.squarelotronVarialble[i][j] = squarelotronVarialble[sizeMatrix - i][j];
                 }
             }
         }
@@ -95,8 +95,8 @@ public class Squarelotron {
      */
     private void isTheDiagonalCenterValues(final Squarelotron squarelotronCopy, int j, int i) {
         if (j != i) {
-            squarelotronCopy.squarelotron[i][j] = squarelotron[j][i];
-            squarelotronCopy.squarelotron[j][i] = squarelotron[i][j];
+            squarelotronCopy.squarelotronVarialble[i][j] = squarelotronVarialble[j][i];
+            squarelotronCopy.squarelotronVarialble[j][i] = squarelotronVarialble[i][j];
         }
     }
 
@@ -153,10 +153,10 @@ public class Squarelotron {
 
         for (int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j) {
-                squarelotronClone[i][j] = squarelotron[(size - 1) - j][i];
+                squarelotronClone[i][j] = squarelotronVarialble[(size - 1) - j][i];
             }
         }
-        squarelotron = squarelotronClone.clone();
+        squarelotronVarialble = squarelotronClone.clone();
     }
 
     /**
@@ -168,10 +168,10 @@ public class Squarelotron {
 
         for (int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j) {
-                squarelotronClone[i][j] = squarelotron[j][(size - 1) - i];
+                squarelotronClone[i][j] = squarelotronVarialble[j][(size - 1) - i];
             }
         }
 
-        squarelotron = squarelotronClone.clone();
+        squarelotronVarialble = squarelotronClone.clone();
     }
 }

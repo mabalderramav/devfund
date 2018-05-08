@@ -4,7 +4,7 @@ package org.minions.devfund.reinaldo;
  * Class the handle the squarelotron logic.
  */
 public class Squarelotron {
-    private int[][] squarelotronVariable;
+    private int[][] squarelotron;
     private int size;
 
     /**
@@ -12,7 +12,7 @@ public class Squarelotron {
      */
     public Squarelotron(final int n) {
         size = n;
-        squarelotronVariable = new int[n][n];
+        squarelotron = new int[n][n];
         fillSquarelotron();
     }
 
@@ -22,7 +22,7 @@ public class Squarelotron {
      * @return current squarelotron value.
      */
     public int[][] getSquarelotron() {
-        return squarelotronVariable.clone();
+        return squarelotron.clone();
     }
 
     /**
@@ -31,76 +31,45 @@ public class Squarelotron {
     public void fillSquarelotron() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                squarelotronVariable[i][j] = size * i + j + 1;
+                squarelotron[i][j] = size * i + j + 1;
             }
         }
     }
 
     /**
-     * The methods get the size.
-     *
-     * @return size.
-     */
-    public int getSizeSquare() {
-        return size % 2 == 0 ? size / 2 : (size - 1) / 2;
-    }
-
-    /**
-     * The methodos swap to last and first column on the matrix.
-     *
-     * @param squarelotronCopy matrix copy.
-     * @param j                position column.
-     * @param ring             the ring.
-     */
-    public void moveTheFirstAndLasColummn(final Squarelotron squarelotronCopy, final int j, final int ring) {
-        for (int i = ring - 1; i < getSizeSquare(); i++) {
-
-            int temp = squarelotronCopy.squarelotronVariable[i][j];
-            squarelotronCopy.squarelotronVariable[i][j] = squarelotronCopy.squarelotronVariable[size - 1 - i][j];
-            squarelotronCopy.squarelotronVariable[size - 1 - i][j] = temp;
-        }
-    }
-
-    /**
-     * The methodos swap to distints last and first column on the matrix.
-     *
-     * @param squarelotronCopy matrix copy.
-     * @param j                position column.
-     * @param ring             the ring.
-     */
-    public void moveTheDistintSFirstAndLasColummn(final Squarelotron squarelotronCopy, final int j, final int ring) {
-        squarelotronCopy.squarelotronVariable[ring - 1][j] = squarelotronVariable[size - ring][j];
-        squarelotronCopy.squarelotronVariable[size - ring][j] = squarelotronVariable[ring - 1][j];
-    }
-
-    /**
-     * Method up side down flip.
-     *
+     * The Methods returna a new matrix.
      * @param ring ring.
-     * @return squarelotron matrix.
+     * @return squarelotron.
      */
-    public Squarelotron upsideDownFlip(final int ring) {
+    public Squarelotron upsideDownFlip(int ring) {
         Squarelotron squarelotronCopy = new Squarelotron(size);
-        for (int columnJ = ring - 1; columnJ <= size - ring; columnJ++) {
-
-            isColumfirstAndColumnlast(ring, squarelotronCopy, columnJ);
+        int sizeMatrix = size - 1;
+        for (int i = 0; i <= sizeMatrix; i++) {
+            getFirstAndLastColumns(squarelotronCopy, ring - 1, size - ring, i, sizeMatrix);
         }
-
         return squarelotronCopy;
     }
 
     /**
-     * Methods tha execute moveTheFirstAndLasColumm and moveTheDistintSFirstAndLasColummn.
-     *
-     * @param ring             rign.
-     * @param squarelotronCopy matrix copy.
-     * @param columnJ          columns.
+     * This Method hadle the logic for upside down flip in the matrix copy.
+     * @param squarelotronCopy squarelotroncopy.
+     * @param first firstPosition.
+     * @param last lastPosition.
+     * @param i currencyRow.
+     * @param sizeMatrix size.
      */
-    private void isColumfirstAndColumnlast(int ring, final Squarelotron squarelotronCopy, int columnJ) {
-        if (columnJ == ring - 1 || columnJ == size - ring) {
-            moveTheFirstAndLasColummn(squarelotronCopy, columnJ, ring);
-        } else {
-            moveTheDistintSFirstAndLasColummn(squarelotronCopy, columnJ, ring);
+    private void getFirstAndLastColumns(final Squarelotron squarelotronCopy, int first,
+                                        int last, int i, int sizeMatrix) {
+        for (int j = 0; j <= sizeMatrix; j++) {
+            if (i == first || i == last) {
+                if (j >= first && j <= last) {
+                    squarelotronCopy.squarelotron[i][j] = squarelotron[sizeMatrix - i][j];
+                }
+            } else {
+                if (i > first && i < last && (j == first || j == last)) {
+                    squarelotronCopy.squarelotron[i][j] = squarelotron[sizeMatrix - i][j];
+                }
+            }
         }
     }
 
@@ -126,8 +95,8 @@ public class Squarelotron {
      */
     private void isTheDiagonalCenterValues(final Squarelotron squarelotronCopy, int j, int i) {
         if (j != i) {
-            squarelotronCopy.squarelotronVariable[i][j] = squarelotronVariable[j][i];
-            squarelotronCopy.squarelotronVariable[j][i] = squarelotronVariable[i][j];
+            squarelotronCopy.squarelotron[i][j] = squarelotron[j][i];
+            squarelotronCopy.squarelotron[j][i] = squarelotron[i][j];
         }
     }
 
@@ -184,10 +153,10 @@ public class Squarelotron {
 
         for (int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j) {
-                squarelotronClone[i][j] = squarelotronVariable[(size - 1) - j][i];
+                squarelotronClone[i][j] = squarelotron[(size - 1) - j][i];
             }
         }
-        squarelotronVariable = squarelotronClone.clone();
+        squarelotron = squarelotronClone.clone();
     }
 
     /**
@@ -199,10 +168,10 @@ public class Squarelotron {
 
         for (int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j) {
-                squarelotronClone[i][j] = squarelotronVariable[j][(size - 1) - i];
+                squarelotronClone[i][j] = squarelotron[j][(size - 1) - i];
             }
         }
 
-        squarelotronVariable = squarelotronClone.clone();
+        squarelotron = squarelotronClone.clone();
     }
 }

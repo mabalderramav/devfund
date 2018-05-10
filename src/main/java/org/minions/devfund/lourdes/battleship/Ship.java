@@ -11,6 +11,9 @@ public abstract class Ship {
 //    public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean){
 //
 //    }
+    public boolean placeShipAt(int row, int column, boolean horizontal, Ocean ocean){
+
+    }
     public int getBowRow() {
         return bowRow;
     }

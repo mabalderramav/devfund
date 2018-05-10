@@ -17,6 +17,9 @@ public class Ocean {
             Arrays.fill(row, new EmptySea());
         }
     }
+    public boolean isOccupied(int row, int column){
+        return ship[row][column].getShipType().equals("empty");
+    }
 
     public Ship[][] getShip() {
         return ship;
